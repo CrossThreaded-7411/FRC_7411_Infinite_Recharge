@@ -7,7 +7,6 @@
 
 package frc.robot.commands;
 
-import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.EnergyLaunchSubsystem;
 
@@ -17,19 +16,21 @@ import frc.robot.subsystems.EnergyLaunchSubsystem;
 public class LaunchEnergyCommand extends CommandBase
 {
    private final EnergyLaunchSubsystem m_energyLauncher;
-   private final double m_motorPower;
+   private final double m_motorPowerLower;
+   private final double m_moterPowerUpper;
 
-   public LaunchEnergyCommand(EnergyLaunchSubsystem subsystem, double motorPower)
+   public LaunchEnergyCommand(EnergyLaunchSubsystem subsystem, double motorPowerLower, double motorPowerUpper)
    {
       m_energyLauncher = subsystem;
-      m_motorPower = motorPower;
+      m_motorPowerLower = motorPowerLower;
+      m_moterPowerUpper = motorPowerUpper;
       addRequirements(subsystem);
    }
 
    @Override
    public void initialize()
    {
-      m_energyLauncher.setMotorPower(m_motorPower);
+      m_energyLauncher.setMotorPower(m_motorPowerLower, m_moterPowerUpper);
    }
 
    @Override

@@ -19,14 +19,24 @@ import edu.wpi.first.wpilibj.GenericHID;
  */
 public final class Constants 
 {
-   public static final class LauncherConstants
+   public static final class MotorPorts
    {
-      public static final int motorPort = 0;
+      public static final int launchMotor1Port = 0;
+      public static final int launchMotor2Port = 1;
+      public static final int leftFrontDriveMotorPort = 2;
+      public static final int leftRearDriveMotorPort = 3;
+      public static final int rightFrontDriveMotorPort = 4;
+      public static final int rightRearDriveMotorPort = 5;
+      // public static final int  = 6;
+      // public static final int  = 7;
+      // public static final int  = 8;
+      // public static final int  = 9;
    }
 
    public static final class OIConstants
    {
       public static final int driver1ControlPort = 0;
+      public static final int driver2ControlPort = 1;
    }
 
    public enum GamePadAxis
@@ -35,8 +45,7 @@ public final class Constants
       leftStickY(2),
       shoulder(3),
       rightStickX(4),
-      rightStickY(5),
-      dpad(6);
+      rightStickY(5);
 
       @SuppressWarnings({"MemberName", "PMD.SingularField"})
       public final int value;
@@ -53,11 +62,12 @@ public final class Constants
       buttonB(2),
       buttonX(3),
       buttonY(4),
-      triggerL(5),
-      triggerR(6),
+      bumperL(5),
+      bumperR(6),
       back(7),
       start(8),
-      leftStick(9),
+      leftStickPress(9),
+      rightStickPress(10),
       rightStick(1),
       mode(-1),
       logitech(-1);
@@ -66,6 +76,21 @@ public final class Constants
       public final int value;
 
       GamePadButtons(int value)
+      {
+         this.value = value;
+      }
+   }
+
+   public enum ProAxis
+   {
+      XAxis(0),
+      YAxis(1),
+      ZAxis(2);
+
+      @SuppressWarnings({"MemberName", "PMD.SingularField"})
+      public final int value;
+
+      ProAxis(int value)
       {
          this.value = value;
       }
