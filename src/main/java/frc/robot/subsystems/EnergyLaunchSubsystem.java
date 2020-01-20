@@ -7,11 +7,13 @@
 
 package frc.robot.subsystems;
 
+import java.util.logging.Logger;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class EnergyLaunchSubsystem extends SubsystemBase
 {
+   private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
    private VictorSP motor = new VictorSP(0);
 
    /**
@@ -25,18 +27,21 @@ public class EnergyLaunchSubsystem extends SubsystemBase
 
    /**
     * Sets motor power for the ball launcher motor
+    * 
     * @param targetPower Accepts a power level between -1 to 1
     */
    public void setMotorPower(double targetPower)
    {
       motor.set(targetPower);
+      logger.info("Launch motor power set to " + targetPower);
    }
 
-  /**
-   * Stops the motor by setting power to 0.0
-   */
-  public void stopMotor()
-  {
-    motor.set(0.0);
-  }
+   /**
+    * Stops the motor by setting power to 0.0
+    */
+   public void stopMotor()
+   {
+      motor.set(0.0);
+      logger.info("Launch motor stopped");
+   }
 }

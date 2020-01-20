@@ -55,9 +55,9 @@ public class RobotContainer
   {
       // Bind controller buttons to commands
       new JoystickButton(m_driver1Joystick, GamePadButtons.back.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.0));
-      new JoystickButton(m_driver1Joystick, GamePadButtons.buttonY.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.7));
-      new JoystickButton(m_driver1Joystick, GamePadButtons.buttonB.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.8));
-      new JoystickButton(m_driver1Joystick, GamePadButtons.buttonA.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.9));
+      new JoystickButton(m_driver1Joystick, GamePadButtons.buttonY.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.2));
+      new JoystickButton(m_driver1Joystick, GamePadButtons.buttonB.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.4));
+      new JoystickButton(m_driver1Joystick, GamePadButtons.buttonA.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.6));
       new JoystickButton(m_driver1Joystick, GamePadButtons.buttonX.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 1.0));
   }
 
