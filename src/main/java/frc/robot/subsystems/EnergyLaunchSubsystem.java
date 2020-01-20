@@ -7,15 +7,16 @@
 
 package frc.robot.subsystems;
 
+import java.util.logging.Logger;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.MotorPorts;
 
 public class EnergyLaunchSubsystem extends SubsystemBase
 {
-
-   private VictorSP launchMotor1 = new VictorSP(MotorPorts.launchMotor1Port);
-   private VictorSP launchMotor2 = new VictorSP(MotorPorts.launchMotor2Port);
+   private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+   private VictorSP launchMotorLower = new VictorSP(MotorPorts.launchMotorLowerPort);
+   private VictorSP launchMotorUpper = new VictorSP(MotorPorts.launchMotorUpperPort);
 
    /**
     * Creates a new DriveSubsystem.
@@ -24,25 +25,34 @@ public class EnergyLaunchSubsystem extends SubsystemBase
    {
       // Constructor
       stopMotors();
-      launchMotor2.setInverted(true);
+      launchMotorUpper.setInverted(true);
+      logger.fine("Launch motor upper direction inverted = " + launchMotorUpper.getInverted());
+
+      logger.finer("Launch subsystem constructor complete");
    }
 
    /**
     * Sets motor power for the ball launcher motor
+    * 
     * @param targetPower Accepts a power level between -1 to 1
     */
    public void setMotorPower(double targetPowerLower, double targetPowerUpper)
    {
-      launchMotor1.set(targetPowerLower);
-      launchMotor2.set(targetPowerUpper);
+      launchMotorLower.set(targetPowerLower);
+      launchMotorUpper.set(targetPowerUpper);
+      logger.info("Launch motor lower = " + launchMotorLower.get());
+      logger.info("Launch motor upper = " + launchMotorUpper.get());
    }
 
-  /**
-   * Stops the motor by setting power to 0.0
-   */
-  public void stopMotors()
-  {
-    launchMotor1.set(0.0);
-    launchMotor2.set(0.0);
-  }
+   /**
+    * Stops the motor by setting power to 0.0
+    */
+   public void stopMotors()
+   {
+      double stopPower = 0.0;
+      launchMotorLower.set(stopPower);
+      launchMotorUpper.set(stopPower);
+      logger.info("Launch motor lower = " + launchMotorLower.get());
+      logger.info("Launch motor upper = " + launchMotorUpper.get());
+   }
 }
