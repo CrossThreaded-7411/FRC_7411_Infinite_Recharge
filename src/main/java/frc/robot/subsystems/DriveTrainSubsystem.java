@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.MotorPorts;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class DriveTrainSubsystem extends SubsystemBase
 {
@@ -15,11 +16,12 @@ public class DriveTrainSubsystem extends SubsystemBase
    private VictorSP rightRearDriveMotor = new VictorSP(MotorPorts.rightRearDriveMotorPort);
    SpeedControllerGroup rightDriveMotors = new SpeedControllerGroup(rightFrontDriveMotor, rightRearDriveMotor);
 
+   public final DifferentialDrive driveBase = new DifferentialDrive(leftDriveMotors, rightDriveMotors);
+
    public DriveTrainSubsystem()
    {
       // Constructor
       stopDriveMotors();
-      leftDriveMotors.setInverted(true);
    }
 
    public void stopDriveMotors()

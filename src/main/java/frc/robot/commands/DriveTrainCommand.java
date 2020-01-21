@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrainSubsystem;
+import frc.robot.Constants.ProAxis;
 
 /**
  * A command to turn on the launch motor to a known desired power
@@ -16,6 +17,9 @@ public class DriveTrainCommand extends CommandBase
       m_driveTrain = subsystem;
       m_drivePower = driveMotorPower;
       addRequirements(subsystem);
+
+      //driver 2 input from the joysticks; meant to control the drivetrain
+      m_driveTrain.driveBase.arcadeDrive(ProAxis.YAxis.value, ProAxis.XAxis.value, true);
    }
 
    @Override
