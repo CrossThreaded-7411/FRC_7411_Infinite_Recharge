@@ -7,8 +7,6 @@
 
 package frc.robot;
 
-import java.io.IOException;
-import java.util.logging.Logger;
 import edu.wpi.first.wpilibj.RobotBase;
 //import frc.robot.RobotLogger;
 
@@ -18,10 +16,7 @@ import edu.wpi.first.wpilibj.RobotBase;
  * the parameter class to the startRobot call.
  */
 public final class Main
-{
-   // use the classname for the logger, this way you can refactor
-   //private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-   
+{   
    private Main()
    {
 
@@ -35,17 +30,6 @@ public final class Main
     */
    public static void main(String... args)
    {
-      // try
-      // {
-      //    RobotLogger.setup();
-      //    logger.fine("Main has started");
-      // }
-      // catch (IOException e)
-      // {
-      //    e.printStackTrace();
-      //    throw new RuntimeException("Problems with creating the log files");
-      // }
-
       RobotBase.startRobot(Robot::new);
    }
 }

@@ -12,8 +12,11 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.EnergyLaunchSubsystem;
+import frc.robot.subsystems.LiftSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
+import frc.robot.commands.DriveByJoystick;
 import frc.robot.commands.LaunchEnergyCommand;
+import frc.robot.commands.RunLift;
 import frc.robot.Constants.*;
 // import frc.wpi.first.wpi.command.XboxController;
 // import frc.robot.Constants.GamePadButtons;
@@ -29,13 +32,14 @@ public class RobotContainer
 {
   // The robot's subsystems and commands are defined here...
   private final EnergyLaunchSubsystem m_energyLaunchSubsystem = new EnergyLaunchSubsystem();
-  private final DriveTrainSubsystem m_driveTrainSubsystem = new DriveTrainSubsystem();
-
+  private final DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem();
+  private final LiftSubsystem liftSubsystem = new LiftSubsystem();
+  
 //   private final LaunchEnergyCommand m_launchEnergyCommand = new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.0);
 
   // Create driver controller
-  Joystick m_driver1Joystick = new Joystick(OIConstants.driver1ControlPort);
-  Joystick m_driver2Joystick = new Joystick(OIConstants.driver2ControlPort);
+  public Joystick driver1Joystick = new Joystick(OIConstants.driver1ControlPort);
+  public Joystick driver2Joystick = new Joystick(OIConstants.driver2ControlPort);
 
   // Create joystic button objects
 //   JoystickButton launchButton = new JoystickButton(m_driver1Joystick, GamePadButtons.buttonA.value);
@@ -45,9 +49,13 @@ public class RobotContainer
    */
   public RobotContainer()
   {
-    // Configure the button bindings
-    configureButtonBindings();
-  }
+      // Configure the button bindings
+      configureButtonBindings();
+      
+      driveTrainSubsystem.setDefaultCommand(new DriveByJoystick(driveTrainSubsystem));
+      liftSubsystem.setDefaultCommand(new RunLift(liftSubsystem));
+   }
+
 
   /**
    * Use this method to define your button->command mappings.  Buttons can be created by
@@ -58,16 +66,16 @@ public class RobotContainer
   private void configureButtonBindings()
   {
       // Bind controller buttons to commands
-      new JoystickButton(m_driver1Joystick, GamePadButtons.back.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.0, 0.0));
+      new JoystickButton(driver1Joystick, GamePadButtons.back.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.0, 0.0));
       //new JoystickButton(m_driver1Joystick, GamePadButtons.leftStickPress.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.0));
       //new JoystickButton(m_driver1Joystick, GamePadButtons.bumperL.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.65));
       //new JoystickButton(m_driver1Joystick, GamePadButtons.back.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.7));
       // new JoystickButton(m_driver1Joystick, GamePadButtons.start.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.75));
-      new JoystickButton(m_driver1Joystick, GamePadButtons.bumperR.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.6, 0.6));
-      new JoystickButton(m_driver1Joystick, GamePadButtons.buttonY.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.7, 0.7));
-      new JoystickButton(m_driver1Joystick, GamePadButtons.buttonB.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.8, 0.8));
-      new JoystickButton(m_driver1Joystick, GamePadButtons.buttonA.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.9, 0.9));
-      new JoystickButton(m_driver1Joystick, GamePadButtons.buttonX.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 1.0, 1.0));
+      new JoystickButton(driver1Joystick, GamePadButtons.bumperR.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.6, 0.6));
+      new JoystickButton(driver1Joystick, GamePadButtons.buttonY.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.7, 0.7));
+      new JoystickButton(driver1Joystick, GamePadButtons.buttonB.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.8, 0.8));
+      new JoystickButton(driver1Joystick, GamePadButtons.buttonA.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.9, 0.9));
+      new JoystickButton(driver1Joystick, GamePadButtons.buttonX.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 1.0, 1.0));
 
       //m_driveTrainSubsystem.runDriveMotorsStraight(ProAxis.YAxis.value);
       //m_driveTrainSubsystem.runDriveMotorsTurn(ProAxis.XAxis.value);

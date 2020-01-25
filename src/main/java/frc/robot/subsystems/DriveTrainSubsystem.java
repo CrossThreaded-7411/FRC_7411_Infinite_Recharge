@@ -5,9 +5,12 @@ import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.MotorPorts;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import java.util.logging.Logger;
 
 public class DriveTrainSubsystem extends SubsystemBase
 {
+   private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
    private VictorSP leftFrontDriveMotor = new VictorSP(MotorPorts.leftFrontDriveMotorPort);
    private VictorSP leftRearDriveMotor = new VictorSP(MotorPorts.leftRearDriveMotorPort);
    SpeedControllerGroup leftDriveMotors = new SpeedControllerGroup(leftFrontDriveMotor, leftRearDriveMotor);
@@ -21,6 +24,7 @@ public class DriveTrainSubsystem extends SubsystemBase
    public DriveTrainSubsystem()
    {
       // Constructor
+      logger.fine("entered Drivetrain constructor");
       stopDriveMotors();
    }
 
@@ -30,15 +34,18 @@ public class DriveTrainSubsystem extends SubsystemBase
       rightDriveMotors.set(0.0);
    }
 
-   public void runDriveMotorsStraight(double driveSpeed)
+
+   /**
+   * Drives the robot using arcade controls.
+   *
+   * @param fwd the commanded forward movement
+   * @param rot the commanded rotation
+   */
+   public void driveByArcade(double fwd, double rot)
    {
-      leftDriveMotors.set(driveSpeed);
-      rightDriveMotors.set(driveSpeed);
+      driveBase.arcadeDrive(fwd, rot);
+      logger.fine("leftdrive actual: " + leftDriveMotors.get());
+      logger.fine("rightdrive actual: " + rightDriveMotors.get());
    }
 
-   public void runDriveMotorsTurn(double turnSpeed)
-   {
-      leftDriveMotors.set(-turnSpeed);
-      rightDriveMotors.set(turnSpeed);
-   }
 }
