@@ -54,8 +54,7 @@ public class RobotContainer
       
       driveTrainSubsystem.setDefaultCommand(new DriveByJoystick(driveTrainSubsystem));
       liftSubsystem.setDefaultCommand(new RunLift(liftSubsystem));
-   }
-
+  }
 
   /**
    * Use this method to define your button->command mappings.  Buttons can be created by
