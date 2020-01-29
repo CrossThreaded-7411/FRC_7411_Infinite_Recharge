@@ -11,7 +11,7 @@ public class BallCollectorSubsystem extends SubsystemBase
     private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
 
-    private VictorSP ballCollectorMotor = new VictorSP(MotorPorts.ballCollectorMotorPort);
+    public VictorSP ballCollectorMotor = new VictorSP(MotorPorts.ballCollectorMotorPort);
 
     public void BallCollectorSubsystem()
     {
