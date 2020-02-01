@@ -23,7 +23,7 @@ public class RecordPlayerSubsystem extends SubsystemBase
    public RecordPlayerSubsystem()
    {
       // Constructor
-      stopMotors();
+      stopMotor();
       logger.finer("Launch subsystem constructor complete");
    }
 
@@ -41,10 +41,10 @@ public class RecordPlayerSubsystem extends SubsystemBase
    /**
     * Stops the motor by setting power to 0.0
     */
-   public void stopMotors()
+   public void stopMotor()
    {
-      double stopPower = 0.0;
-      recordPlayerMotor.set(stopPower);
+      double stopMotorPower = 0.0;
+      recordPlayerMotor.set(stopMotorPower);
       logger.info("Launch motor lower = " + recordPlayerMotor.get());
    }
 }
