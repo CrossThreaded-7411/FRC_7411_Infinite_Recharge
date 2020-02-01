@@ -13,9 +13,11 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.EnergyLaunchSubsystem;
 import frc.robot.subsystems.LiftSubsystem;
+import frc.robot.subsystems.TCS3472Subsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.commands.DriveByJoystick;
 import frc.robot.commands.LaunchEnergyCommand;
+import frc.robot.commands.PrintColorValues;
 import frc.robot.commands.RunLift;
 import frc.robot.Constants.*;
 // import frc.wpi.first.wpi.command.XboxController;
@@ -34,6 +36,7 @@ public class RobotContainer
   private final EnergyLaunchSubsystem m_energyLaunchSubsystem = new EnergyLaunchSubsystem();
   private final DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem();
   private final LiftSubsystem liftSubsystem = new LiftSubsystem();
+  private final TCS3472Subsystem colorSensor = new TCS3472Subsystem(0x29, 1);
   
 //   private final LaunchEnergyCommand m_launchEnergyCommand = new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.0);
 
@@ -54,6 +57,7 @@ public class RobotContainer
       
       driveTrainSubsystem.setDefaultCommand(new DriveByJoystick(driveTrainSubsystem));
       liftSubsystem.setDefaultCommand(new RunLift(liftSubsystem));
+      colorSensor.setDefaultCommand(new PrintColorValues(colorSensor));
    }
 
 
