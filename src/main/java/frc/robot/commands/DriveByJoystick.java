@@ -4,7 +4,6 @@ import frc.robot.Robot;
 import java.util.logging.Logger;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrainSubsystem;
-import java.util.function.DoubleSupplier;
 import frc.robot.Constants;
 
 /**

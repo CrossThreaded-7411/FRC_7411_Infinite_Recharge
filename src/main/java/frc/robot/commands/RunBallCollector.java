@@ -8,24 +8,39 @@ import frc.robot.subsystems.BallCollectorSubsystem;
 
 public class RunBallCollector extends CommandBase 
 {
+    private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private final double m_CollectormotorPower;
+    private final BallCollectorSubsystem m_ballCollector;
+    
 
-    private final BallCollectorSubsystem m_ballCollectorSubsystem = new BallCollectorSubsystem();
-    public RunBallCollector()
-    {       
       
-    }
+      public RunBallCollector(BallCollectorSubsystem subsystem, double CollectormotorPower)
+      {
+        m_ballCollector = subsystem;
+        m_CollectormotorPower = CollectormotorPower;
+        addRequirements(subsystem);
 
-    public void execute()
+        logger.fine(" Collector command constructor complete");
+        
+      }
+    
+    @Override
+    public void initialize()
     {
 
+      logger.fine("Collector command requested motor power at " + m_CollectormotorPower);
+      m_ballCollector.setMotorPower(m_CollectormotorPower);
+      /*
+        Operated by a single toggle button for on and off, feedback on SmartDashboard, fixed power, needs to reverse by a seperate toggle button
+      */
 
     
     }
-
-    public void RunBallCollectorMotor(double collectormotorspeed)
+    
+    @Override
+    public boolean isFinished()
     {
-      m_ballCollectorSubsystem.ballCollectorMotor.set(collectormotorspeed);
+      return true;
     }
-
     
 }
