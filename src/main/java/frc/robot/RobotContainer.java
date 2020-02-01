@@ -12,11 +12,10 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.EnergyLaunchSubsystem;
-import frc.robot.subsystems.LiftSubsystem;
+import frc.robot.subsystems.RecordPlayerSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
-import frc.robot.commands.DriveByJoystick;
 import frc.robot.commands.LaunchEnergyCommand;
-import frc.robot.commands.RunLift;
+import frc.robot.commands.SpinRecordPlayer;
 import frc.robot.Constants.*;
 // import frc.wpi.first.wpi.command.XboxController;
 // import frc.robot.Constants.GamePadButtons;
@@ -33,7 +32,7 @@ public class RobotContainer
   // The robot's subsystems and commands are defined here...
   private final EnergyLaunchSubsystem m_energyLaunchSubsystem = new EnergyLaunchSubsystem();
   private final DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem();
-  private final LiftSubsystem liftSubsystem = new LiftSubsystem();
+  private final RecordPlayerSubsystem recordPlayer = new RecordPlayerSubsystem();
   
 //   private final LaunchEnergyCommand m_launchEnergyCommand = new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.0);
 
@@ -53,7 +52,6 @@ public class RobotContainer
       configureButtonBindings();
       
       driveTrainSubsystem.setDefaultCommand(new DriveByJoystick(driveTrainSubsystem));
-      liftSubsystem.setDefaultCommand(new RunLift(liftSubsystem));
    }
 
 
@@ -73,14 +71,13 @@ public class RobotContainer
       // new JoystickButton(m_driver1Joystick, GamePadButtons.start.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.75));
       new JoystickButton(driver1Joystick, GamePadButtons.bumperR.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.6, 0.6));
       new JoystickButton(driver1Joystick, GamePadButtons.buttonY.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.7, 0.7));
-      new JoystickButton(driver1Joystick, GamePadButtons.buttonB.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.8, 0.8));
+      new JoystickButton(driver1Joystick, GamePadButtons.buttonB.value).whenPressed(new SpinRecordPlayer(recordPlayer, 0.8));
       new JoystickButton(driver1Joystick, GamePadButtons.buttonA.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.9, 0.9));
       new JoystickButton(driver1Joystick, GamePadButtons.buttonX.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 1.0, 1.0));
 
       //m_driveTrainSubsystem.runDriveMotorsStraight(ProAxis.YAxis.value);
       //m_driveTrainSubsystem.runDriveMotorsTurn(ProAxis.XAxis.value);
   }
-
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
