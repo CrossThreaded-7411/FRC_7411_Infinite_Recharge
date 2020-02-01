@@ -39,6 +39,12 @@ public final class Constants
       public static final int driver2ControlPort = 1;
    }
 
+   public static final class AIPorts
+   {
+      public static final int stringPotHorizontalPort = 0;
+      public static final int stringPotVerticalPort = 1;
+   }
+
    public enum GamePadAxis
    {
       leftStickX(0),
