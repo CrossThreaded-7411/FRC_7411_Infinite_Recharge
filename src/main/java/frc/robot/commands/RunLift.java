@@ -28,10 +28,10 @@ public class RunLift extends CommandBase {
    public void execute()
    {
       raise = rangeLimitedPower(Robot.m_robotContainer.driver2Joystick.getRawAxis(Constants.GamePadAxis.rightStickY.value));
-      slide = rangeLimitedPower(Robot.m_robotContainer.driver2Joystick.getRawAxis(Constants.GamePadAxis.rightStickX.value));
+      slide = rangeLimitedPower(Robot.m_robotContainer.driver2Joystick.getRawAxis(Constants.GamePadAxis.leftStickX.value));
 
-      lift.runLiftMotors(raise);
-      lift.runStringPotHorizontal(slide);
+      lift.runLift(raise);
+      lift.runSlide(-slide);
    }
 
    /**

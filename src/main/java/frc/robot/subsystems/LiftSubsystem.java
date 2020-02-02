@@ -18,6 +18,20 @@ public class LiftSubsystem extends SubsystemBase
    private AnalogInput stringPotHorizontal = new AnalogInput(Constants.AIPorts.stringPotHorizontalPort);
    private AnalogInput stringPotVertical = new AnalogInput(Constants.AIPorts.stringPotVerticalPort);
 
+   //Limits for the string pot to stop the slide before it breaks something
+   //Travells 0.0591V V/cm, meaning there are 0.148 Volts (2.5 cm) of decreased speed between the hard and soft stops.
+   private final double SPHHardStopRight = 0.09887;
+   private final double SPHSoftStopRight = 0.24687;
+   private final double SPHSoftStopLeft = 2.167;
+   private final double SPHHardStopLeft = 2.315;
+
+   //Same as above, but for the lift
+   private final double SPVHardStopDown = 0.295;
+   private final double SPVSoftStopDown = 0.443;
+   private final double SPVSoftStopUp = 2.302;
+   private final double SPVHardStopUp = 2.45;
+
+
    public LiftSubsystem()
    {
       logger.fine("entered Lift constructor");
@@ -32,34 +46,41 @@ public class LiftSubsystem extends SubsystemBase
       liftRaiseMotor.set(0.0);
    }
 
-   public void runLiftMotors(double raise)
+   public void runSlide(double slide)
    {
-
-      liftRaiseMotor.set(raise);
-
-      logger.fine("lift raise motor:" + liftRaiseMotor.get());
-   }
-
-   public void runStringPotHorizontal(double slide)
-   {
-      if ((stringPotHorizontal.getVoltage() >= 0.4) && (stringPotHorizontal.getVoltage() <= 2.0))
+      if ((stringPotHorizontal.getVoltage() >= SPHSoftStopRight) && (stringPotHorizontal.getVoltage() <= SPHSoftStopLeft))
       {
          liftSlideMotor.set(slide);
          logger.fine("lift slide motor: " + liftSlideMotor.get());
       }
 
-      else if ((stringPotHorizontal.getVoltage() >= 0.3) && (stringPotHorizontal.getVoltage() < 0.4))
+      else if ((stringPotHorizontal.getVoltage() >= SPHHardStopRight) && (stringPotHorizontal.getVoltage() < SPHSoftStopRight))
       {
-         //liftSlideMotor.set(10*(stringPotHorizontal.getVoltage()-0.3));
-         
+         if (slide < 0)
+         {
+            liftSlideMotor.set(slide/3);
+         }
+
+         else if (slide > 0)
+         {
+            liftSlideMotor.set(slide);
+         }
       }
 
-      else if ((stringPotHorizontal.getVoltage() > 2.0) && (stringPotHorizontal.getVoltage() <= 2.1))
+      else if ((stringPotHorizontal.getVoltage() > SPHSoftStopLeft) && (stringPotHorizontal.getVoltage() <= SPHHardStopLeft))
       {
-         //liftSlideMotor.set(10*(2.1 - stringPotHorizontal.getVoltage()));
+         if (slide > 0)
+         {
+            liftSlideMotor.set(slide/3);
+         }
+
+         else if (slide < 0)
+         {
+            liftSlideMotor.set(slide);
+         }
       }
 
-      else if (stringPotHorizontal.getVoltage() < 0.3)
+      else if (stringPotHorizontal.getVoltage() < SPHHardStopRight)
       {
          if (slide >= 0)
          {
@@ -72,7 +93,7 @@ public class LiftSubsystem extends SubsystemBase
          }
       }
 
-      else if (stringPotHorizontal.getVoltage() > 2.1)
+      else if (stringPotHorizontal.getVoltage() > SPHHardStopLeft)
       {
          if (slide <= 0)
          {
@@ -90,20 +111,74 @@ public class LiftSubsystem extends SubsystemBase
          liftSlideMotor.set(0);
       }
 
-      SmartDashboard.putNumber("String Pot:", stringPotHorizontal.getVoltage());
+      SmartDashboard.putNumber("String Pot Horizontal:", stringPotHorizontal.getVoltage());
    }
 
-   // public void runStringPotVertical(double raise)
-   // {
-   //    if((stringPotVertical.getVoltage() >= 0.1) && (stringPotVertical.getVoltage() <= 4.0))
-   //    {
-   //       liftRaiseMotor.set(raise);
-   //    }
+   public void runLift(double raise)
+   {
+      if ((stringPotVertical.getVoltage() >= SPVSoftStopDown) && (stringPotVertical.getVoltage() <= SPVSoftStopUp))
+      {
+         liftRaiseMotor.set(raise);
+         logger.fine("lift slide motor: " + liftSlideMotor.get());
+      }
 
-   //    else
-   //    {
-   //       liftRaiseMotor.set(0);
-   //    }
-   // }
-   
+      else if ((stringPotVertical.getVoltage() >= SPVHardStopDown) && (stringPotVertical.getVoltage() < SPVSoftStopDown))
+      {
+         if (raise > 0)
+         {
+            liftRaiseMotor.set(raise/2);
+         }
+
+         else if (raise < 0)
+         {
+            liftRaiseMotor.set(raise);
+         }
+      }
+
+      else if ((stringPotVertical.getVoltage() > SPVSoftStopUp) && (stringPotVertical.getVoltage() <= SPVHardStopUp))
+      {
+         if (raise < 0)
+         {
+            liftRaiseMotor.set(raise/2);
+         }
+
+         else if (raise > 0)
+         {
+            liftRaiseMotor.set(raise);
+         }
+      }
+
+      else if (stringPotVertical.getVoltage() < SPVHardStopDown)
+      {
+         if (raise <= 0)
+         {
+            liftRaiseMotor.set(raise);
+         }
+
+         else if (raise > 0)
+         {
+            liftRaiseMotor.set(0);
+         }
+      }
+
+      else if (stringPotVertical.getVoltage() > SPVHardStopUp)
+      {
+         if (raise > 0)
+         {
+            liftRaiseMotor.set(raise);
+         }
+
+         else if (raise < 0)
+         {
+            liftRaiseMotor.set(0);
+         }
+      }
+      
+      else 
+      {
+         liftRaiseMotor.set(0);
+      }
+
+      SmartDashboard.putNumber("String Pot Vertical", stringPotVertical.getVoltage());
+   }
 }

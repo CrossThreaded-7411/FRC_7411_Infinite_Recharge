@@ -76,9 +76,6 @@ public class RobotContainer
       new JoystickButton(driver1Joystick, GamePadButtons.buttonB.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.8, 0.8));
       new JoystickButton(driver1Joystick, GamePadButtons.buttonA.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.9, 0.9));
       new JoystickButton(driver1Joystick, GamePadButtons.buttonX.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 1.0, 1.0));
-
-      //m_driveTrainSubsystem.runDriveMotorsStraight(ProAxis.YAxis.value);
-      //m_driveTrainSubsystem.runDriveMotorsTurn(ProAxis.XAxis.value);
   }
 
 
