@@ -14,7 +14,7 @@ public class RunBallCollector extends CommandBase
     
 
       
-      public RunBallCollector(BallCollectorSubsystem subsystem, double CollectormotorPower)
+      public RunBallCollector(BallCollectorSubsystem subsystem,double CollectormotorPower)
       {
         m_ballCollector = subsystem;
         m_CollectormotorPower = CollectormotorPower;
@@ -30,17 +30,30 @@ public class RunBallCollector extends CommandBase
 
       logger.fine("Collector command requested motor power at " + m_CollectormotorPower);
       m_ballCollector.setMotorPower(m_CollectormotorPower);
+      System.out.println("Toggled motor on");
       /*
         Operated by a single toggle button for on and off, feedback on SmartDashboard, fixed power, needs to reverse by a seperate toggle button
       */
-
-    
     }
     
     @Override
     public boolean isFinished()
     {
+      System.out.println("Toggled motor on is Finished");
       return true;
     }
     
+    //public void end()
+   // {
+    //  System.out.println("entered end command");
+    //  m_ballCollector.stopBallCollectorMotor();
+   //   m_ballCollector.setMotorPower(0.0);
+   // }
+
+  //  @Override
+    //public void execute()
+   // {
+     // System.out.println("entered execute command");
+
+    //}
 }

@@ -13,7 +13,7 @@ public class BallCollectorSubsystem extends SubsystemBase
     public BallCollectorSubsystem()
     {
         logger.fine("entered ball collector constructor ");
-        stopballCollectorMotors();
+        stopBallCollectorMotor();
     }  
 
 
@@ -24,9 +24,10 @@ public class BallCollectorSubsystem extends SubsystemBase
     }
 
 
-    public void stopballCollectorMotors()
+    public void stopBallCollectorMotor()
     {
         ballCollectorMotor.set(0.0);
+        System.out.println("Motor set to off");
     }
 
 
@@ -34,6 +35,7 @@ public class BallCollectorSubsystem extends SubsystemBase
     {
         ballCollectorMotor.set(collectorSpeed);
         logger.fine("ball collector motor:" + ballCollectorMotor.get());
+        System.out.println("Power set to " + ballCollectorMotor.get());
     }
 }
 
