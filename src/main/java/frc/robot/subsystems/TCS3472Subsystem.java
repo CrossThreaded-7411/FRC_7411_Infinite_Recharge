@@ -12,14 +12,14 @@ public class TCS3472Subsystem extends SubsystemBase {
 
     private final int ENABLE = 0x80; // 0x00
     private final int ATIME = 0x81; // 0x01
-    private final int CDATAL = 0x94; // 0x14 0xB4 0x94
-    private final int CDATAH = 0x15; // 0x15
+    private final int CDATAL = 0xB4; // 0x14 0xB4 0x94
+    private final int CDATAH = 0xB5; // 0x15
     private final int RDATAL = 0xB6; // 0x16 0xB6 0x96
     private final int RDATAH = 0xB7; // 0x17
-    private final int GDATAL = 0x98; // 0x18 0xB8 0x98
-    private final int GDATAH = 0x19; // 0x19
-    private final int BDATAL = 0x9A; // 0x1A 0xBA 0x9A
-    private final int BDATAH = 0x1B; // 0x1B
+    private final int GDATAL = 0xB8; // 0x18 0xB8 0x98
+    private final int GDATAH = 0xB9; // 0x19
+    private final int BDATAL = 0xBA; // 0x1A 0xBA 0x9A
+    private final int BDATAH = 0xBB; // 0x1B
 
     public TCS3472Subsystem(int deviceAddress, int id){
         System.out.println("Entered TCS subsystem constructor");
@@ -66,20 +66,34 @@ public class TCS3472Subsystem extends SubsystemBase {
         int[] output= {-1,-1,-1,-1};
         if(enabled == true) {
             System.out.println("getting TCS");
-            byte[] clearBuffer = {0,0};
-            byte[] redBuffer = {0,0};
-            byte[] greenBuffer = {0, 0};
-            byte[] blueBuffer = {0, 0};
+            ByteBuffer clearBuffer = ByteBuffer.allocate(2);
+            ByteBuffer redBuffer = ByteBuffer.allocate(2);
+            ByteBuffer blueBuffer = ByteBuffer.allocate(2);
+            ByteBuffer greenBuffer = ByteBuffer.allocate(2);
+            // byte[] clearBuffer = {0,0};
+            // byte[] redBuffer = {0,0};
+            // byte[] greenBuffer = {0, 0};
+            // byte[] blueBuffer = {0, 0};
 
             i2cSource.read(CDATAL, 2, clearBuffer);
             i2cSource.read(RDATAL, 2, redBuffer);
             i2cSource.read(GDATAL, 2, greenBuffer);
             i2cSource.read(BDATAL, 2, blueBuffer);
-            System.out.println("RedHigh: " + redBuffer[1] + "RedLow: " + redBuffer[0]);
 
-            int redValue = (int)((redBuffer[1] << 8) | (redBuffer[0] & 0xFF));  // Bitshifts the high buffer over 8 and appends the low buffer.
-            int greenValue = (int)((greenBuffer[1] << 8) | (greenBuffer[0] & 0xFF));
-            int blueValue = (int)((blueBuffer[1] << 8) | (blueBuffer[0] & 0xFF));
+            byte clearL = clearBuffer.get();
+            byte clearH = clearBuffer.get();
+            byte redL = redBuffer.get();
+            byte redH = redBuffer.get();
+            byte greenL = greenBuffer.get();
+            byte greenH = greenBuffer.get();
+            byte blueL = blueBuffer.get();
+            byte blueH = blueBuffer.get();
+
+            System.out.println("RedHigh: " + redH + "RedLow: " + redL);
+
+            int redValue = (((redH & 0xFF) << 8) | (redL & 0xFF));  // Bitshifts the high buffer over 8 and appends the low buffer.
+            int greenValue = (((greenH & 0xFF) << 8) | (greenL & 0xFF));
+            int blueValue = (((blueH & 0xFF) << 8) | (blueL & 0xFF));
 
             output[0] = 0;
             output[1] = redValue;
