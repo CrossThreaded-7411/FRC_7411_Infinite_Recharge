@@ -8,7 +8,7 @@ import frc.robot.subsystems.LiftSubsystem;
 //import java.math.abs;
 
 public class RunLift extends CommandBase {
-   private final static Logger  = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+   private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
    private final LiftSubsystem lift;
    private double slide;
    private double raise;
@@ -19,7 +19,6 @@ public class RunLift extends CommandBase {
    {
       lift = subsystem;
       addRequirements(subsystem);
-
       setDeadband(0.05);
       setMaxPower(1.0);
    }
@@ -28,6 +27,7 @@ public class RunLift extends CommandBase {
    public void execute()
    {
       raise = rangeLimitedPower(Robot.m_robotContainer.driver2Joystick.getRawAxis(Constants.GamePadAxis.rightStickY.value));
+
       slide = rangeLimitedPower(Robot.m_robotContainer.driver2Joystick.getRawAxis(Constants.GamePadAxis.leftStickX.value));
 
       lift.runLift(raise);
@@ -55,7 +55,6 @@ public class RunLift extends CommandBase {
 
       return (newCommand);
    }
-
 
    /**
     * Method sets deadband for joystick axis
