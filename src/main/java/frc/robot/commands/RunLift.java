@@ -27,7 +27,6 @@ public class RunLift extends CommandBase {
    public void execute()
    {
       raise = rangeLimitedPower(Robot.m_robotContainer.driver2Joystick.getRawAxis(Constants.GamePadAxis.rightStickY.value));
-
       slide = rangeLimitedPower(Robot.m_robotContainer.driver2Joystick.getRawAxis(Constants.GamePadAxis.leftStickX.value));
 
       lift.runLift(raise);
