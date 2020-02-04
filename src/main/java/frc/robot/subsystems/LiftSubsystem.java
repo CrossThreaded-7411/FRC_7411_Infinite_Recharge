@@ -9,29 +9,29 @@ public class LiftSubsystem extends SubsystemBase
 {
    private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
-   private VictorSP liftSlideMotor = new VictorSP(MotorPorts.liftSlideMotorPort);
-   private VictorSP liftRaiseMotor = new VictorSP(MotorPorts.liftRaiseMotorPort);
+   private VictorSP SlideliftMotor = new VictorSP(MotorPorts.liftSlideMotorPort);
+   private VictorSP RaiseliftMotor = new VictorSP(MotorPorts.liftRaiseMotorPort);
 
    public LiftSubsystem()
    {
       logger.fine("entered Lift constructor");
       stopLiftMotors();
 
-      liftRaiseMotor.setInverted(true);
+      RaiseliftMotor.setInverted(true);
    }
 
    public void stopLiftMotors()
    {
-      liftSlideMotor.set(0.0);
-      liftRaiseMotor.set(0.0);
+      SlideliftMotor.set(0.0);
+      RaiseliftMotor.set(0.0);
    }
 
    public void runLiftMotors(double slide, double raise)
    {
-      liftSlideMotor.set(slide);
-      liftRaiseMotor.set(raise);
-      logger.fine("lift slide motor: " + liftSlideMotor.get());
-      logger.fine("lift raise motor:" + liftRaiseMotor.get());
+      SlideliftMotor.set(slide);
+      RaiseliftMotor.set(raise);
+      logger.fine("lift slide motor: " + SlideliftMotor.get());
+      logger.fine("lift raise motor:" + RaiseliftMotor.get());
    }
-   
+
 }
