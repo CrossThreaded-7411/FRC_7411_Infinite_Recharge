@@ -19,6 +19,23 @@ import edu.wpi.first.wpilibj.GenericHID;
  */
 public final class Constants 
 {
+   public static final class CANID
+   {
+      public static final int powerDistPanel = 00;
+      // public static final int roboRio = ;
+      public static final int ballShooterUpper = 10;
+      public static final int ballShooterLower = 11;
+      public static final int driveTrainLF = 20;
+      public static final int driveTrainLR = 21;
+      public static final int driveTrainRF = 22;
+      public static final int driveTrainRR = 23;
+      public static final int ballCollector = 24;
+      public static final int ballConveyer = 25;
+      public static final int liftRaise = 26;
+      public static final int liftSlide = 27;
+      public static final int ballShooterTurret = 30;
+   }
+
    public static final class MotorPorts
    {
       public static final int launchMotorLowerPort = 0;
@@ -31,7 +48,6 @@ public final class Constants
       public static final int liftRaiseMotorPort = 7;
       public static final int ballCollectorMotorPort = 9;
       // public static final int  = 9;
-   
    }
 
    public static final class OIConstants

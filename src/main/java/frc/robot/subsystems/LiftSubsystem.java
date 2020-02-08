@@ -1,19 +1,20 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import java.util.logging.Logger;
 import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.Constants.MotorPorts;
+import frc.robot.Constants.CANID;
 
 public class LiftSubsystem extends SubsystemBase
 {
    private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
-   private VictorSP liftSlideMotor = new VictorSP(MotorPorts.liftSlideMotorPort);
-   private VictorSP liftRaiseMotor = new VictorSP(MotorPorts.liftRaiseMotorPort);
+   private VictorSPX liftSlideMotor = new VictorSPX(CANID.liftSlide);
+   private VictorSPX liftRaiseMotor = new VictorSPX(CANID.liftRaise);
 
    private AnalogInput stringPotHorizontal = new AnalogInput(Constants.AIPorts.stringPotHorizontalPort);
    private AnalogInput stringPotVertical = new AnalogInput(Constants.AIPorts.stringPotVerticalPort);
@@ -42,28 +43,28 @@ public class LiftSubsystem extends SubsystemBase
 
    public void stopLiftMotors()
    {
-      liftSlideMotor.set(0.0);
-      liftRaiseMotor.set(0.0);
+      liftSlideMotor.set(ControlMode.PercentOutput, 0.0);
+      liftRaiseMotor.set(ControlMode.PercentOutput, 0.0);
    }
 
    public void runSlide(double slide)
    {
       if ((stringPotHorizontal.getVoltage() >= SPHSoftStopRight) && (stringPotHorizontal.getVoltage() <= SPHSoftStopLeft))
       {
-         liftSlideMotor.set(slide);
-         logger.fine("lift slide motor: " + liftSlideMotor.get());
+         liftSlideMotor.set(ControlMode.PercentOutput, slide);
+         logger.fine("lift slide motor percent: " + liftSlideMotor.getMotorOutputPercent());
       }
 
       else if ((stringPotHorizontal.getVoltage() >= SPHHardStopRight) && (stringPotHorizontal.getVoltage() < SPHSoftStopRight))
       {
          if (slide < 0)
          {
-            liftSlideMotor.set(slide/3);
+            liftSlideMotor.set(ControlMode.PercentOutput, slide/3);
          }
 
          else if (slide > 0)
          {
-            liftSlideMotor.set(slide);
+            liftSlideMotor.set(ControlMode.PercentOutput, slide);
          }
       }
 
@@ -71,12 +72,12 @@ public class LiftSubsystem extends SubsystemBase
       {
          if (slide > 0)
          {
-            liftSlideMotor.set(slide/3);
+            liftSlideMotor.set(ControlMode.PercentOutput, slide/3);
          }
 
          else if (slide < 0)
          {
-            liftSlideMotor.set(slide);
+            liftSlideMotor.set(ControlMode.PercentOutput, slide);
          }
       }
 
@@ -84,12 +85,12 @@ public class LiftSubsystem extends SubsystemBase
       {
          if (slide >= 0)
          {
-            liftSlideMotor.set(slide);
+            liftSlideMotor.set(ControlMode.PercentOutput, slide);
          }
 
          else if (slide < 0)
          {
-            liftSlideMotor.set(0);
+            liftSlideMotor.set(ControlMode.PercentOutput, 0);
          }
       }
 
@@ -97,18 +98,18 @@ public class LiftSubsystem extends SubsystemBase
       {
          if (slide <= 0)
          {
-            liftSlideMotor.set(slide);
+            liftSlideMotor.set(ControlMode.PercentOutput, slide);
          }
 
          else if (slide > 0)
          {
-            liftSlideMotor.set(0);
+            liftSlideMotor.set(ControlMode.PercentOutput, 0);
          }
       }
       
       else 
       {
-         liftSlideMotor.set(0);
+         liftSlideMotor.set(ControlMode.PercentOutput, 0);
       }
 
       SmartDashboard.putNumber("String Pot Horizontal:", stringPotHorizontal.getVoltage());
@@ -118,20 +119,20 @@ public class LiftSubsystem extends SubsystemBase
    {
       if ((stringPotVertical.getVoltage() >= SPVSoftStopDown) && (stringPotVertical.getVoltage() <= SPVSoftStopUp))
       {
-         liftRaiseMotor.set(raise);
-         logger.fine("lift slide motor: " + liftSlideMotor.get());
+         liftRaiseMotor.set(ControlMode.PercentOutput, raise);
+         logger.fine("lift slide motor percent: " + liftSlideMotor.getMotorOutputPercent());
       }
 
       else if ((stringPotVertical.getVoltage() >= SPVHardStopDown) && (stringPotVertical.getVoltage() < SPVSoftStopDown))
       {
          if (raise > 0)
          {
-            liftRaiseMotor.set(raise/2);
+            liftRaiseMotor.set(ControlMode.PercentOutput, raise/2);
          }
 
          else if (raise < 0)
          {
-            liftRaiseMotor.set(raise);
+            liftRaiseMotor.set(ControlMode.PercentOutput, raise);
          }
       }
 
@@ -139,12 +140,12 @@ public class LiftSubsystem extends SubsystemBase
       {
          if (raise < 0)
          {
-            liftRaiseMotor.set(raise/2);
+            liftRaiseMotor.set(ControlMode.PercentOutput, raise/2);
          }
 
          else if (raise > 0)
          {
-            liftRaiseMotor.set(raise);
+            liftRaiseMotor.set(ControlMode.PercentOutput, raise);
          }
       }
 
@@ -152,12 +153,12 @@ public class LiftSubsystem extends SubsystemBase
       {
          if (raise <= 0)
          {
-            liftRaiseMotor.set(raise);
+            liftRaiseMotor.set(ControlMode.PercentOutput, raise);
          }
 
          else if (raise > 0)
          {
-            liftRaiseMotor.set(0);
+            liftRaiseMotor.set(ControlMode.PercentOutput, 0);
          }
       }
 
@@ -165,18 +166,18 @@ public class LiftSubsystem extends SubsystemBase
       {
          if (raise > 0)
          {
-            liftRaiseMotor.set(raise);
+            liftRaiseMotor.set(ControlMode.PercentOutput, raise);
          }
 
          else if (raise < 0)
          {
-            liftRaiseMotor.set(0);
+            liftRaiseMotor.set(ControlMode.PercentOutput, 0);
          }
       }
       
       else 
       {
-         liftRaiseMotor.set(0);
+         liftRaiseMotor.set(ControlMode.PercentOutput, 0);
       }
 
       SmartDashboard.putNumber("String Pot Vertical", stringPotVertical.getVoltage());
