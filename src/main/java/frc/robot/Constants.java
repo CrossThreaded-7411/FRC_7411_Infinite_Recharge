@@ -21,16 +21,16 @@ public final class Constants
 {
    public static final class MotorPorts
    {
-      public static final int launchMotorLowerPort = 0;
-      public static final int launchMotorUpperPort = 1;
-      public static final int leftFrontDriveMotorPort = 2;
-      public static final int leftRearDriveMotorPort = 3;
-      public static final int rightFrontDriveMotorPort = 4;
-      public static final int rightRearDriveMotorPort = 5;
-      public static final int liftSlideMotorPort = 6;
-      public static final int liftRaiseMotorPort = 7;
-      public static final int ballCollectorMotorPort = 9;
-      // public static final int  = 9;
+       public static final int launchMotorLowerPort = 0;
+       public static final int launchMotorUpperPort = 8;//1
+       public static final int leftFrontDriveMotorPort = 2;
+       public static final int leftRearDriveMotorPort = 3;
+       public static final int rightFrontDriveMotorPort = 4;
+       public static final int rightRearDriveMotorPort = 5;
+       public static final int liftSlideMotorPort = 6;
+       public static final int liftRaiseMotorPort = 7;
+       public static final int ballCollectorMotorPort = 1;
+      // public static final int  = 8;
    
    }
 
@@ -54,6 +54,8 @@ public final class Constants
       rightTrigger(3),
       rightStickX(4),
       rightStickY(5);
+     
+      
 
       @SuppressWarnings({"MemberName", "PMD.SingularField"})
       public final int value;
@@ -62,6 +64,22 @@ public final class Constants
       {
          this.value = value;
       }
+   }
+
+   public enum GamePadPOVAxis
+
+   {
+      POV(0);
+
+      @SuppressWarnings({"MemberName", "PMD.SingularField"})
+      public final int value;
+
+      GamePadPOVAxis(int value)
+      {
+         this.value = value;
+      }
+      
+
    }
 
    public enum GamePadButtons
