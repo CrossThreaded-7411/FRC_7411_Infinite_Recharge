@@ -22,14 +22,14 @@ public final class Constants
    public static final class MotorPorts
    {
        public static final int launchMotorLowerPort = 0;
-       public static final int launchMotorUpperPort = 8;//1
+       public static final int launchMotorUpperPort = 1;
        public static final int leftFrontDriveMotorPort = 2;
        public static final int leftRearDriveMotorPort = 3;
        public static final int rightFrontDriveMotorPort = 4;
        public static final int rightRearDriveMotorPort = 5;
        public static final int liftSlideMotorPort = 6;
        public static final int liftRaiseMotorPort = 7;
-       public static final int ballCollectorMotorPort = 1;
+       public static final int ballCollectorMotorPort = 8;
       // public static final int  = 8;
    
    }
