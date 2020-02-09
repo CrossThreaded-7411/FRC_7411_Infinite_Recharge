@@ -26,6 +26,9 @@ public class DriveTrainSubsystem extends SubsystemBase
       // Constructor
       logger.fine("entered Drivetrain constructor");
       stopDriveMotors();
+
+      rightDriveMotors.setInverted(true);
+      leftDriveMotors.setInverted(true);
    }
 
    public void stopDriveMotors()
