@@ -30,13 +30,20 @@ public final class Constants
       public static final int liftSlideMotorPort = 6;
       public static final int liftRaiseMotorPort = 7;
       public static final int recordPlayerMotorPort = 8;
-      // public static final int  = 9;
+      public static final int ballCollectorMotorPort = 9;
+   
    }
 
    public static final class OIConstants
    {
       public static final int driver1ControlPort = 0;
       public static final int driver2ControlPort = 1;
+   }
+
+   public static final class AIPorts
+   {
+      public static final int stringPotHorizontalPort = 0;
+      public static final int stringPotVerticalPort = 1;
    }
 
    public enum GamePadAxis

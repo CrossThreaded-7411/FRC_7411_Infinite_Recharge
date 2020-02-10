@@ -13,9 +13,13 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.EnergyLaunchSubsystem;
 import frc.robot.subsystems.RecordPlayerSubsystem;
+import frc.robot.subsystems.LiftSubsystem;
+import frc.robot.subsystems.BallCollectorSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.commands.LaunchEnergyCommand;
 import frc.robot.commands.SpinRecordPlayer;
+import frc.robot.commands.RunBallCollector;
+import frc.robot.commands.RunLift;
 import frc.robot.Constants.*;
 import frc.robot.commands.DriveByJoystick;
 // import frc.wpi.first.wpi.command.XboxController;
@@ -34,6 +38,8 @@ public class RobotContainer
   private final EnergyLaunchSubsystem m_energyLaunchSubsystem = new EnergyLaunchSubsystem();
   private final DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem();
   private final RecordPlayerSubsystem recordPlayer = new RecordPlayerSubsystem();
+  private final LiftSubsystem liftSubsystem = new LiftSubsystem();
+  private final BallCollectorSubsystem ballCollectorSubsystem = new BallCollectorSubsystem();
   
 //   private final LaunchEnergyCommand m_launchEnergyCommand = new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.0);
 
@@ -53,23 +59,31 @@ public class RobotContainer
       configureButtonBindings();
       
       driveTrainSubsystem.setDefaultCommand(new DriveByJoystick(driveTrainSubsystem));
-   }
-
+      liftSubsystem.setDefaultCommand(new RunLift(liftSubsystem));
+       
+  }
 
   /**
    * Use this method to define your button->command mappings.  Buttons can be created by
-   * instantiating a {@link GenericHID} or one of its subclasses ({@link
+   * instantiating a {@link GenericHID} or one of its subclasses ({@linkw
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings()
   {
-      // Bind controller buttons to commands
-      new JoystickButton(driver1Joystick, GamePadButtons.buttonB.value).whenPressed(new SpinRecordPlayer(recordPlayer, 0.0));
-      new JoystickButton(driver1Joystick, GamePadButtons.buttonX.value).whenPressed(new SpinRecordPlayer(recordPlayer, 0.8));
-
-      //m_driveTrainSubsystem.runDriveMotorsStraight(ProAxis.YAxis.value);
-      //m_driveTrainSubsystem.runDriveMotorsTurn(ProAxis.XAxis.value);
+    // Bind controller buttons to commands
+    new JoystickButton(driver1Joystick, GamePadButtons.back.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.0, 0.0));
+    new JoystickButton(driver1Joystick, GamePadButtons.bumperR.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.4, 0.6));
+    new JoystickButton(driver1Joystick, GamePadButtons.buttonY.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.5, 0.7));
+    new JoystickButton(driver1Joystick, GamePadButtons.buttonB.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.6, 0.8));
+    new JoystickButton(driver1Joystick, GamePadButtons.buttonA.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.7, 0.9));
+    new JoystickButton(driver1Joystick, GamePadButtons.buttonX.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.8, 1.0));
+   
+    // Bind controller buttons to command
+     
+    new JoystickButton(driver1Joystick, GamePadButtons.bumperL.value).whenPressed(new RunBallCollector(ballCollectorSubsystem,1.0));
+    new JoystickButton(driver1Joystick, GamePadButtons.bumperR.value).whenPressed(new RunBallCollector(ballCollectorSubsystem,0.0));
+    //new JoystickButton(driver1Joystick, GamePadButtons.bumperl.value).(new StopBallCollector(ballCollectorSubsystem, 0.0));
   }
 
   /**

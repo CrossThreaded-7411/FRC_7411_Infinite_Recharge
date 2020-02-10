@@ -19,7 +19,6 @@ public class RunLift extends CommandBase {
    {
       lift = subsystem;
       addRequirements(subsystem);
-
       setDeadband(0.05);
       setMaxPower(1.0);
    }
@@ -28,9 +27,10 @@ public class RunLift extends CommandBase {
    public void execute()
    {
       raise = rangeLimitedPower(Robot.m_robotContainer.driver2Joystick.getRawAxis(Constants.GamePadAxis.rightStickY.value));
-      slide = rangeLimitedPower(Robot.m_robotContainer.driver2Joystick.getRawAxis(Constants.GamePadAxis.rightStickX.value));
+      slide = rangeLimitedPower(Robot.m_robotContainer.driver2Joystick.getRawAxis(Constants.GamePadAxis.leftStickX.value));
 
-      lift.runLiftMotors(slide, raise);
+      lift.runLift(raise);
+      lift.runSlide(-slide);
    }
 
    /**
@@ -54,7 +54,6 @@ public class RunLift extends CommandBase {
 
       return (newCommand);
    }
-
 
    /**
     * Method sets deadband for joystick axis
