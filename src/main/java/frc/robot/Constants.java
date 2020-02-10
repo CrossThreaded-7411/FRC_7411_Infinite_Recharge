@@ -7,8 +7,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
-
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants.  This class should not be used for any other purpose.  All constants should be
@@ -22,18 +20,18 @@ public final class Constants
    public static final class CANID
    {
       public static final int powerDistPanel = 00;
-      // public static final int roboRio = ;
-      public static final int ballShooterUpper = 10;
-      public static final int ballShooterLower = 11;
+      public static final int ballShooterTop = 10;
+      public static final int ballShooterBottom = 11;
       public static final int driveTrainLF = 20;
       public static final int driveTrainLR = 21;
       public static final int driveTrainRF = 22;
       public static final int driveTrainRR = 23;
       public static final int ballCollector = 24;
-      public static final int ballConveyer = 25;
-      public static final int liftRaise = 26;
-      public static final int liftSlide = 27;
-      public static final int ballShooterTurret = 30;
+      public static final int ballFeeder = 25;
+      public static final int liftSlide = 30;
+      public static final int liftRaise = 31;
+      public static final int recordPlayer = 32;
+      public static final int ballShooterTurret = 33;
    }
 
    public static final class MotorPorts
@@ -86,8 +84,8 @@ public final class Constants
       buttonB(2),
       buttonX(3),
       buttonY(4),
-      bumperL(5),
-      bumperR(6),
+      bumperLeft(5),
+      bumperRight(6),
       back(7),
       start(8),
       leftStickPress(9),

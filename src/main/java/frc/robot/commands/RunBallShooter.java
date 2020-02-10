@@ -9,7 +9,7 @@ package frc.robot.commands;
 
 import java.util.logging.Logger;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.BallShooter;
+import frc.robot.subsystems.BallShooterSubsystem;
 
 /**
  * A command to turn on the launch motor to a known desired power
@@ -17,11 +17,11 @@ import frc.robot.subsystems.BallShooter;
 public class RunBallShooter extends CommandBase
 {
    private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-   private final BallShooter m_ballShooter;
+   private final BallShooterSubsystem m_ballShooter;
    private final double m_motorPowerLower;
    private final double m_motorPowerUpper;
 
-   public RunBallShooter(BallShooter subsystem, double motorPowerLower, double motorPowerUpper)
+   public RunBallShooter(BallShooterSubsystem subsystem, double motorPowerLower, double motorPowerUpper)
    {
       m_ballShooter = subsystem;
       m_motorPowerLower = motorPowerLower;
