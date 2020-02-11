@@ -1,9 +1,9 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.VictorSP;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.MotorPorts;
+import frc.robot.Constants.CANID;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import java.util.logging.Logger;
 
@@ -11,12 +11,12 @@ public class DriveTrainSubsystem extends SubsystemBase
 {
    private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
-   private VictorSP leftFrontDriveMotor = new VictorSP(MotorPorts.leftFrontDriveMotorPort);
-   private VictorSP leftRearDriveMotor = new VictorSP(MotorPorts.leftRearDriveMotorPort);
+   private WPI_VictorSPX leftFrontDriveMotor = new WPI_VictorSPX(CANID.driveTrainLF);
+   private WPI_VictorSPX leftRearDriveMotor = new WPI_VictorSPX(CANID.driveTrainLR);
    SpeedControllerGroup leftDriveMotors = new SpeedControllerGroup(leftFrontDriveMotor, leftRearDriveMotor);
 
-   private VictorSP rightFrontDriveMotor = new VictorSP(MotorPorts.rightFrontDriveMotorPort);
-   private VictorSP rightRearDriveMotor = new VictorSP(MotorPorts.rightRearDriveMotorPort);
+   private WPI_VictorSPX rightFrontDriveMotor = new WPI_VictorSPX(CANID.driveTrainRF);
+   private WPI_VictorSPX rightRearDriveMotor = new WPI_VictorSPX(CANID.driveTrainRR);
    SpeedControllerGroup rightDriveMotors = new SpeedControllerGroup(rightFrontDriveMotor, rightRearDriveMotor);
 
    public final DifferentialDrive driveBase = new DifferentialDrive(leftDriveMotors, rightDriveMotors);
@@ -26,6 +26,9 @@ public class DriveTrainSubsystem extends SubsystemBase
       // Constructor
       logger.fine("entered Drivetrain constructor");
       stopDriveMotors();
+
+      rightDriveMotors.setInverted(true);
+      leftDriveMotors.setInverted(true);
    }
 
    public void stopDriveMotors()
