@@ -10,23 +10,23 @@ package frc.robot.subsystems;
 import java.util.logging.Logger;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.MotorPorts;
+import frc.robot.Constants.CANID;
 
-public class EnergyLaunchSubsystem extends SubsystemBase
+public class BallShooterSubsystem extends SubsystemBase
 {
    private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-   private Spark launchMotorLower = new Spark(MotorPorts.launchMotorLowerPort);
-   private Spark launchMotorUpper = new Spark(MotorPorts.launchMotorUpperPort);
+   private Spark launchMotorBottom = new Spark(CANID.ballShooterBottom);
+   private Spark launchMotorTop = new Spark(CANID.ballShooterTop);
 
    /**
     * Creates a new DriveSubsystem.
     */
-   public EnergyLaunchSubsystem()
+   public BallShooterSubsystem()
    {
       // Constructor
       stopMotors();
-      launchMotorUpper.setInverted(true);
-      logger.fine("Launch motor upper direction inverted = " + launchMotorUpper.getInverted());
+      launchMotorTop.setInverted(true);
+      logger.fine("Launch motor upper direction inverted = " + launchMotorTop.getInverted());
 
       logger.finer("Launch subsystem constructor complete");
    }
@@ -38,10 +38,10 @@ public class EnergyLaunchSubsystem extends SubsystemBase
     */
    public void setMotorPower(double targetPowerLower, double targetPowerUpper)
    {
-      launchMotorLower.set(targetPowerLower);
-      launchMotorUpper.set(targetPowerUpper);
-      logger.info("Launch motor lower = " + launchMotorLower.get());
-      logger.info("Launch motor upper = " + launchMotorUpper.get());
+      launchMotorBottom.set(targetPowerLower);
+      launchMotorBottom.set(targetPowerUpper);
+      logger.info("Launch motor lower = " + launchMotorBottom.get());
+      logger.info("Launch motor upper = " + launchMotorTop.get());
    }
 
    /**
@@ -50,9 +50,9 @@ public class EnergyLaunchSubsystem extends SubsystemBase
    public void stopMotors()
    {
       double stopPower = 0.0;
-      launchMotorLower.set(stopPower);
-      launchMotorUpper.set(stopPower);
-      logger.info("Launch motor lower = " + launchMotorLower.get());
-      logger.info("Launch motor upper = " + launchMotorUpper.get());
+      launchMotorBottom.set(stopPower);
+      launchMotorTop.set(stopPower);
+      logger.info("Launch motor lower = " + launchMotorBottom.get());
+      logger.info("Launch motor upper = " + launchMotorTop.get());
    }
 }

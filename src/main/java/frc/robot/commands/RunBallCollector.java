@@ -1,7 +1,6 @@
 package frc.robot.commands;
 
 import java.util.logging.Logger;
-import  edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.subsystems.BallCollectorSubsystem;
@@ -37,6 +36,7 @@ public class RunBallCollector extends CommandBase {
   public void execute()
     {
       int direction = Robot.m_robotContainer.driver1Joystick.getPOV(0);
+      Robot.m_robotContainer.driver1Joystick.getPOV();
       this.setBallCollectorMotorPower(direction);
     }
 
@@ -51,20 +51,20 @@ public class RunBallCollector extends CommandBase {
    // double POVXAxisValue = Math.sin(Math.toRadians(90));
 
     if (direction == 0) {
-      m_ballCollector.setMotorPower(0.5);
+      m_ballCollector.setMotorPower(0.40);
       // POV UP button is pressed
       // do something
 
     } else if (direction == 180) {
-      m_ballCollector.setMotorPower(-0.5);
+      m_ballCollector.setMotorPower(-0.40);
       // POV DOWN button is pressed
       // do something else
 
     
 
 
-    } else if (direction == 90)  {
-      m_ballCollector.setMotorPower(0.0); // when POVr will not spin
+    } else if (direction == 270)  {
+      m_ballCollector.setMotorPower(0.0); // when POV will not spin
     
     }
 

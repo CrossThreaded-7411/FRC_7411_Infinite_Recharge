@@ -11,18 +11,21 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.EnergyLaunchSubsystem;
+
+// Import Subsystems
+import frc.robot.subsystems.BallShooterSubsystem;
 import frc.robot.subsystems.LiftSubsystem;
 import frc.robot.subsystems.BallCollectorSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
+import frc.robot.subsystems.BallTurretSubsystem;
+
+// Import Commands
 import frc.robot.commands.DriveByJoystick;
-import frc.robot.commands.LaunchEnergyCommand;
+import frc.robot.commands.RunBallShooter;
 import frc.robot.commands.RunBallCollector;
 import frc.robot.commands.RunLift;
+import frc.robot.commands.RunTurret;
 import frc.robot.Constants.*;
-// import frc.wpi.first.wpi.command.XboxController;
-// import frc.robot.Constants.GamePadButtons;
-// import frc.robot.Constants.OIConstants;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -33,10 +36,11 @@ import frc.robot.Constants.*;
 public class RobotContainer
 {
   // The robot's subsystems and commands are defined here...
-  private final EnergyLaunchSubsystem m_energyLaunchSubsystem = new EnergyLaunchSubsystem();
+  private final BallShooterSubsystem ballShooterSubsystem = new BallShooterSubsystem();
   private final DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem();
   private final LiftSubsystem liftSubsystem = new LiftSubsystem();
   private final BallCollectorSubsystem ballCollectorSubsystem = new BallCollectorSubsystem();
+  private final BallTurretSubsystem turretSubsystem = new BallTurretSubsystem();
   
 //   private final LaunchEnergyCommand m_launchEnergyCommand = new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.0);
 
@@ -58,6 +62,7 @@ public class RobotContainer
       driveTrainSubsystem.setDefaultCommand(new DriveByJoystick(driveTrainSubsystem));
       liftSubsystem.setDefaultCommand(new RunLift(liftSubsystem));
       ballCollectorSubsystem.setDefaultCommand(new RunBallCollector(ballCollectorSubsystem));
+      turretSubsystem.setDefaultCommand(new RunTurret(turretSubsystem));
        
   }
 
@@ -70,13 +75,10 @@ public class RobotContainer
   private void configureButtonBindings()
   {
     // Bind controller buttons to commands
-    new JoystickButton(driver1Joystick, GamePadButtons.back.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.0, 0.0));
-    new JoystickButton(driver1Joystick, GamePadButtons.bumperR.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.4, 0.6));
-    new JoystickButton(driver1Joystick, GamePadButtons.buttonY.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.5, 0.7));
-    new JoystickButton(driver1Joystick, GamePadButtons.buttonB.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.6, 0.8));
-    new JoystickButton(driver1Joystick, GamePadButtons.buttonA.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.7, 0.9));
-    new JoystickButton(driver1Joystick, GamePadButtons.buttonX.value).whenPressed(new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.8, 1.0));
-   //new JoystickButton(driver1Joystick, GamePadButtons.bumperl.value).(new StopBallCollector(ballCollectorSubsystem, 0.0));
+    new JoystickButton(driver1Joystick, GamePadButtons.back.value).whenPressed(new RunBallShooter(ballShooterSubsystem, 0.0, 0.0));
+    new JoystickButton(driver1Joystick, GamePadButtons.buttonB.value).whenPressed(new RunBallShooter(ballShooterSubsystem, 0.6, 0.8));
+    new JoystickButton(driver1Joystick, GamePadButtons.buttonA.value).whenPressed(new RunBallShooter(ballShooterSubsystem, 0.7, 0.9));
+    new JoystickButton(driver1Joystick, GamePadButtons.buttonX.value).whenPressed(new RunBallShooter(ballShooterSubsystem, 0.8, 1.0));
   }
 
 

@@ -7,8 +7,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
-
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants.  This class should not be used for any other purpose.  All constants should be
@@ -19,19 +17,35 @@ import edu.wpi.first.wpilibj.GenericHID;
  */
 public final class Constants 
 {
+   public static final class CANID
+   {
+      public static final int powerDistPanel = 00;
+      public static final int ballShooterTop = 10;
+      public static final int ballShooterBottom = 11;
+      public static final int driveTrainLF = 20;
+      public static final int driveTrainLR = 21;
+      public static final int driveTrainRF = 22;
+      public static final int driveTrainRR = 23;
+      public static final int ballCollector = 24;
+      public static final int ballFeeder = 25;
+      public static final int liftSlide = 30;
+      public static final int liftRaise = 31;
+      public static final int recordPlayer = 32;
+      public static final int ballShooterTurret = 33;
+   }
+
    public static final class MotorPorts
    {
-       public static final int launchMotorLowerPort = 0;
-       public static final int launchMotorUpperPort = 1;
-       public static final int leftFrontDriveMotorPort = 2;
-       public static final int leftRearDriveMotorPort = 3;
-       public static final int rightFrontDriveMotorPort = 4;
-       public static final int rightRearDriveMotorPort = 5;
-       public static final int liftSlideMotorPort = 6;
-       public static final int liftRaiseMotorPort = 7;
-       public static final int ballCollectorMotorPort = 8;
-      // public static final int  = 8;
-   
+      public static final int launchMotorLowerPort = 0;
+      public static final int launchMotorUpperPort = 1;
+      public static final int leftFrontDriveMotorPort = 2;
+      public static final int leftRearDriveMotorPort = 3;
+      public static final int rightFrontDriveMotorPort = 4;
+      public static final int rightRearDriveMotorPort = 5;
+      public static final int liftSlideMotorPort = 6;
+      public static final int liftRaiseMotorPort = 7;
+      public static final int ballCollectorMotorPort = 9;
+      // public static final int  = 9;
    }
 
    public static final class OIConstants
@@ -88,8 +102,8 @@ public final class Constants
       buttonB(2),
       buttonX(3),
       buttonY(4),
-      bumperL(5),
-      bumperR(6),
+      bumperLeft(5),
+      bumperRight(6),
       back(7),
       start(8),
       leftStickPress(9),
