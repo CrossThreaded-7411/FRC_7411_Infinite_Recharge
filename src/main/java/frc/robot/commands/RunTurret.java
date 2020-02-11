@@ -35,8 +35,8 @@ public class RunTurret extends CommandBase
    public void execute()
    {
       double motorPower = 0.0;
-      boolean leftBumper = Robot.m_robotContainer.driver2Joystick.getRawButton(GamePadButtons.bumperLeft.value);
-      boolean rightBumper = Robot.m_robotContainer.driver2Joystick.getRawButton(GamePadButtons.bumperRight.value);
+      boolean leftBumper = Robot.m_robotContainer.driver2Controller.getRawButton(GamePadButtons.bumperLeft.value);
+      boolean rightBumper = Robot.m_robotContainer.driver2Controller.getRawButton(GamePadButtons.bumperRight.value);
 
       // Rotate the turret based on the bumper buttons. If turret is at the rotational limit, do not allow rotation further that direction
       if (leftBumper && (operatingState() != State.at_CCW_limit))

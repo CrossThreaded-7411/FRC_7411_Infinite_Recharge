@@ -102,6 +102,7 @@ public final class Constants
          this.value = value;
       }
    }
+   
 
    public enum LogitechProAxis
    {

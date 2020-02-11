@@ -24,8 +24,8 @@ public class RunLift extends CommandBase {
    @Override
    public void execute()
    {
-      raise = rangeLimitedPower(Robot.m_robotContainer.driver1Joystick.getRawAxis(Constants.GamePadAxis.rightStickY.value));
-      slide = rangeLimitedPower(Robot.m_robotContainer.driver1Joystick.getRawAxis(Constants.GamePadAxis.leftStickX.value));
+      raise = rangeLimitedPower(Robot.m_robotContainer.driver2Controller.getRawAxis(Constants.GamePadAxis.rightStickY.value));
+      slide = rangeLimitedPower(Robot.m_robotContainer.driver2Controller.getRawAxis(Constants.GamePadAxis.leftStickX.value));
 
       lift.runLift(raise);
       lift.runSlide(-slide);

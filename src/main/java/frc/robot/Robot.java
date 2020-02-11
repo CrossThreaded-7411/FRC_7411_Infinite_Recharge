@@ -10,7 +10,6 @@ package frc.robot;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -23,13 +22,9 @@ import frc.robot.Constants.*;
  * creating this project, you must also update the build.gradle file in the
  * project.
  */
-public class Robot extends TimedRobot {
+public class Robot extends TimedRobot
+{
    private Command m_autonomousCommand;
-
-     // Create driver controller
-   public Joystick driver1Joystick = new Joystick(OIConstants.driver1ControlPort);
-   public Joystick driver2Joystick = new Joystick(OIConstants.driver2ControlPort);
-
    public static RobotContainer m_robotContainer;
 
    // use the classname for the logger, this way you can refactor
@@ -79,8 +74,8 @@ public class Robot extends TimedRobot {
       // robot's periodic
       // block in order for anything in the Command-based framework to work.
       CommandScheduler.getInstance().run();
-      logger.fine("yaxis:" + m_robotContainer.driver2Joystick.getRawAxis(GamePadAxis.leftStickY.value));
-      logger.fine("xaxis:" + m_robotContainer.driver2Joystick.getRawAxis(GamePadAxis.leftStickX.value));
+      logger.fine("yaxis:" + m_robotContainer.driver2Controller.getRawAxis(GamePadAxis.leftStickY.value));
+      logger.fine("xaxis:" + m_robotContainer.driver2Controller.getRawAxis(GamePadAxis.leftStickX.value));
    }
 
    /**
