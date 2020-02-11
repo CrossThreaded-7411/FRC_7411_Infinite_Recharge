@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import frc.robot.Constants.CANID;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class BallTurretSubsystem extends SubsystemBase
 {
