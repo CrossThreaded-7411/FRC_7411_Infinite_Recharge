@@ -8,14 +8,16 @@
 package frc.robot.subsystems;
 
 import java.util.logging.Logger;
-import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.MotorPorts;
+import frc.robot.Constants;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class RecordPlayerSubsystem extends SubsystemBase
 {
    private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-   private VictorSP recordPlayerMotor = new VictorSP(MotorPorts.recordPlayerMotorPort);
+   private TalonSRX recordPlayerMotor = new TalonSRX(Constants.CANID.recordPlayer);
 
    /**
     * Creates a new DriveSubsystem.
@@ -34,8 +36,7 @@ public class RecordPlayerSubsystem extends SubsystemBase
     */
    public void setMotorPower(double power)
    {
-      recordPlayerMotor.set(power);
-      logger.info("Launch motor lower = " + recordPlayerMotor.get());
+      recordPlayerMotor.set(ControlMode.PercentOutput, power);
    }
 
    /**
@@ -44,7 +45,6 @@ public class RecordPlayerSubsystem extends SubsystemBase
    public void stopMotor()
    {
       double stopMotorPower = 0.0;
-      recordPlayerMotor.set(stopMotorPower);
-      logger.info("Launch motor lower = " + recordPlayerMotor.get());
+      recordPlayerMotor.set(ControlMode.PercentOutput, stopMotorPower);
    }
 }
