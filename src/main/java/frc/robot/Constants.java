@@ -60,6 +60,11 @@ public final class Constants
       public static final int stringPotVerticalPort = 1;
    }
 
+   public static final class POVAxis 
+   {
+      public static final int POVAxis = 0;
+   }
+
    public enum GamePadAxis
    {
       leftStickX(0),

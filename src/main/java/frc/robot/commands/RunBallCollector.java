@@ -22,59 +22,37 @@ public class RunBallCollector extends CommandBase {
 
   }
 
-  //@//Override
-  //public boolean isFinished() {
+  // @//Override
+  // public boolean isFinished() {
 
-    // System.out.println("Toggled motor on is Finished");
-    //return false;
-  //}
-
-
-
+  // System.out.println("Toggled motor on is Finished");
+  // return false;
+  // }
 
   @Override
-  public void execute()
-    {
-      int direction = Robot.m_robotContainer.driver1Joystick.getPOV(0);
-      Robot.m_robotContainer.driver1Joystick.getPOV();
-      this.setBallCollectorMotorPower(direction);
-    }
+  public void execute() {
+    int direction = Robot.m_robotContainer.driver1Joystick.getPOV(0);
+    Robot.m_robotContainer.driver1Joystick.getPOV();
+    this.setBallCollectorMotorPower(direction);
+  }
 
-
-  private void setBallCollectorMotorPower(int direction)
-  {
-    // int direction = GamePadPOVAxis(1);
-
-   // VictorSP.set(POVYAxisValue);
-    //VictorSP.set(POVXAxisValue);
-   // double POVYAxisValue = Math.cos(Math.toRadians(0));
-   // double POVXAxisValue = Math.sin(Math.toRadians(90));
+  private void setBallCollectorMotorPower(int direction) {
 
     if (direction == 0) {
-      m_ballCollector.setMotorPower(0.40);
+      m_ballCollector.setMotorPower(-0.35);
       // POV UP button is pressed
       // do something
 
     } else if (direction == 180) {
-      m_ballCollector.setMotorPower(-0.40);
+      m_ballCollector.setMotorPower(0.35);
       // POV DOWN button is pressed
       // do something else
 
-    
-
-
-    } else if (direction == 270)  {
-      m_ballCollector.setMotorPower(0.0); // when POV will not spin
-    
-    }
+    } else if (direction == 270) {
+      m_ballCollector.setMotorPower(0.0); // when POV is not pressed will not spin
 
     }
 
-  private void stopBallCollectorMotor() {
-  }
-
-  private int GamePadPOVAxis(int i) {
-    return 0;
   }
 
 }
