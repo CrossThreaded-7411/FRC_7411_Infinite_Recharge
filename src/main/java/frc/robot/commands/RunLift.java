@@ -1,14 +1,12 @@
 package frc.robot.commands;
 
-import java.util.logging.Logger;
-import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.subsystems.LiftSubsystem;
+import frc.robot.Constants;
 //import java.math.abs;
 
 public class RunLift extends CommandBase {
-   private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
    private final LiftSubsystem lift;
    private double slide;
    private double raise;
