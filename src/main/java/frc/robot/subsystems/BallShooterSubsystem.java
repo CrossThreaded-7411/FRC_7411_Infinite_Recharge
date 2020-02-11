@@ -7,16 +7,18 @@
 
 package frc.robot.subsystems;
 
-import java.util.logging.Logger;
-import edu.wpi.first.wpilibj.Spark;
+// import edu.wpi.first.wpilibj.Spark;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CANID;
 
 public class BallShooterSubsystem extends SubsystemBase
 {
-   private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-   private Spark launchMotorBottom = new Spark(CANID.ballShooterBottom);
-   private Spark launchMotorTop = new Spark(CANID.ballShooterTop);
+   // private Spark launchMotorBottom = new Spark(CANID.ballShooterBottom);
+   // private Spark launchMotorTop = new Spark(CANID.ballShooterTop);
+   private CANSparkMax launchMotorBottom = new CANSparkMax(CANID.ballShooterBottom, MotorType.kBrushless);
+   private CANSparkMax launchMotorTop = new CANSparkMax(CANID.ballShooterTop, MotorType.kBrushless);
 
    /**
     * Creates a new DriveSubsystem.
@@ -26,9 +28,6 @@ public class BallShooterSubsystem extends SubsystemBase
       // Constructor
       stopMotors();
       launchMotorTop.setInverted(true);
-      logger.fine("Launch motor upper direction inverted = " + launchMotorTop.getInverted());
-
-      logger.finer("Launch subsystem constructor complete");
    }
 
    /**
@@ -39,9 +38,7 @@ public class BallShooterSubsystem extends SubsystemBase
    public void setMotorPower(double targetPowerLower, double targetPowerUpper)
    {
       launchMotorBottom.set(targetPowerLower);
-      launchMotorBottom.set(targetPowerUpper);
-      logger.info("Launch motor lower = " + launchMotorBottom.get());
-      logger.info("Launch motor upper = " + launchMotorTop.get());
+      launchMotorTop.set(targetPowerUpper);
    }
 
    /**
@@ -52,7 +49,5 @@ public class BallShooterSubsystem extends SubsystemBase
       double stopPower = 0.0;
       launchMotorBottom.set(stopPower);
       launchMotorTop.set(stopPower);
-      logger.info("Launch motor lower = " + launchMotorBottom.get());
-      logger.info("Launch motor upper = " + launchMotorTop.get());
    }
 }
