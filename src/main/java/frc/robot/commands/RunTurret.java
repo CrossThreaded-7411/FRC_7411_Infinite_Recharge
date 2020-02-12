@@ -12,7 +12,7 @@ import frc.robot.Constants.GamePadButtons;
 public class RunTurret extends CommandBase
 {
    private final BallTurretSubsystem turret;
-   private final double maxMotorPower = 0.1;
+   private final double maxMotorPower = 0.2;
    private final int countLimitCW = 10050;
    private final int countLimitCCW = -3520;
 

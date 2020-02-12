@@ -18,12 +18,14 @@ import frc.robot.subsystems.LiftSubsystem;
 import frc.robot.subsystems.BallFeederSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.BallTurretSubsystem;
+import frc.robot.subsystems.BallCollectorSubsystem;
 
 // Import Commands
 import frc.robot.commands.DriveByJoystick;
 import frc.robot.commands.RunBallShooter;
 import frc.robot.commands.RunLift;
 import frc.robot.commands.RunTurret;
+import frc.robot.commands.RunBallCollector;
 import frc.robot.Constants.*;
 
 /**
@@ -40,6 +42,7 @@ public class RobotContainer
    private final LiftSubsystem liftSubsystem = new LiftSubsystem();
    private final BallFeederSubsystem ballFeederSubsystem = new BallFeederSubsystem();
    private final BallTurretSubsystem turretSubsystem = new BallTurretSubsystem();
+   private final BallCollectorSubsystem ballCollectorSubsystem = new BallCollectorSubsystem();
 
    // Create driver controller
    public Joystick driver1Controller = new Joystick(OIConstants.driver1ControlPort);
@@ -70,7 +73,7 @@ public class RobotContainer
    {
       // Bind controller buttons to commands
       new JoystickButton(driver2Controller, GamePadButtons.back.value).whenPressed(new RunBallShooter(ballShooterSubsystem, ballFeederSubsystem, 0.0, 0.0, 0.0));
-      new JoystickButton(driver2Controller, GamePadButtons.buttonB.value).whenPressed(new RunBallShooter(ballShooterSubsystem, ballFeederSubsystem, 0.6, 0.6, 0.3));
+      new JoystickButton(driver2Controller, GamePadButtons.buttonB.value).whenPressed(new RunBallShooter(ballShooterSubsystem, ballFeederSubsystem, 0.5, 0.7, 0.3));
    }
 
 

@@ -1,11 +1,11 @@
 package frc.robot.commands;
 
-
 import java.util.logging.Logger;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.BallCollectorSubsystem;
+import frc.robot.Robot;
 
-public class RunBallCollector extends CommandBas
+public class RunBallCollector extends CommandBase
 {
   private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
   private final BallCollectorSubsystem m_ballCollector;
@@ -28,8 +28,8 @@ public class RunBallCollector extends CommandBas
   @Override
   public void execute()
   {
-    int direction = Robot.m_robotContainer.driver1Joystick.getPOV(0);
-    Robot.m_robotContainer.driver1Joystick.getPOV();
+    int direction = Robot.m_robotContainer.driver2Controller.getPOV(0);
+    Robot.m_robotContainer.driver1Controller.getPOV();
     this.setBallCollectorMotorPower(direction);
   }
 
