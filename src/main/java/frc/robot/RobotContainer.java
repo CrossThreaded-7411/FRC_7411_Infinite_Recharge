@@ -30,7 +30,7 @@ public class RobotContainer
    {
       // Configure the button bindings
       configureButtonBindings();
-      colorSensor.setDefaultCommand(new PrintColorValues(colorSensor));
+      //colorSensor.setDefaultCommand(new PrintColorValues(colorSensor));
    }
 
 

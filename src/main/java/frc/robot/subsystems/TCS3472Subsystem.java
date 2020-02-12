@@ -77,7 +77,7 @@ public class TCS3472Subsystem extends SubsystemBase
    public void disable()
    {
       int regValue = 0x00; // 0000 0000 disables RGBC and Power on
-      write8(ENABLE, 0);
+      write8(ENABLE, regValue);
       enabled = false;
       System.out.println("Disabled TCS");
    }
@@ -124,11 +124,12 @@ public class TCS3472Subsystem extends SubsystemBase
    }
 
 
-   public int[] getData()
+   // public int[] getData()
+   public void getData()
    {
       // This will return 4 fields - clear, red, green, blue
-      byte[] chipId = new byte[1];
-      chipId[0] = 0x00;
+      // byte[] chipId = new byte[1];
+      // chipId[0] = 0x00;
       //System.out.println(i2cSource.read(0x92, 1, chipId));
       
       try
@@ -140,36 +141,36 @@ public class TCS3472Subsystem extends SubsystemBase
          System.out.println("InterruptedException");
       }
 
-      System.out.println(chipId[0]);
-      int[] output = {-1, -1, -1, -1};
+      //System.out.println(chipId[0]);
+      // int[] output = {-1, -1, -1, -1};
       
       if (enabled == true)
       {
          int redValue = read16(RDATAL);
-         int blueValue = read16(BDATAL);
-         int greenValue = read16(GDATAL);
-         int clearValue = read16(CDATAL);
+         // int blueValue = read16(BDATAL);
+         // int greenValue = read16(GDATAL);
+         // int clearValue = read16(CDATAL);
 
-         output[0] = 0;
-         output[1] = redValue;
-         output[2] = greenValue;
-         output[3] = blueValue;
+         // output[0] = 0;
+         // output[1] = redValue;
+         // output[2] = greenValue;
+         // output[3] = blueValue;
       }
-      else
-      {
-         init();
-         output[0] = -1;
-         output[1] = -1;
-         output[2] = -1;
-         output[3] = -1;
-      }
+      // else
+      // {
+      //    init();
+      //    output[0] = -1;
+      //    output[1] = -1;
+      //    output[2] = -1;
+      //    output[3] = -1;
+      // }
 
-      return output;
+      // return output;
    }
 
 
    // Read 16 bit data value
-   private int read16(int register)
+   public int read16(int register)
    {
       ByteBuffer rawByte = ByteBuffer.allocate(2);
       i2cSource.read(COMMANDBIT | AUTOINCREMENT | register, 2, rawByte);
@@ -177,6 +178,8 @@ public class TCS3472Subsystem extends SubsystemBase
       byte hi = rawByte.get();
 
       int result = ((hi & 0xFF) << 8) | (lo & 0xFF);
+
+      // System.out.println("LB: " +  lo + " HB: " + hi + " Val: " + result);
       return result;
    }
    

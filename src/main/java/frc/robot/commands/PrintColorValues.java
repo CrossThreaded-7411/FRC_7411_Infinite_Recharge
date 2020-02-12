@@ -5,7 +5,6 @@ import frc.robot.subsystems.TCS3472Subsystem;
 
 public class PrintColorValues extends CommandBase
 {
-
    TCS3472Subsystem colorSensor;
 
    public PrintColorValues(TCS3472Subsystem subsystem)
@@ -13,11 +12,12 @@ public class PrintColorValues extends CommandBase
       colorSensor = subsystem;
       addRequirements(subsystem);
    }
+   
 
    @Override
    public void execute()
    {
-      colorSensor.getStatus();
+      colorSensor.getData();
 
       // int[] values = colorSensor.getData();
       // int red = values[1];
