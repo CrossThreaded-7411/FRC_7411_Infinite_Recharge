@@ -56,6 +56,7 @@ public class RobotContainer
 
       driveTrainSubsystem.setDefaultCommand(new DriveByJoystick(driveTrainSubsystem));
       liftSubsystem.setDefaultCommand(new RunLift(liftSubsystem));
+      ballCollectorSubsystem.setDefaultCommand(new RunBallCollector(ballCollectorSubsystem));
       turretSubsystem.setDefaultCommand(new RunTurret(turretSubsystem));
    }
 
