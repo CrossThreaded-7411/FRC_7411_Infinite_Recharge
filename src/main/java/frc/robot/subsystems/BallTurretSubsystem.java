@@ -27,6 +27,7 @@ public class BallTurretSubsystem extends SubsystemBase
       stopMotor();
    }
 
+   
    /**
     * Sets motor power for the ball launcher motor
     * 
@@ -37,6 +38,7 @@ public class BallTurretSubsystem extends SubsystemBase
       turretMotor.set(ControlMode.PercentOutput, power);
    }
 
+
    /**
     * Stops the motor by setting power to 0.0
     */
@@ -46,6 +48,8 @@ public class BallTurretSubsystem extends SubsystemBase
    }
 
 
+   // Returns the absolute encoder position for the turret. We need absolute position since the turret
+   // is not gauranteed to be at a known state on power up.
    public int getAbsPosition()
    {
       return turretMotor.getSensorCollection().getPulseWidthPosition();
@@ -53,7 +57,6 @@ public class BallTurretSubsystem extends SubsystemBase
 
    public void displayTurretPosition()
    {
-      System.out.println("Turret Counts: " + turretMotor.getSelectedSensorPosition());
-      System.out.println("Turret Counts (abs): " + turretMotor.getSensorCollection().getPulseWidthPosition());
+      System.out.println("Turret Counts: " + turretMotor.getSelectedSensorPosition() + ",  " + turretMotor.getSensorCollection().getPulseWidthPosition());
    }
 }

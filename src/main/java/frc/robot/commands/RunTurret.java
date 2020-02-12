@@ -3,7 +3,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.subsystems.BallTurretSubsystem;
-import frc.robot.Constants.*;
+import frc.robot.Constants.GamePadButtons;
 
 
 /**
@@ -12,10 +12,11 @@ import frc.robot.Constants.*;
 public class RunTurret extends CommandBase
 {
    private final BallTurretSubsystem turret;
-   private final double maxMotorPower = 0.07;
-   private final int countLimitCCW = 500;
-   private final int countLimitCW = -500;
+   private final double maxMotorPower = 0.1;
+   private final int countLimitCW = 10050;
+   private final int countLimitCCW = -3520;
 
+   // Rotational state of the turret
    private enum State
    {
       in_range,
@@ -24,6 +25,7 @@ public class RunTurret extends CommandBase
    }
 
 
+   // Constructor
    public RunTurret(BallTurretSubsystem subsystem)
    {
       turret = subsystem;
@@ -41,13 +43,13 @@ public class RunTurret extends CommandBase
       // Rotate the turret based on the bumper buttons. If turret is at the rotational limit, do not allow rotation further that direction
       if (leftBumper && (operatingState() != State.at_CCW_limit))
       {
-         // Rotate CW while held
+         // Rotate CCW while held
          motorPower = -maxMotorPower;
       }
 
       else if (rightBumper && (operatingState() != State.at_CW_limit))
       {
-         // Rotate CCW while held
+         // Rotate CW while held
          motorPower = maxMotorPower;
       }
       else
@@ -57,7 +59,7 @@ public class RunTurret extends CommandBase
       }
       
       turret.setMotorPower(motorPower);
-      // turret.displayTurretPosition();
+      turret.displayTurretPosition();
    }
 
    
