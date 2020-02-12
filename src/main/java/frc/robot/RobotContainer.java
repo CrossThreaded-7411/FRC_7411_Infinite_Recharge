@@ -43,10 +43,12 @@ public class RobotContainer
   // The robot's subsystems and commands are defined here...
   private final BallShooterSubsystem ballShooterSubsystem = new BallShooterSubsystem();
   private final DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem();
-  private final RecordPlayerSubsystem recordPlayer = new RecordPlayerSubsystem();
+  private final RecordPlayerSubsystem recordPlayerSubsystem = new RecordPlayerSubsystem();
   private final LiftSubsystem liftSubsystem = new LiftSubsystem();
   private final BallCollectorSubsystem ballCollectorSubsystem = new BallCollectorSubsystem();
   private final BallTurretSubsystem turretSubsystem = new BallTurretSubsystem();
+
+  private double spin;
   
 //   private final LaunchEnergyCommand m_launchEnergyCommand = new LaunchEnergyCommand(m_energyLaunchSubsystem, 0.0);
 
@@ -68,7 +70,7 @@ public class RobotContainer
       driveTrainSubsystem.setDefaultCommand(new DriveByJoystick(driveTrainSubsystem));
       liftSubsystem.setDefaultCommand(new RunLift(liftSubsystem));
       turretSubsystem.setDefaultCommand(new RunTurret(turretSubsystem));
-       
+      recordPlayerSubsystem.setDefaultCommand(new SpinRecordPlayer(recordPlayerSubsystem, spin));
   }
 
   /**
@@ -84,6 +86,22 @@ public class RobotContainer
     new JoystickButton(driver1Joystick, GamePadButtons.buttonB.value).whenPressed(new RunBallShooter(ballShooterSubsystem, 0.6, 0.8));
     new JoystickButton(driver1Joystick, GamePadButtons.buttonA.value).whenPressed(new RunBallShooter(ballShooterSubsystem, 0.7, 0.9));
     new JoystickButton(driver1Joystick, GamePadButtons.buttonX.value).whenPressed(new RunBallShooter(ballShooterSubsystem, 0.8, 1.0));
+
+    if ((Robot.m_robotContainer.driver1Joystick.getRawAxis(Constants.GamePadAxis.leftTrigger.value) > 0.05) && (Robot.m_robotContainer.driver1Joystick.getRawAxis(Constants.GamePadAxis.leftTrigger.value) <= 1.0))
+    {
+      spin = Robot.m_robotContainer.driver1Joystick.getRawAxis(Constants.GamePadAxis.leftTrigger.value);
+    }
+
+    else if ((Robot.m_robotContainer.driver1Joystick.getRawAxis(Constants.GamePadAxis.rightTrigger.value) > 0.05) && (Robot.m_robotContainer.driver1Joystick.getRawAxis(Constants.GamePadAxis.rightTrigger.value) <= 1.0) && (Robot.m_robotContainer.driver1Joystick.getRawAxis(Constants.GamePadAxis.leftTrigger.value) < 0.05))
+    {
+ 
+     spin = -Robot.m_robotContainer.driver1Joystick.getRawAxis(Constants.GamePadAxis.rightTrigger.value);
+    }
+
+    else
+    {
+      spin = 0.0;
+    }
   }
 
   /**

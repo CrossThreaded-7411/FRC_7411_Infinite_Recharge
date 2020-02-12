@@ -10,6 +10,9 @@ package frc.robot.commands;
 import java.util.logging.Logger;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.RecordPlayerSubsystem;
+import frc.robot.Robot;
+import frc.robot.Constants;
+import edu.wpi.first.wpilibj.Joystick;
 
 /**
  * A command to turn on the launch motor to a known desired power
@@ -26,13 +29,15 @@ public class SpinRecordPlayer extends CommandBase
       addRequirements(subsystem);
 
       logger.finer("Launcher command constructor complete");
+
+      powerRecordPlayer.setRecordPlayerPower(m_motorPower);
    }
 
    @Override
    public void initialize()
    {
       logger.fine("Launcher command requested motor power lower at " + m_motorPower);
-      powerRecordPlayer.setMotorPower(m_motorPower);
+      powerRecordPlayer.setRecordPlayerPower(m_motorPower);
    }
 
    @Override
@@ -40,4 +45,4 @@ public class SpinRecordPlayer extends CommandBase
    {
       return true;
    }
-}
+}  

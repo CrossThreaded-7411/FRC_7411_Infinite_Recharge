@@ -34,9 +34,9 @@ public class RecordPlayerSubsystem extends SubsystemBase
     * 
     * @param targetPower Accepts a power level between -1 to 1
     */
-   public void setMotorPower(double power)
+   public void setRecordPlayerPower(double motorPower)
    {
-      recordPlayerMotor.set(ControlMode.PercentOutput, power);
+      recordPlayerMotor.set(ControlMode.PercentOutput, motorPower);
    }
 
    /**
