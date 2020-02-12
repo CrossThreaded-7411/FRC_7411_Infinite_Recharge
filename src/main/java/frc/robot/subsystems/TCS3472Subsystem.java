@@ -114,7 +114,11 @@ public class TCS3472Subsystem extends SubsystemBase
       enable();
    }
 
-   
+
+   // Check to see if new data is in the data register
+   private 
+
+
    public int[] getData()
    {
       // This will return 4 fields - clear, red, green, blue
