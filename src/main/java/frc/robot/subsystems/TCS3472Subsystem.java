@@ -116,15 +116,12 @@ public class TCS3472Subsystem extends SubsystemBase
 
 
    // Check to see if new data is in the data register
-<<<<<<< Updated upstream
-   private 
-=======
-   private int getStatus()
+   public void getStatus()
    {
       ByteBuffer rawByte = ByteBuffer.allocate(1);
-      i2cSource.read(COMMANDBIT | register, rawByte);
+      i2cSource.read(COMMANDBIT | STATUS, 1, rawByte);
+      System.out.println("Status: " +  rawByte.get());
    }
->>>>>>> Stashed changes
 
 
    public int[] getData()
@@ -170,11 +167,8 @@ public class TCS3472Subsystem extends SubsystemBase
       return output;
    }
 
-<<<<<<< Updated upstream
-=======
 
    // Read 16 bit data value
->>>>>>> Stashed changes
    private int read16(int register)
    {
       ByteBuffer rawByte = ByteBuffer.allocate(2);
@@ -185,10 +179,7 @@ public class TCS3472Subsystem extends SubsystemBase
       int result = ((hi & 0xFF) << 8) | (lo & 0xFF);
       return result;
    }
-<<<<<<< Updated upstream
-=======
    
->>>>>>> Stashed changes
 
    private void write8(int register, int value)
    {
