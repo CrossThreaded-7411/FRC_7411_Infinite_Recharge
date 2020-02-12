@@ -43,6 +43,6 @@ public class RunTurret extends CommandBase
       }
       
       turret.setMotorPower(motorPower);
-      turret.displayTurretPosition();
+      // turret.displayTurretPosition();
    }  
 }
