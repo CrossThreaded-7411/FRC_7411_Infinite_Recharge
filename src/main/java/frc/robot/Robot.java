@@ -9,12 +9,9 @@ package frc.robot;
 
 import java.io.IOException;
 import java.util.logging.Logger;
-
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.Constants.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,10 +22,6 @@ import frc.robot.Constants.*;
  */
 public class Robot extends TimedRobot {
    private Command m_autonomousCommand;
-
-     // Create driver controller
-   public Joystick driver1Joystick = new Joystick(OIConstants.driver1ControlPort);
-   public Joystick driver2Joystick = new Joystick(OIConstants.driver2ControlPort);
 
    public static RobotContainer m_robotContainer;
 
@@ -71,16 +64,11 @@ public class Robot extends TimedRobot {
    @Override
    public void robotPeriodic()
    {
-      // Runs the Scheduler. This is responsible for polling buttons, adding
-      // newly-scheduled
-      // commands, running already-scheduled commands, removing finished or
-      // interrupted commands,
-      // and running subsystem periodic() methods. This must be called from the
-      // robot's periodic
+      // Runs the Scheduler. This is responsible for polling buttons, adding newly-scheduled
+      // commands, running already-scheduled commands, removing finished or interrupted commands,
+      // and running subsystem periodic() methods. This must be called from the robot's periodic
       // block in order for anything in the Command-based framework to work.
       CommandScheduler.getInstance().run();
-      logger.fine("yaxis:" + m_robotContainer.driver2Joystick.getRawAxis(GamePadAxis.leftStickY.value));
-      logger.fine("xaxis:" + m_robotContainer.driver2Joystick.getRawAxis(GamePadAxis.leftStickX.value));
    }
 
    /**
