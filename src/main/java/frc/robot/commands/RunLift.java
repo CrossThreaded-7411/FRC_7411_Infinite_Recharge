@@ -1,14 +1,12 @@
 package frc.robot.commands;
 
-import java.util.logging.Logger;
-import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.subsystems.LiftSubsystem;
+import frc.robot.Constants;
 //import java.math.abs;
 
 public class RunLift extends CommandBase {
-   private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
    private final LiftSubsystem lift;
    private double slide;
    private double raise;
@@ -26,8 +24,8 @@ public class RunLift extends CommandBase {
    @Override
    public void execute()
    {
-      raise = rangeLimitedPower(Robot.m_robotContainer.driver1Joystick.getRawAxis(Constants.GamePadAxis.rightStickY.value));
-      slide = rangeLimitedPower(Robot.m_robotContainer.driver1Joystick.getRawAxis(Constants.GamePadAxis.leftStickX.value));
+      raise = rangeLimitedPower(Robot.m_robotContainer.driver2Controller.getRawAxis(Constants.GamePadAxis.rightStickY.value));
+      slide = rangeLimitedPower(Robot.m_robotContainer.driver2Controller.getRawAxis(Constants.GamePadAxis.leftStickX.value));
 
       lift.runLift(raise);
       lift.runSlide(-slide);
