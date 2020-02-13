@@ -12,7 +12,7 @@ public class PrintColorValues extends CommandBase
       colorSensor = subsystem;
       addRequirements(subsystem);
    }
-   
+
 
    @Override
    public void execute()
@@ -31,7 +31,4 @@ public class PrintColorValues extends CommandBase
       // System.out.print(" Blue: ");
       // System.out.println(blue);
    }
-
-
-
 }

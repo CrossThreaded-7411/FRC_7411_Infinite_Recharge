@@ -1,7 +1,7 @@
 package frc.robot.subsystems;
 
 import java.nio.ByteBuffer;
-import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+// import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -48,8 +48,8 @@ public class TCS3472Subsystem extends SubsystemBase
    private final int BDATAL = 0x1A;    // Blue data low byte
    private final int BDATAH = 0x1B;    // Blue data high byte
    // private final int GAIN = 0x0F; 
-   private final int COMMANDBIT = 0x80;
-   private final int AUTOINCREMENT = 0x20;
+   private final int COMMANDBIT = 0x80; // Used to set the MSB
+   private final int AUTOINCREMENT = 0x20; // Used to have slave send date consecutively
 
    public TCS3472Subsystem(int deviceAddress, int id)
    {
@@ -103,7 +103,7 @@ public class TCS3472Subsystem extends SubsystemBase
    public void setGAIN()
    {
       // write8(CONTROL, Command.read.value);
-      write8(GAIN, 0x01);
+      write8(GAIN, 0x00);
    }
 
 
@@ -130,32 +130,39 @@ public class TCS3472Subsystem extends SubsystemBase
       // This will return 4 fields - clear, red, green, blue
       // byte[] chipId = new byte[1];
       // chipId[0] = 0x00;
-      //System.out.println(i2cSource.read(0x92, 1, chipId));
+      // System.out.println(i2cSource.read(0x92, 1, chipId));
+
+      ByteBuffer chipId = ByteBuffer.allocate(1);
+      i2cSource.read(0x92, 1, chipId);
+      // System.out.println(chipId.get());
       
-      try
-      {
-         Thread.sleep(100);
-      }
-      catch (InterruptedException e)
-      {
-         System.out.println("InterruptedException");
-      }
+      // try
+      // {
+      //    Thread.sleep(1000);
+      // }
+      // catch (InterruptedException e)
+      // {
+      //    System.out.println("InterruptedException");
+      // }
 
       //System.out.println(chipId[0]);
       // int[] output = {-1, -1, -1, -1};
       
-      if (enabled == true)
-      {
+      // if (enabled == true)
+      // {
          int redValue = read16(RDATAL);
-         // int blueValue = read16(BDATAL);
-         // int greenValue = read16(GDATAL);
-         // int clearValue = read16(CDATAL);
+         int greenValue = read16(GDATAL);
+         int blueValue = read16(BDATAL);
 
-         // output[0] = 0;
-         // output[1] = redValue;
-         // output[2] = greenValue;
-         // output[3] = blueValue;
-      }
+         System.out.println("[" + redValue + ", " + greenValue + ", " + blueValue + "]");
+
+      //    // int clearValue = read16(CDATAL);
+
+      //    // output[0] = 0;
+      //    // output[1] = redValue;
+      //    // output[2] = greenValue;
+      //    // output[3] = blueValue;
+      // }
       // else
       // {
       //    init();
@@ -174,12 +181,15 @@ public class TCS3472Subsystem extends SubsystemBase
    {
       ByteBuffer rawByte = ByteBuffer.allocate(2);
       i2cSource.read(COMMANDBIT | AUTOINCREMENT | register, 2, rawByte);
+
+      // Color is a 16-bit value (2-bytes). These bytes are buffered as BIG ENDIAN.
+      // Pull each byte of the buffer in the order lo than hi byte
       byte lo = rawByte.get();
       byte hi = rawByte.get();
 
+      // Assemble teh 16 bit value from the two 8-bit values. This is done through
+      // bit shifting the hi byte and using a bitwise OR
       int result = ((hi & 0xFF) << 8) | (lo & 0xFF);
-
-      // System.out.println("LB: " +  lo + " HB: " + hi + " Val: " + result);
       return result;
    }
    

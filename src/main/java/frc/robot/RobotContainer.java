@@ -21,7 +21,7 @@ import frc.robot.commands.PrintColorValues;
 public class RobotContainer
 {
    // The robot's subsystems and commands are defined here...
-   private final TCS3472Subsystem colorSensor = new TCS3472Subsystem(0x29, 1);
+   public final TCS3472Subsystem colorSensor = new TCS3472Subsystem(0x29, 1);
 
    /**
     * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -30,7 +30,7 @@ public class RobotContainer
    {
       // Configure the button bindings
       configureButtonBindings();
-      //colorSensor.setDefaultCommand(new PrintColorValues(colorSensor));
+      colorSensor.setDefaultCommand(new PrintColorValues(colorSensor));
    }
 
 
