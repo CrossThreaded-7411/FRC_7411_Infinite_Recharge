@@ -7,9 +7,7 @@
 
 package frc.robot;
 
-import java.io.IOException;
-import java.util.logging.Logger;
-
+// import java.util.logging.Logger;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -28,7 +26,7 @@ public class Robot extends TimedRobot
    public static RobotContainer m_robotContainer;
 
    // use the classname for the logger, this way you can refactor
-   private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+   // private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
    /**
     * This function is run when the robot is first started up and should be used
@@ -37,21 +35,21 @@ public class Robot extends TimedRobot
    @Override
    public void robotInit()
    {
-      try
-      {
-         RobotLogger.setup();
-         logger.fine("Robot init started");
-      }
-      catch (IOException e)
-      {
-         e.printStackTrace();
-         throw new RuntimeException("Problems with creating the log files");
-      }
+      // try
+      // {
+      //    RobotLogger.setup();
+      //    logger.fine("Robot init started");
+      // }
+      // catch (IOException e)
+      // {
+      //    e.printStackTrace();
+      //    throw new RuntimeException("Problems with creating the log files");
+      // }
 
       // Instantiate our RobotContainer. This will perform all our button bindings,
       // and put our autonomous chooser on the dashboard.
       m_robotContainer = new RobotContainer();
-      logger.fine("Robot init complete");
+      // logger.fine("Robot init complete");
    }
 
    /**
@@ -74,8 +72,8 @@ public class Robot extends TimedRobot
       // robot's periodic
       // block in order for anything in the Command-based framework to work.
       CommandScheduler.getInstance().run();
-      logger.fine("yaxis:" + m_robotContainer.driver2Controller.getRawAxis(GamePadAxis.leftStickY.value));
-      logger.fine("xaxis:" + m_robotContainer.driver2Controller.getRawAxis(GamePadAxis.leftStickX.value));
+      // logger.fine("yaxis:" + m_robotContainer.driver2Controller.getRawAxis(GamePadAxis.leftStickY.value));
+      // logger.fine("xaxis:" + m_robotContainer.driver2Controller.getRawAxis(GamePadAxis.leftStickX.value));
    }
 
    /**
@@ -127,6 +125,9 @@ public class Robot extends TimedRobot
       {
          m_autonomousCommand.cancel();
       }
+
+      // Initialize the color sensor (turns it on)
+      m_robotContainer.colorSensor.init();
    }
 
    /**

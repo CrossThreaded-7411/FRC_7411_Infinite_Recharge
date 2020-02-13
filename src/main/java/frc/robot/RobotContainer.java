@@ -19,6 +19,7 @@ import frc.robot.subsystems.BallFeederSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.BallTurretSubsystem;
 import frc.robot.subsystems.BallCollectorSubsystem;
+import frc.robot.subsystems.TCS3472Subsystem;
 
 // Import Commands
 import frc.robot.commands.DriveByJoystick;
@@ -26,6 +27,7 @@ import frc.robot.commands.RunBallShooter;
 import frc.robot.commands.RunLift;
 import frc.robot.commands.RunTurret;
 import frc.robot.commands.RunBallCollector;
+import frc.robot.commands.PrintColorValues;
 import frc.robot.Constants.*;
 
 /**
@@ -43,6 +45,7 @@ public class RobotContainer
    private final BallFeederSubsystem ballFeederSubsystem = new BallFeederSubsystem();
    private final BallTurretSubsystem turretSubsystem = new BallTurretSubsystem();
    private final BallCollectorSubsystem ballCollectorSubsystem = new BallCollectorSubsystem();
+   public final TCS3472Subsystem colorSensor = new TCS3472Subsystem(0x29);
 
    // Create driver controller
    public Joystick driver1Controller = new Joystick(OIConstants.driver1ControlPort);
@@ -61,6 +64,7 @@ public class RobotContainer
       liftSubsystem.setDefaultCommand(new RunLift(liftSubsystem));
       ballCollectorSubsystem.setDefaultCommand(new RunBallCollector(ballCollectorSubsystem));
       turretSubsystem.setDefaultCommand(new RunTurret(turretSubsystem));
+      colorSensor.setDefaultCommand(new PrintColorValues(colorSensor));
    }
 
    /**
