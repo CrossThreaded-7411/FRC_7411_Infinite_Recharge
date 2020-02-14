@@ -26,6 +26,7 @@ import frc.robot.commands.RunBallShooter;
 import frc.robot.commands.RunLift;
 import frc.robot.commands.RunTurret;
 import frc.robot.commands.RunBallCollector;
+import frc.robot.commands.RunBallFeeder;
 import frc.robot.Constants.*;
 
 /**
@@ -72,8 +73,10 @@ public class RobotContainer
    private void configureButtonBindings()
    {
       // Bind controller buttons to commands
-      new JoystickButton(driver2Controller, GamePadButtons.back.value).whenPressed(new RunBallShooter(ballShooterSubsystem, ballFeederSubsystem, 0.0, 0.0, 0.0));
-      new JoystickButton(driver2Controller, GamePadButtons.buttonB.value).whenPressed(new RunBallShooter(ballShooterSubsystem, ballFeederSubsystem, 0.5, 0.7, 0.3));
+      new JoystickButton(driver2Controller, GamePadButtons.back.value).whenPressed(new RunBallShooter(ballShooterSubsystem, 0.0, 0.0));
+      new JoystickButton(driver2Controller, GamePadButtons.buttonB.value).whenPressed(new RunBallShooter(ballShooterSubsystem, 0.5, 0.7));
+      new JoystickButton(driver2Controller, GamePadButtons.buttonX.value).whenPressed(new RunBallFeeder(ballFeederSubsystem, 0.2));
+      new JoystickButton(driver2Controller, GamePadButtons.buttonY.value).whenPressed(new RunBallFeeder(ballFeederSubsystem, 0.0));
    }
 
 
