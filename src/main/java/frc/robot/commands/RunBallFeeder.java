@@ -16,8 +16,7 @@ public RunBallFeeder (BallFeederSubsystem feederSubsystem, double feederPower)
 {
     ballFeeder = feederSubsystem;
     m_feederPower = feederPower;
-    addRequirements( feederSubsystem);
-    
+    addRequirements( feederSubsystem);   
 
 }
 
@@ -25,6 +24,7 @@ public RunBallFeeder (BallFeederSubsystem feederSubsystem, double feederPower)
   public void initialize()
   {
     ballFeeder.setMotorPower(m_feederPower);
+    
   }
 
 
