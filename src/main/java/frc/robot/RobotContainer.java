@@ -19,6 +19,7 @@ import frc.robot.subsystems.BallFeederSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.BallTurretSubsystem;
 import frc.robot.subsystems.BallCollectorSubsystem;
+//import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 // Import Commands
 import frc.robot.commands.DriveByJoystick;
@@ -26,7 +27,10 @@ import frc.robot.commands.RunBallShooter;
 import frc.robot.commands.RunLift;
 import frc.robot.commands.RunTurret;
 import frc.robot.commands.RunBallCollector;
+import frc.robot.commands.RunBallFeeder;
 import frc.robot.Constants.*;
+import frc.robot.commands.StartShooterCommandGroup;
+import frc.robot.commands.StopShooterCommandGroup;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -72,8 +76,10 @@ public class RobotContainer
    private void configureButtonBindings()
    {
       // Bind controller buttons to commands
-      new JoystickButton(driver2Controller, GamePadButtons.back.value).whenPressed(new RunBallShooter(ballShooterSubsystem, ballFeederSubsystem, 0.0, 0.0, 0.0));
-      new JoystickButton(driver2Controller, GamePadButtons.buttonB.value).whenPressed(new RunBallShooter(ballShooterSubsystem, ballFeederSubsystem, 0.5, 0.7, 0.3));
+      new JoystickButton(driver2Controller, GamePadButtons.back.value).whenPressed(new StopShooterCommandGroup(ballShooterSubsystem, ballFeederSubsystem));
+      new JoystickButton(driver2Controller, GamePadButtons.buttonB.value).whenPressed(new StartShooterCommandGroup(ballShooterSubsystem, ballFeederSubsystem));
+      new JoystickButton(driver2Controller, GamePadButtons.buttonX.value).whenPressed(new RunBallFeeder(ballFeederSubsystem, 0.3));
+      new JoystickButton(driver2Controller, GamePadButtons.buttonY.value).whenPressed(new RunBallFeeder(ballFeederSubsystem, 0.0));
    }
 
 
