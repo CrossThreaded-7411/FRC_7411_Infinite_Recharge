@@ -1,20 +1,20 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import java.util.logging.Logger;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import frc.robot.Constants.CANID;
 
 public class LiftSubsystem extends SubsystemBase
 {
    private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
-   private VictorSPX liftSlideMotor = new VictorSPX(CANID.liftSlide);
-   private VictorSPX liftRaiseMotor = new VictorSPX(CANID.liftRaise);
+   private TalonSRX liftSlideMotor = new TalonSRX(CANID.liftSlide);
+   private TalonSRX liftRaiseMotor = new TalonSRX(CANID.liftRaise);
 
    private AnalogInput stringPotHorizontal = new AnalogInput(Constants.AIPorts.stringPotHorizontalPort);
    private AnalogInput stringPotVertical = new AnalogInput(Constants.AIPorts.stringPotVerticalPort);
