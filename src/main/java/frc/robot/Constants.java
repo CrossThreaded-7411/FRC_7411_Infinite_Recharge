@@ -60,6 +60,11 @@ public final class Constants
       public static final int stringPotVerticalPort = 1;
    }
 
+   public static final class POVAxis 
+   {
+      public static final int POVAxis = 0;
+   }
+
    public enum GamePadAxis
    {
       leftStickX(0),
@@ -68,6 +73,8 @@ public final class Constants
       rightTrigger(3),
       rightStickX(4),
       rightStickY(5);
+     
+      
 
       @SuppressWarnings({"MemberName", "PMD.SingularField"})
       public final int value;
@@ -76,6 +83,22 @@ public final class Constants
       {
          this.value = value;
       }
+   }
+
+   public enum GamePadPOVAxis
+
+   {
+      POV(0);
+
+      @SuppressWarnings({"MemberName", "PMD.SingularField"})
+      public final int value;
+
+      GamePadPOVAxis(int value)
+      {
+         this.value = value;
+      }
+      
+
    }
 
    public enum GamePadButtons
@@ -102,6 +125,7 @@ public final class Constants
          this.value = value;
       }
    }
+   
 
    public enum LogitechProAxis
    {

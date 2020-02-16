@@ -31,8 +31,8 @@ public class DriveByJoystick extends CommandBase
    @Override
    public void execute()
    {
-      forward = Robot.m_robotContainer.driver2Joystick.getRawAxis(Constants.GamePadAxis.leftStickY.value);
-      rotate = -Robot.m_robotContainer.driver2Joystick.getRawAxis(Constants.GamePadAxis.leftStickX.value);
+      forward = Robot.m_robotContainer.driver1Controller.getRawAxis(Constants.GamePadAxis.leftStickY.value);
+      rotate = -Robot.m_robotContainer.driver1Controller.getRawAxis(Constants.GamePadAxis.leftStickX.value);
       
       logger.fine("forward  command: " + forward);
       logger.fine("rotate command:" + rotate);

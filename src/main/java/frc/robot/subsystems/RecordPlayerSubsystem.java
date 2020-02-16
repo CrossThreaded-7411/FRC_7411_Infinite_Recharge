@@ -4,19 +4,15 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-
 package frc.robot.subsystems;
 
-import java.util.logging.Logger;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class RecordPlayerSubsystem extends SubsystemBase
 {
-   private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
    private TalonSRX recordPlayerMotor = new TalonSRX(Constants.CANID.recordPlayer);
 
    /**
@@ -24,9 +20,7 @@ public class RecordPlayerSubsystem extends SubsystemBase
     */
    public RecordPlayerSubsystem()
    {
-      // Constructor
       stopMotor();
-      logger.finer("Launch subsystem constructor complete");
    }
 
    /**
