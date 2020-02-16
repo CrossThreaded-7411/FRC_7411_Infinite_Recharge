@@ -15,9 +15,8 @@ public class RecordPlayerSubsystem extends SubsystemBase
 {
    private TalonSRX recordPlayerMotor = new TalonSRX(Constants.CANID.recordPlayer);
 
-   /**
-    * Creates a new DriveSubsystem.
-    */
+
+   //constructor
    public RecordPlayerSubsystem()
    {
       stopMotor();
@@ -26,7 +25,7 @@ public class RecordPlayerSubsystem extends SubsystemBase
    /**
     * Sets motor power for the Record Player Spinner motor
     * 
-    * @param targetPower Accepts a power level between -1 to 1
+    * @param RecordPlayerPower Accepts a power level between -1 to 1
     */
    public void setRecordPlayerPower(double motorPower)
    {
