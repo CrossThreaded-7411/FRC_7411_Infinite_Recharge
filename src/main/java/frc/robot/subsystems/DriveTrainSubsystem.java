@@ -1,7 +1,10 @@
 package frc.robot.subsystems;
 
+
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+//import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CANID;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -11,12 +14,12 @@ public class DriveTrainSubsystem extends SubsystemBase
 {
    private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
-   private WPI_VictorSPX leftFrontDriveMotor = new WPI_VictorSPX(CANID.driveTrainLF);
-   private WPI_VictorSPX leftRearDriveMotor = new WPI_VictorSPX(CANID.driveTrainLR);
+   private CANSparkMax leftFrontDriveMotor = new CANSparkMax(CANID.driveTrainLF,MotorType.kBrushless);
+   private CANSparkMax leftRearDriveMotor = new CANSparkMax(CANID.driveTrainLR,MotorType.kBrushless);
    SpeedControllerGroup leftDriveMotors = new SpeedControllerGroup(leftFrontDriveMotor, leftRearDriveMotor);
 
-   private WPI_VictorSPX rightFrontDriveMotor = new WPI_VictorSPX(CANID.driveTrainRF);
-   private WPI_VictorSPX rightRearDriveMotor = new WPI_VictorSPX(CANID.driveTrainRR);
+   private CANSparkMax rightFrontDriveMotor = new CANSparkMax(CANID.driveTrainRF,MotorType.kBrushless);
+   private CANSparkMax rightRearDriveMotor = new CANSparkMax(CANID.driveTrainRR,MotorType.kBrushless);
    SpeedControllerGroup rightDriveMotors = new SpeedControllerGroup(rightFrontDriveMotor, rightRearDriveMotor);
 
    public final DifferentialDrive driveBase = new DifferentialDrive(leftDriveMotors, rightDriveMotors);
