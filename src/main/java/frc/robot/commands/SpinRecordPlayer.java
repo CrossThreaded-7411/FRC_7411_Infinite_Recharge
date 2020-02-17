@@ -9,9 +9,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.RecordPlayerSubsystem;
 import frc.robot.Robot;
-import frc.robot.RobotContainer;
 import frc.robot.Constants;
-import edu.wpi.first.wpilibj.Joystick;
 
 /**
  * A command to turn on the launch motor to a known desired power
@@ -26,13 +24,11 @@ public class SpinRecordPlayer extends CommandBase
       addRequirements(subsystem);
    }
 
-
    @Override
    public void initialize()
    {
       powerRecordPlayer.stopMotor();
    }
-
 
    @Override
    public void execute()
@@ -58,7 +54,6 @@ public class SpinRecordPlayer extends CommandBase
       // Setting motor power proportional to joystick trigger position
       powerRecordPlayer.setRecordPlayerPower(power);
    }
-
 
    @Override
    public boolean isFinished()
