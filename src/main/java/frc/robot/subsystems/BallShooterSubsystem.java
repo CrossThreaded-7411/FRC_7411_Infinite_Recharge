@@ -11,7 +11,10 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Constants.CANID;
+import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class BallShooterSubsystem extends SubsystemBase
 {
@@ -19,6 +22,8 @@ public class BallShooterSubsystem extends SubsystemBase
    // private Spark launchMotorTop = new Spark(CANID.ballShooterTop);
    private CANSparkMax launchMotorBottom = new CANSparkMax(CANID.ballShooterBottom, MotorType.kBrushless);
    private CANSparkMax launchMotorTop = new CANSparkMax(CANID.ballShooterTop, MotorType.kBrushless);
+
+   private Servo dribbleServo = new Servo(Constants.MotorPorts.dribbleServoPort);
 
    /**
     * Creates a new DriveSubsystem.
@@ -49,5 +54,11 @@ public class BallShooterSubsystem extends SubsystemBase
       double stopPower = 0.0;
       launchMotorBottom.set(stopPower);
       launchMotorTop.set(stopPower);
+   }
+
+   public void runServo(double dribblePosition)
+   {
+      dribbleServo.set(dribblePosition);
+      SmartDashboard.putNumber("dribbleServoPosition: ", dribbleServo.get());
    }
 }

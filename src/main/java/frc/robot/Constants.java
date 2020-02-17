@@ -36,7 +36,7 @@ public final class Constants
 
    public static final class MotorPorts
    {
-      public static final int launchMotorLowerPort = 0;
+      public static final int dribbleServoPort = 0;
       public static final int launchMotorUpperPort = 1;
       public static final int leftFrontDriveMotorPort = 2;
       public static final int leftRearDriveMotorPort = 3;

@@ -23,7 +23,6 @@ import frc.robot.subsystems.BallCollectorSubsystem;
 
 // Import Commands
 import frc.robot.commands.DriveByJoystick;
-import frc.robot.commands.RunBallShooter;
 import frc.robot.commands.RunLift;
 import frc.robot.commands.RunTurret;
 import frc.robot.commands.RunBallCollector;
@@ -31,6 +30,7 @@ import frc.robot.commands.RunBallFeeder;
 import frc.robot.Constants.*;
 import frc.robot.commands.StartShooterCommandGroup;
 import frc.robot.commands.StopShooterCommandGroup;
+import frc.robot.commands.RunServo;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -77,9 +77,16 @@ public class RobotContainer
    {
       // Bind controller buttons to commands
       new JoystickButton(driver2Controller, GamePadButtons.back.value).whenPressed(new StopShooterCommandGroup(ballShooterSubsystem, ballFeederSubsystem));
-      new JoystickButton(driver2Controller, GamePadButtons.buttonB.value).whenPressed(new StartShooterCommandGroup(ballShooterSubsystem, ballFeederSubsystem, ballCollectorSubsystem));
+      new JoystickButton(driver2Controller, GamePadButtons.buttonB.value).whenPressed(new StartShooterCommandGroup(ballShooterSubsystem, ballFeederSubsystem, ballCollectorSubsystem, 0.4, 0.7, 0.0));
       new JoystickButton(driver2Controller, GamePadButtons.buttonX.value).whenPressed(new RunBallFeeder(ballFeederSubsystem, 0.3));
       new JoystickButton(driver2Controller, GamePadButtons.buttonY.value).whenPressed(new RunBallFeeder(ballFeederSubsystem, 0.0));
+
+
+      //IMPORTANT!!!
+      //The last number in this command, as well as the buttonB command, is servo position. These values have not been tested and will probably make the servo run somewhere you don't want it to.
+      //The values can be between 0.0 and 1.0, but we have hardware stops earlier than this.
+      
+      new JoystickButton(driver2Controller, GamePadButtons.buttonA.value).whenHeld(new StartShooterCommandGroup(ballShooterSubsystem, ballFeederSubsystem, ballCollectorSubsystem, 0.1, 0.2, 0.5));
    }
 
 
