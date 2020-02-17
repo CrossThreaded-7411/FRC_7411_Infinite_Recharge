@@ -44,8 +44,8 @@ public final class Constants
       public static final int rightRearDriveMotorPort = 5;
       public static final int liftSlideMotorPort = 6;
       public static final int liftRaiseMotorPort = 7;
+      public static final int recordPlayerMotorPort = 8;
       public static final int ballCollectorMotorPort = 9;
-      // public static final int  = 9;
    }
 
    public static final class OIConstants

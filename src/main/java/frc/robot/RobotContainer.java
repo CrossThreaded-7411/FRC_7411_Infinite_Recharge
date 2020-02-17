@@ -4,13 +4,17 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project. */
 /*----------------------------------------------------------------------------*/
-
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.RecordPlayerSubsystem;
+import frc.robot.subsystems.LiftSubsystem;
+import frc.robot.subsystems.BallCollectorSubsystem;
+import frc.robot.subsystems.DriveTrainSubsystem;
+import frc.robot.commands.SpinRecordPlayer;
 
 // Import Subsystems
 import frc.robot.subsystems.BallShooterSubsystem;
@@ -47,6 +51,7 @@ public class RobotContainer
    private final BallFeederSubsystem ballFeederSubsystem = new BallFeederSubsystem();
    private final BallTurretSubsystem turretSubsystem = new BallTurretSubsystem();
    private final BallCollectorSubsystem ballCollectorSubsystem = new BallCollectorSubsystem();
+   private final RecordPlayerSubsystem recordPlayerSubsystem = new RecordPlayerSubsystem();
 
    // Create driver controller
    public Joystick driver1Controller = new Joystick(OIConstants.driver1ControlPort);
@@ -65,7 +70,8 @@ public class RobotContainer
       liftSubsystem.setDefaultCommand(new RunLift(liftSubsystem));
       ballCollectorSubsystem.setDefaultCommand(new RunBallCollector(ballCollectorSubsystem));
       turretSubsystem.setDefaultCommand(new RunTurret(turretSubsystem));
-   }
+      recordPlayerSubsystem.setDefaultCommand(new SpinRecordPlayer(recordPlayerSubsystem));
+  }
 
    /**
     * Use this method to define your button->command mappings. Buttons can be created by
