@@ -1,9 +1,8 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018-2019 FIRST. All Rights Reserved. */
-/* Open Source Software - may be modified and shared by FRC teams. The code */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project. */
-/*----------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------
+   FRC Team CrossThreaded #7411
+   Valley Lutheran School, Cedar Falls, IA
+   Open Source Software - may be modified and shared by all.
+  ---------------------------------------------------------------------------*/
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -11,25 +10,28 @@ import frc.robot.subsystems.RecordPlayerSubsystem;
 import frc.robot.Robot;
 import frc.robot.Constants;
 
-/**
- * A command to turn on the launch motor to a known desired power
- */
+// A command to turn on the launch motor to a known desired power
 public class SpinRecordPlayer extends CommandBase
 {
    private final RecordPlayerSubsystem powerRecordPlayer;
 
+   // Constructor
    public SpinRecordPlayer(RecordPlayerSubsystem subsystem)
    {
       powerRecordPlayer = subsystem;
       addRequirements(subsystem);
    }
 
+
+   // Start up command by assuring that motors are turned off
    @Override
    public void initialize()
    {
       powerRecordPlayer.stopMotor();
    }
 
+
+   // Runtime operation of the record player by sing the right and left joystick triggers on driver 2 controller
    @Override
    public void execute()
    {
@@ -55,6 +57,8 @@ public class SpinRecordPlayer extends CommandBase
       powerRecordPlayer.setRecordPlayerPower(power);
    }
 
+
+   // This command should remain active through the entire competition so isFinished is False
    @Override
    public boolean isFinished()
    {
