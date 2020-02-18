@@ -54,7 +54,8 @@ public class RobotContainer
    private final BallTurretSubsystem turretSubsystem = new BallTurretSubsystem();
    private final BallCollectorSubsystem ballCollectorSubsystem = new BallCollectorSubsystem();
    private final RecordPlayerSubsystem recordPlayerSubsystem = new RecordPlayerSubsystem();
-   private final TCS3472Subsystem colorSensorSubsystem = new TCS3472Subsystem(0x29);
+   public final TCS3472Subsystem colorSensorSubsystem = new TCS3472Subsystem(0x29);
+
    // Create driver controller
    public Joystick driver1Controller = new Joystick(OIConstants.driver1ControlPort);
    public Joystick driver2Controller = new Joystick(OIConstants.driver2ControlPort);
