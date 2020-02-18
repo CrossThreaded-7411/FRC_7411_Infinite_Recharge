@@ -22,6 +22,6 @@ public class StartShooterCommandGroup extends SequentialCommandGroup
             new WaitCommand(0.5),
             new BallCollectorManual(ballCollector, -0.35),
             new RunBallFeeder(ballFeeder, 0.35)
-        );
+         );
     }
 }

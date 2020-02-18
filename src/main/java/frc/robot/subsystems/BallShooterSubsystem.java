@@ -59,6 +59,6 @@ public class BallShooterSubsystem extends SubsystemBase
    public void runServo(double dribblePosition)
    {
       dribbleServo.set(dribblePosition);
-      SmartDashboard.putNumber("dribbleServoPosition: ", dribbleServo.get());
+      SmartDashboard.putNumber("Servo Position: ", dribbleServo.get());
    }
 }
