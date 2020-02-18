@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -30,7 +31,6 @@ import frc.robot.commands.RunBallFeeder;
 import frc.robot.Constants.*;
 import frc.robot.commands.StartShooterCommandGroup;
 import frc.robot.commands.StopShooterCommandGroup;
-import frc.robot.commands.RunServo;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -61,10 +61,11 @@ public class RobotContainer
       // Configure the button bindings
       configureButtonBindings();
 
-      driveTrainSubsystem.setDefaultCommand(new DriveByJoystick(driveTrainSubsystem));
+      //driveTrainSubsystem.setDefaultCommand(new DriveByJoystick(driveTrainSubsystem));
       liftSubsystem.setDefaultCommand(new RunLift(liftSubsystem));
       ballCollectorSubsystem.setDefaultCommand(new RunBallCollector(ballCollectorSubsystem));
       turretSubsystem.setDefaultCommand(new RunTurret(turretSubsystem));
+      drib
    }
 
    /**
@@ -77,16 +78,11 @@ public class RobotContainer
    {
       // Bind controller buttons to commands
       new JoystickButton(driver2Controller, GamePadButtons.back.value).whenPressed(new StopShooterCommandGroup(ballShooterSubsystem, ballFeederSubsystem));
-      new JoystickButton(driver2Controller, GamePadButtons.buttonB.value).whenPressed(new StartShooterCommandGroup(ballShooterSubsystem, ballFeederSubsystem, ballCollectorSubsystem, 0.4, 0.7, 0.0));
+      //new JoystickButton(driver2Controller, GamePadButtons.buttonB.value).whenPressed(new StartShooterCommandGroup(ballShooterSubsystem, ballFeederSubsystem, ballCollectorSubsystem, 0.4, 0.7, 0.0));
       new JoystickButton(driver2Controller, GamePadButtons.buttonX.value).whenPressed(new RunBallFeeder(ballFeederSubsystem, 0.3));
       new JoystickButton(driver2Controller, GamePadButtons.buttonY.value).whenPressed(new RunBallFeeder(ballFeederSubsystem, 0.0));
 
-
-      //IMPORTANT!!!
-      //The last number in this command, as well as the buttonB command, is servo position. These values have not been tested and will probably make the servo run somewhere you don't want it to.
-      //The values can be between 0.0 and 1.0, but we have hardware stops earlier than this.
-      
-      new JoystickButton(driver2Controller, GamePadButtons.buttonA.value).whenHeld(new StartShooterCommandGroup(ballShooterSubsystem, ballFeederSubsystem, ballCollectorSubsystem, 0.1, 0.2, 0.5));
+      //new JoystickButton(driver2Controller, GamePadButtons.buttonA.value).whenPressed(new StartShooterCommandGroup(ballShooterSubsystem, ballFeederSubsystem, ballCollectorSubsystem, 0.1, 0.2, 0.5));
    }
 
 

@@ -8,13 +8,14 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CANID;
 
 public class BallFeederSubsystem extends SubsystemBase
 {
-   private VictorSPX feederMotor = new VictorSPX(CANID.ballFeeder);
+   private TalonSRX feederMotor = new TalonSRX(CANID.ballFeeder);
 
    /**
     * Creates a new DriveSubsystem.

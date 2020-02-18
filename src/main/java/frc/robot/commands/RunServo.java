@@ -9,27 +9,28 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.subsystems.BallFeederSubsystem;
 import frc.robot.subsystems.BallShooterSubsystem;
+import frc.robot.subsystems.DribbleSubsystem;
+
 /**
  * A command to turn on the launch motor to a known desired power
  */
 public class RunServo extends CommandBase
 {
-   private final BallShooterSubsystem ballShooter;
-   private final double m_dribblePosition;
+   private final double dribbleServoPosition;
 
-   public RunServo(BallShooterSubsystem shooterSubsystem, double dribbleServoPosition)
+   public RunServo(DribbleSubsystem dribbleMode)
    {
-      ballShooter = shooterSubsystem;
-      m_dribblePosition = dribbleServoPosition;
-      addRequirements(shooterSubsystem);
+      dribbleMode.runDribbleServo(dribbleServoPosition);
+      dribbleServoPosition = Robot.m_robotContainer.driver1Controller.getRawAxis(Constants.LogitechProAxis.YAxis.value);
    }
 
    @Override
    public void initialize()
    {
-      ballShooter.runServo(m_dribblePosition);
    }
 
    @Override

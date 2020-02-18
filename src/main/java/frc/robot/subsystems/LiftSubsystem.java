@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
 import frc.robot.Constants.CANID;
 
 public class LiftSubsystem extends SubsystemBase
@@ -14,7 +16,7 @@ public class LiftSubsystem extends SubsystemBase
    private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
    private TalonSRX liftSlideMotor = new TalonSRX(CANID.liftSlide);
-   private TalonSRX liftRaiseMotor = new TalonSRX(CANID.liftRaise);
+   private VictorSPX liftRaiseMotor = new VictorSPX(CANID.liftRaise);
 
    private AnalogInput stringPotHorizontal = new AnalogInput(Constants.AIPorts.stringPotHorizontalPort);
    private AnalogInput stringPotVertical = new AnalogInput(Constants.AIPorts.stringPotVerticalPort);

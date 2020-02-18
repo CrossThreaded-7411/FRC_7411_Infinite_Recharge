@@ -22,14 +22,14 @@ public final class Constants
       public static final int powerDistPanel = 00;
       public static final int ballShooterTop = 10;
       public static final int ballShooterBottom = 11;
-      public static final int driveTrainLF = 20;
-      public static final int driveTrainLR = 21;
-      public static final int driveTrainRF = 22;
-      public static final int driveTrainRR = 23;
+      public static final int driveTrainLF = 12;
+      public static final int driveTrainLR = 13;
+      public static final int driveTrainRF = 14;
+      public static final int driveTrainRR = 15;
       public static final int ballCollector = 24;
-      public static final int ballFeeder = 25;
+      public static final int ballFeeder = 31;
       public static final int liftSlide = 30;
-      public static final int liftRaise = 31;
+      public static final int liftRaise = 25;
       public static final int recordPlayer = 32;
       public static final int ballShooterTurret = 33;
    }
@@ -44,8 +44,8 @@ public final class Constants
       public static final int rightRearDriveMotorPort = 5;
       public static final int liftSlideMotorPort = 6;
       public static final int liftRaiseMotorPort = 7;
+      public static final int recordPlayerMotorPort = 8;
       public static final int ballCollectorMotorPort = 9;
-      // public static final int  = 9;
    }
 
    public static final class OIConstants
