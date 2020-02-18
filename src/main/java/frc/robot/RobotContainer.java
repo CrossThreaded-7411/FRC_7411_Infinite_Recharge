@@ -69,6 +69,8 @@ public class RobotContainer
       // Configure the button bindings
       configureButtonBindings();
 
+      colorSensorSubsystem.init();
+
       driveTrainSubsystem.setDefaultCommand(new DriveByJoystick(driveTrainSubsystem));
       liftSubsystem.setDefaultCommand(new RunLift(liftSubsystem));
       ballCollectorSubsystem.setDefaultCommand(new RunBallCollector(ballCollectorSubsystem));
