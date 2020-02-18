@@ -57,6 +57,6 @@ public class BallTurretSubsystem extends SubsystemBase
 
    public void displayTurretPosition()
    {
-      System.out.println("Turret Counts: " + turretMotor.getSelectedSensorPosition() + ",  " + turretMotor.getSensorCollection().getPulseWidthPosition());
+     // System.out.println("Turret Counts: " + turretMotor.getSelectedSensorPosition() + ",  " + turretMotor.getSensorCollection().getPulseWidthPosition());
    }
 }
