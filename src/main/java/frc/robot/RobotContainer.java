@@ -19,12 +19,14 @@ import frc.robot.subsystems.LiftSubsystem;
 import frc.robot.subsystems.BallFeederSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.BallTurretSubsystem;
+import frc.robot.subsystems.DribbleSubsystem;
 import frc.robot.subsystems.BallCollectorSubsystem;
 //import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 // Import Commands
 import frc.robot.commands.DriveByJoystick;
 import frc.robot.commands.RunLift;
+import frc.robot.commands.RunServo;
 import frc.robot.commands.RunTurret;
 import frc.robot.commands.RunBallCollector;
 import frc.robot.commands.RunBallFeeder;
@@ -47,6 +49,7 @@ public class RobotContainer
    private final BallFeederSubsystem ballFeederSubsystem = new BallFeederSubsystem();
    private final BallTurretSubsystem turretSubsystem = new BallTurretSubsystem();
    private final BallCollectorSubsystem ballCollectorSubsystem = new BallCollectorSubsystem();
+   private final DribbleSubsystem dribbleModeSubsystem = new DribbleSubsystem();
 
    // Create driver controller
    public Joystick driver1Controller = new Joystick(OIConstants.driver1ControlPort);
@@ -61,11 +64,10 @@ public class RobotContainer
       // Configure the button bindings
       configureButtonBindings();
 
-      //driveTrainSubsystem.setDefaultCommand(new DriveByJoystick(driveTrainSubsystem));
+      driveTrainSubsystem.setDefaultCommand(new DriveByJoystick(driveTrainSubsystem));
       liftSubsystem.setDefaultCommand(new RunLift(liftSubsystem));
       ballCollectorSubsystem.setDefaultCommand(new RunBallCollector(ballCollectorSubsystem));
       turretSubsystem.setDefaultCommand(new RunTurret(turretSubsystem));
-      drib
    }
 
    /**
@@ -77,12 +79,13 @@ public class RobotContainer
    private void configureButtonBindings()
    {
       // Bind controller buttons to commands
-      new JoystickButton(driver2Controller, GamePadButtons.back.value).whenPressed(new StopShooterCommandGroup(ballShooterSubsystem, ballFeederSubsystem));
-      //new JoystickButton(driver2Controller, GamePadButtons.buttonB.value).whenPressed(new StartShooterCommandGroup(ballShooterSubsystem, ballFeederSubsystem, ballCollectorSubsystem, 0.4, 0.7, 0.0));
+      new JoystickButton(driver2Controller, GamePadButtons.buttonB.value).whenPressed(new StartShooterCommandGroup(ballShooterSubsystem, ballFeederSubsystem, ballCollectorSubsystem, dribbleModeSubsystem, 0.4, 0.7, 0.63));
+      new JoystickButton(driver2Controller, GamePadButtons.buttonB.value).whenReleased(new StopShooterCommandGroup(ballShooterSubsystem, ballFeederSubsystem, dribbleModeSubsystem, 0.63));
       new JoystickButton(driver2Controller, GamePadButtons.buttonX.value).whenPressed(new RunBallFeeder(ballFeederSubsystem, 0.3));
       new JoystickButton(driver2Controller, GamePadButtons.buttonY.value).whenPressed(new RunBallFeeder(ballFeederSubsystem, 0.0));
 
-      //new JoystickButton(driver2Controller, GamePadButtons.buttonA.value).whenPressed(new StartShooterCommandGroup(ballShooterSubsystem, ballFeederSubsystem, ballCollectorSubsystem, 0.1, 0.2, 0.5));
+      new JoystickButton(driver2Controller, GamePadButtons.buttonA.value).whenPressed(new StartShooterCommandGroup(ballShooterSubsystem, ballFeederSubsystem, ballCollectorSubsystem, dribbleModeSubsystem, 0.2, 0.25, 0.37));
+      new JoystickButton(driver2Controller, GamePadButtons.buttonA.value).whenReleased(new StopShooterCommandGroup(ballShooterSubsystem, ballFeederSubsystem, dribbleModeSubsystem, 0.63));
    }
 
 

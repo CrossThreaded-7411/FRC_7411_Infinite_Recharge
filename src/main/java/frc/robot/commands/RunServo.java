@@ -9,10 +9,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.Robot;
-import frc.robot.subsystems.BallFeederSubsystem;
-import frc.robot.subsystems.BallShooterSubsystem;
 import frc.robot.subsystems.DribbleSubsystem;
 
 /**
@@ -20,22 +16,26 @@ import frc.robot.subsystems.DribbleSubsystem;
  */
 public class RunServo extends CommandBase
 {
-   private final double dribbleServoPosition;
+   private final DribbleSubsystem dribbleMode;
+   private double servoPos;
 
-   public RunServo(DribbleSubsystem dribbleMode)
+   public RunServo(DribbleSubsystem subsystem, double dribbleServoPosition)
    {
-      dribbleMode.runDribbleServo(dribbleServoPosition);
-      dribbleServoPosition = Robot.m_robotContainer.driver1Controller.getRawAxis(Constants.LogitechProAxis.YAxis.value);
+      servoPos = dribbleServoPosition;
+      dribbleMode = subsystem;
+      addRequirements(subsystem);
    }
 
    @Override
-   public void initialize()
+   public void execute()
    {
+      dribbleMode.runDribbleServo(servoPos);
+      SmartDashboard.putNumber("ServoPosition: ", dribbleMode.dribbleServo.get());
    }
 
    @Override
    public boolean isFinished()
    {
-      return true;
+      return false;
    }
 }
