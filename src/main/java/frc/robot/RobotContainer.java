@@ -84,7 +84,7 @@ public class RobotContainer
       new JoystickButton(driver2Controller, GamePadButtons.buttonX.value).whenPressed(new RunBallFeeder(ballFeederSubsystem, 0.3));
       new JoystickButton(driver2Controller, GamePadButtons.buttonY.value).whenPressed(new RunBallFeeder(ballFeederSubsystem, 0.0));
 
-      new JoystickButton(driver2Controller, GamePadButtons.buttonA.value).whenPressed(new StartShooterCommandGroup(ballShooterSubsystem, ballFeederSubsystem, ballCollectorSubsystem, dribbleModeSubsystem, 0.2, 0.25, 0.37));
+      new JoystickButton(driver2Controller, GamePadButtons.buttonA.value).whenPressed(new StartShooterCommandGroup(ballShooterSubsystem, ballFeederSubsystem, ballCollectorSubsystem, dribbleModeSubsystem, 0.7, 0.25, 0.37));
       new JoystickButton(driver2Controller, GamePadButtons.buttonA.value).whenReleased(new StopShooterCommandGroup(ballShooterSubsystem, ballFeederSubsystem, dribbleModeSubsystem, 0.63));
    }
 
