@@ -23,6 +23,7 @@ import frc.robot.subsystems.BallFeederSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.BallTurretSubsystem;
 import frc.robot.subsystems.BallCollectorSubsystem;
+import frc.robot.subsystems.PDPSubsystem;
 //import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 // Import Commands
@@ -35,6 +36,7 @@ import frc.robot.commands.RunBallFeeder;
 import frc.robot.Constants.*;
 import frc.robot.commands.StartShooterCommandGroup;
 import frc.robot.commands.StopShooterCommandGroup;
+import frc.robot.commands.ReadPDPValues;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -52,6 +54,7 @@ public class RobotContainer
    private final BallTurretSubsystem turretSubsystem = new BallTurretSubsystem();
    private final BallCollectorSubsystem ballCollectorSubsystem = new BallCollectorSubsystem();
    private final RecordPlayerSubsystem recordPlayerSubsystem = new RecordPlayerSubsystem();
+   private final PDPSubsystem pdpSubsystem = new PDPSubsystem();
 
    // Create driver controller
    public Joystick driver1Controller = new Joystick(OIConstants.driver1ControlPort);
@@ -71,6 +74,7 @@ public class RobotContainer
       ballCollectorSubsystem.setDefaultCommand(new RunBallCollector(ballCollectorSubsystem));
       turretSubsystem.setDefaultCommand(new RunTurret(turretSubsystem));
       recordPlayerSubsystem.setDefaultCommand(new SpinRecordPlayer(recordPlayerSubsystem));
+      pdpSubsystem.setDefaultCommand(new ReadPDPValues(pdpSubsystem));
   }
 
    /**

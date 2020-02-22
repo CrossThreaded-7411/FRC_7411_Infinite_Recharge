@@ -34,18 +34,24 @@ public final class Constants
       public static final int ballShooterTurret = 33;
    }
 
-   public static final class MotorPorts
+   public static final class pdpPorts
    {
-      public static final int launchMotorLowerPort = 0;
-      public static final int launchMotorUpperPort = 1;
-      public static final int leftFrontDriveMotorPort = 2;
-      public static final int leftRearDriveMotorPort = 3;
-      public static final int rightFrontDriveMotorPort = 4;
-      public static final int rightRearDriveMotorPort = 5;
-      public static final int liftSlideMotorPort = 6;
-      public static final int liftRaiseMotorPort = 7;
-      public static final int recordPlayerMotorPort = 8;
-      public static final int ballCollectorMotorPort = 9;
+      public static final int ballFeederPort = 0;
+      public static final int ballShooterTopPort = 1;
+      public static final int ballShooterBottomPort = 2;
+      public static final int ballShooterTurretPort = 3;
+      public static final int recordPlayerPort = 4;
+      public static final int liftSlideMotorPort = 5;
+      public static final int liftRaiseMotorPort = 6;
+      public static final int pdpPort1 = 7;
+      public static final int pdpPort2 = 8;
+      public static final int pdpPort3 = 9;
+      public static final int pdpPort4 = 10;
+      public static final int ballCollectorPort = 11;
+      public static final int driveTrainRRPort = 12;
+      public static final int driveTrainRFPort = 13;
+      public static final int driveTrainLFPort = 14;
+      public static final int driveTrainLRPort = 15;
    }
 
    public static final class OIConstants
