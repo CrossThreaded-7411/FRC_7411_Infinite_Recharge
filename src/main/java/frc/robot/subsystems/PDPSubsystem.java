@@ -5,6 +5,7 @@
   ---------------------------------------------------------------------------*/
 package frc.robot.subsystems;
 
+import java.util.logging.Logger;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import frc.robot.Constants.pdpPorts;
@@ -12,6 +13,8 @@ import frc.robot.Constants.pdpPorts;
 public class PDPSubsystem extends SubsystemBase
 {
    private PowerDistributionPanel pdp = new PowerDistributionPanel();
+   private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
 
    //constructor
    public PDPSubsystem()
@@ -40,6 +43,6 @@ public class PDPSubsystem extends SubsystemBase
       double ch14 = pdp.getCurrent(pdpPorts.driveTrainLFPort);
       double ch15 = pdp.getCurrent(pdpPorts.driveTrainLRPort);
 
-      System.out.println("Raise Current: " + liftRaiseCurrent);
+      logger.info("Raise Current: " + liftRaiseCurrent);
    }
 }

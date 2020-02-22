@@ -18,7 +18,7 @@ public class BallCollectorSubsystem extends SubsystemBase {
 
     public void setMotorPower(double targetPowerCollector) {
         ballCollectorMotor.set(ControlMode.PercentOutput, targetPowerCollector);
-        logger.info("Ball Collector motor = " + ballCollectorMotor.getMotorOutputPercent());
+       //logger.info("Ball Collector motor = " + ballCollectorMotor.getMotorOutputPercent());
     }
 
     public void stopBallCollectorMotor() {
