@@ -138,7 +138,8 @@ public class TCS3472Subsystem extends SubsystemBase
          String strGreen = String.format("%.2f", greenPercent);
          String strBlue = String.format("%.2f", bluePercent);
 
-         System.out.println(strRed + ", " + strGreen + ", " + strBlue + ", " + clearValue);
+         System.out.println("Red: " + redValue + ", " + "Grn: " + greenValue + ", " + "Blue: " + blueValue + ", " + "Red" + clearValue);
+         System.out.println("Red%: " + strRed + ", " + "Grnd%: " + strGreen + ", " + "Blue%: " + strBlue);
 
       // // int clearValue = read16(CDATAL);
 
