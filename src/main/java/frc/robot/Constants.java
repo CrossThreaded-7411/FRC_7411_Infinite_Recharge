@@ -125,6 +125,12 @@ public final class Constants
          this.value = value;
       }
    }
+
+   public enum DriveDirection
+   {
+      normal(),
+      inverted();
+   }
    
 
    public enum LogitechProAxis

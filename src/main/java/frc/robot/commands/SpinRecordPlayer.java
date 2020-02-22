@@ -35,8 +35,8 @@ public class SpinRecordPlayer extends CommandBase
    @Override
    public void execute()
    {
-      double leftTrigger = Robot.m_robotContainer.driver2Controller.getRawAxis(Constants.GamePadAxis.leftTrigger.value);
-      double rightTrigger = Robot.m_robotContainer.driver2Controller.getRawAxis(Constants.GamePadAxis.rightTrigger.value);
+      double leftTrigger = Robot.m_robotContainer.driver2Controller.getRawAxis(Constants.GamePadAxis.rightTrigger.value);
+      double rightTrigger = Robot.m_robotContainer.driver2Controller.getRawAxis(Constants.GamePadAxis.leftTrigger.value);
       double deadband = 0.05;
       double power = 0.0;
 

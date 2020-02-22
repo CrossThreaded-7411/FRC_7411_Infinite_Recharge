@@ -4,7 +4,7 @@ import frc.robot.subsystems.BallShooterSubsystem;
 import frc.robot.subsystems.BallFeederSubsystem;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.BallCollectorManual;
+//import frc.robot.commands.BallCollectorManual;
 import frc.robot.subsystems.BallCollectorSubsystem;
 
 

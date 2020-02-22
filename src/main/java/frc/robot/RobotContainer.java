@@ -18,20 +18,20 @@ import frc.robot.commands.SpinRecordPlayer;
 
 // Import Subsystems
 import frc.robot.subsystems.BallShooterSubsystem;
-import frc.robot.subsystems.LiftSubsystem;
+//import frc.robot.subsystems.LiftSubsystem;
 import frc.robot.subsystems.BallFeederSubsystem;
-import frc.robot.subsystems.DriveTrainSubsystem;
+//import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.BallTurretSubsystem;
-import frc.robot.subsystems.BallCollectorSubsystem;
+//import frc.robot.subsystems.BallCollectorSubsystem;
 //import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-
+import frc.robot.commands.BallCollectorManual;
 // Import Commands
 import frc.robot.commands.DriveByJoystick;
-import frc.robot.commands.RunBallShooter;
+//import frc.robot.commands.RunBallShooter;
 import frc.robot.commands.RunLift;
 import frc.robot.commands.RunTurret;
 import frc.robot.commands.RunBallCollector;
-import frc.robot.commands.RunBallFeeder;
+//import frc.robot.commands.RunBallFeeder;
 import frc.robot.Constants.*;
 import frc.robot.commands.StartShooterCommandGroup;
 import frc.robot.commands.StopShooterCommandGroup;
@@ -84,8 +84,8 @@ public class RobotContainer
       // Bind controller buttons to commands
       new JoystickButton(driver2Controller, GamePadButtons.buttonB.value).whenPressed(new StartShooterCommandGroup(ballShooterSubsystem, ballFeederSubsystem, ballCollectorSubsystem));
       new JoystickButton(driver2Controller, GamePadButtons.buttonB.value).whenReleased(new StopShooterCommandGroup(ballShooterSubsystem, ballFeederSubsystem));
-      new JoystickButton(driver2Controller, GamePadButtons.buttonX.value).whenPressed(new RunBallFeeder(ballFeederSubsystem, 0.3));
-      new JoystickButton(driver2Controller, GamePadButtons.buttonY.value).whenPressed(new RunBallFeeder(ballFeederSubsystem, 0.0));
+      new JoystickButton(driver2Controller, GamePadButtons.buttonA.value).whenPressed(new BallCollectorManual(ballCollectorSubsystem, 0.0));
+
    }
 
 

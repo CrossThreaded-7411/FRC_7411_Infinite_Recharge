@@ -24,19 +24,22 @@ public class RunBallCollector extends CommandBase
     this.setBallCollectorMotorPower(direction);
   }
 
-  private void setBallCollectorMotorPower(int direction) {
+  private void setBallCollectorMotorPower(int direction) 
+  {
     if (direction == 0) {
       m_ballCollector.setMotorPower(-0.35);
       // POV UP button is pressed
       // do something
 
-    } else if (direction == 180) {
+    } else if (direction == 180) 
+    {
       m_ballCollector.setMotorPower(0.35);
       // POV DOWN button is pressed
       // do something else
 
-    } else if (direction == 270) {
+    } else if (direction == 270)
+     {
       m_ballCollector.setMotorPower(0.0); // when POV is not pressed will not spin
-    }
+     }
   }
 }
