@@ -8,10 +8,12 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.Constants.CANID;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Servo;
+import com.revrobotics.CANEncoder;
 
 public class BallShooterSubsystem extends SubsystemBase
 {
@@ -19,6 +21,9 @@ public class BallShooterSubsystem extends SubsystemBase
    // private Spark launchMotorTop = new Spark(CANID.ballShooterTop);
    private CANSparkMax launchMotorBottom = new CANSparkMax(CANID.ballShooterBottom, MotorType.kBrushless);
    private CANSparkMax launchMotorTop = new CANSparkMax(CANID.ballShooterTop, MotorType.kBrushless);
+
+   public CANEncoder topEncoder = launchMotorTop.getEncoder();
+
 
    /**
     * Creates a new DriveSubsystem.
@@ -28,7 +33,6 @@ public class BallShooterSubsystem extends SubsystemBase
       stopMotors();
       launchMotorTop.setInverted(true);
    }
-
 
    // Sets motor power for the ball launcher motor
    public void setMotorPower(double targetPowerLower, double targetPowerUpper)
