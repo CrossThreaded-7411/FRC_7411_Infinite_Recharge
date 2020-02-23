@@ -55,11 +55,11 @@ public class DriveByJoystick extends CommandBase
 
       if(state == DriveDirection.normal)
       {
-         driveTrain.driveByArcade(-forward, rotate);
+         driveTrain.driveByArcade(forward, rotate);
       }
       if(state == DriveDirection.inverted)
       {
-         driveTrain.driveByArcade(forward, rotate);
+         driveTrain.driveByArcade(-forward, rotate);
       }
       
      // driveTrain.driveByArcade(forward, rotate);

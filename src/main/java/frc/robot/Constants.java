@@ -133,6 +133,37 @@ public final class Constants
    }
    
 
+   public enum LogitechProAxisButtons
+   {
+      frontHandleButton(1),
+      lowerLeftSideHandleButton(2),
+      bottomLeftHandleButton(3),
+      bottomRightHandleButton(4),
+      topLeftHandleButton(5),
+      topRightHandleButton(6),
+      topLeftBaseButton(7),
+      topRightBaseButton(8),
+      middleLeftBaseButton(9),
+      middleRightBaseButton(10),
+      bottomLeftBaseButton(11),
+      bottomRightBaseButton(12);
+
+   
+
+
+
+      @SuppressWarnings({"MemberName", "PMD.SingularField"})
+      public final int value;
+
+      LogitechProAxisButtons(int value)
+      {
+         this.value = value;
+      }
+
+   }
+
+
+
    public enum LogitechProAxis
    {
       XAxis(0),
@@ -147,4 +178,5 @@ public final class Constants
          this.value = value;
       }
    }
+
 }
