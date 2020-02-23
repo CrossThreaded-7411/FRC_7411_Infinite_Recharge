@@ -18,6 +18,7 @@ public class DriveByJoystick extends CommandBase
    private final DriveTrainSubsystem driveTrain;
    private double forward;
    private double rotate;
+  
    
    
 
@@ -28,12 +29,30 @@ public class DriveByJoystick extends CommandBase
       // forward = forwardValue;
       // rotate = rotateValue;
       addRequirements(subsystem);
+      
 
       // logger.fine("yaxis: " + forwardValue);
       // logger.fine("xaxis: " + rotateValue);
    }
 
    
+  private double setDeadband(double rawvalue)
+  {
+     double newvalue = 0.0;
+     if (Math.abs(rawvalue) <= 0.05)
+     {
+        newvalue = 0.0;
+     }
+     else
+     {
+        newvalue = rawvalue ;
+     }
+
+     return newvalue;
+  }
+   
+
+
    @Override
    public void execute()
    {
@@ -42,6 +61,8 @@ public class DriveByJoystick extends CommandBase
       boolean invertedbutton = Robot.m_robotContainer.driver1Controller.getRawButton(3);
       boolean normalbutton = Robot.m_robotContainer.driver1Controller.getRawButton(5);
 
+      forward = setDeadband(forward);
+      rotate = setDeadband(rotate);
       if(normalbutton)
       {
          state = DriveDirection.normal;
