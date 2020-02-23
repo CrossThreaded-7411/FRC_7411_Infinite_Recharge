@@ -85,6 +85,13 @@ public final class Constants
       }
    }
 
+   public enum DriveDirection
+   {
+      normal(),
+      inverted();
+   }
+
+
    public enum GamePadPOVAxis
 
    {
