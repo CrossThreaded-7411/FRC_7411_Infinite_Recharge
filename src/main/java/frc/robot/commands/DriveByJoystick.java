@@ -57,6 +57,8 @@ public class DriveByJoystick extends CommandBase
 
       boolean invertedbutton = Robot.m_robotContainer.driver1Controller.getRawButton(3);
       boolean normalbutton = Robot.m_robotContainer.driver1Controller.getRawButton(5);
+      forward = Robot.m_robotContainer.driver1Controller.getRawAxis(Constants.GamePadAxis.leftStickY.value);
+      rotate = -Robot.m_robotContainer.driver1Controller.getRawAxis(Constants.GamePadAxis.leftStickX.value);
       forward = setDeadband(forward);
       rotate = setDeadband(rotate);
 
@@ -74,21 +76,19 @@ public class DriveByJoystick extends CommandBase
 
       if(state == DriveDirection.normal)
       {
-         driveTrain.driveByArcade(-forward, rotate);
+         driveTrain.driveByArcade(forward, rotate);
       }
       if(state == DriveDirection.inverted)
       {
-         driveTrain.driveByArcade(forward, rotate);
+         driveTrain.driveByArcade(-forward, rotate);
       }
 
-      forward = Robot.m_robotContainer.driver1Controller.getRawAxis(Constants.GamePadAxis.leftStickY.value);
-      rotate = -Robot.m_robotContainer.driver1Controller.getRawAxis(Constants.GamePadAxis.leftStickX.value);
-      
+     
       logger.fine("forward  command: " + forward);
       logger.fine("rotate command:" + rotate);
       // driveTrain.arcadeDrive(forward.getAsDouble(), rotate.getAsDouble());
       
-      driveTrain.driveByArcade(forward, rotate);
+      //driveTrain.driveByArcade(forward, rotate);
       // driveTrain.driveByArcade(forward, rotate);
    }  
 }

@@ -49,9 +49,8 @@ public class DriveTrainSubsystem extends SubsystemBase
    */
    public void driveByArcade(double fwd, double rot)
    {
-      driveBase.arcadeDrive(fwd, rot);
+      driveBase.arcadeDrive(fwd, rot, true);
       logger.fine("leftdrive actual: " + leftDriveMotors.get());
       logger.fine("rightdrive actual: " + rightDriveMotors.get());
    }
-
 }
