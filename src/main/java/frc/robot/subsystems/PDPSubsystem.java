@@ -27,22 +27,34 @@ public class PDPSubsystem extends SubsystemBase
    public void readCurrentValues()
    {
       double liftRaiseCurrent= pdp.getCurrent(pdpPorts.ballFeederPort);
-      double ch1 = pdp.getCurrent(pdpPorts.ballShooterTopPort);
-      double ch2 = pdp.getCurrent(pdpPorts.ballShooterBottomPort);
-      double ch3 = pdp.getCurrent(pdpPorts.ballShooterTurretPort);
-      double ch4 = pdp.getCurrent(pdpPorts.recordPlayerPort);
-      double ch5 = pdp.getCurrent(pdpPorts.liftSlideMotorPort);
-      double ch6 = pdp.getCurrent(pdpPorts.liftRaiseMotorPort);
-      double ch7 = pdp.getCurrent(pdpPorts.pdpPort1);
-      double ch8 = pdp.getCurrent(pdpPorts.pdpPort2);
-      double ch9 = pdp.getCurrent(pdpPorts.pdpPort3);
-      double ch10 = pdp.getCurrent(pdpPorts.pdpPort4);
-      double ch11 = pdp.getCurrent(pdpPorts.ballCollectorPort);
-      double ch12 = pdp.getCurrent(pdpPorts.driveTrainRRPort);
-      double ch13 = pdp.getCurrent(pdpPorts.driveTrainRFPort);
-      double ch14 = pdp.getCurrent(pdpPorts.driveTrainLFPort);
-      double ch15 = pdp.getCurrent(pdpPorts.driveTrainLRPort);
+      double ballShooterTopCurrent = pdp.getCurrent(pdpPorts.ballShooterTopPort);
+      double ballShooterBottomCurrent = pdp.getCurrent(pdpPorts.ballShooterBottomPort);
+      double ballShooterTurretCurrent = pdp.getCurrent(pdpPorts.ballShooterTurretPort);
+      double recordPlayerCurrent = pdp.getCurrent(pdpPorts.recordPlayerPort);
+      double liftSlideMotorCurrent = pdp.getCurrent(pdpPorts.liftSlideMotorPort);
+      double liftRaiseMotorCurrent = pdp.getCurrent(pdpPorts.liftRaiseMotorPort);
+      double pdpCurrent1 = pdp.getCurrent(pdpPorts.pdpPort1);
+      double pdpCurrent2 = pdp.getCurrent(pdpPorts.pdpPort2);
+      double pdpCurrent3 = pdp.getCurrent(pdpPorts.pdpPort3);
+      double pdpCurrent4 = pdp.getCurrent(pdpPorts.pdpPort4);
+      double ballCollectorCurrent = pdp.getCurrent(pdpPorts.ballCollectorPort);
+      double driveTrainRRCurrent = pdp.getCurrent(pdpPorts.driveTrainRRPort);
+      double driveTrainRFCurrent = pdp.getCurrent(pdpPorts.driveTrainRFPort);
+      double driveTrainLFCurrent = pdp.getCurrent(pdpPorts.driveTrainLFPort);
+      double driveTrainLRCurrent = pdp.getCurrent(pdpPorts.driveTrainLRPort);
 
-      logger.info("Raise Current: " + liftRaiseCurrent);
+      logger.info("Battery_Voltage: " + pdp.getVoltage());
+      logger.info("Raise_Current: " + liftRaiseCurrent);
+      logger.info("Shooter_Top: " + ballShooterTopCurrent);
+      logger.info("Shooter_Bottom: " + ballShooterBottomCurrent);
+      logger.info("Turret: " + ballShooterTurretCurrent);
+      logger.info("Record_Player: " + recordPlayerCurrent);
+      logger.info("Lift_Slide: " + liftSlideMotorCurrent);
+      logger.info("Lift_Raise: " + liftRaiseMotorCurrent);
+      logger.info("Collector: " + ballCollectorCurrent);
+      logger.info("Drivetrain_RR: " + driveTrainRRCurrent);
+      logger.info("Drivetrain_RF: " + driveTrainRFCurrent);
+      logger.info("Drivettrain_LF: " + driveTrainLFCurrent);
+      logger.info("Drivetrain_LR: " + driveTrainLRCurrent);
    }
 }
