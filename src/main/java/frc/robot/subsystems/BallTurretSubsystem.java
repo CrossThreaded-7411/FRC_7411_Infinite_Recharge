@@ -5,6 +5,7 @@
   ---------------------------------------------------------------------------*/
 package frc.robot.subsystems;
 
+import java.util.logging.Logger;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -14,6 +15,8 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 public class BallTurretSubsystem extends SubsystemBase
 {
    private TalonSRX turretMotor = new TalonSRX(CANID.ballShooterTurret);
+   private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
 
    /**
     * Creates a new DriveSubsystem.
@@ -56,5 +59,18 @@ public class BallTurretSubsystem extends SubsystemBase
    public void displayTurretPosition()
    {
       System.out.println("Turret Counts: " + turretMotor.getSelectedSensorPosition() + ",  " + turretMotor.getSensorCollection().getPulseWidthPosition());
+   }
+
+
+   // Log data to file
+   public void logTurretData(boolean enabled)
+   {
+      if (enabled)
+      {
+         logger.finer("Turrent_ABS_Encoder_Counts: " + turretMotor.getSensorCollection().getPulseWidthPosition());
+
+         // Divide by 100 to convert percent to ratio to be consistant with non-CTRE motor libraries
+         logger.finer("Turret_Power: " + turretMotor.getMotorOutputPercent() / 100.0);
+      }
    }
 }

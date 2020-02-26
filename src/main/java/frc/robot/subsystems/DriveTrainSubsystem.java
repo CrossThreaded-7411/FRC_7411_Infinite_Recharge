@@ -52,10 +52,13 @@ public class DriveTrainSubsystem extends SubsystemBase
    }
 
 
-   public void logDriveTrainData()
+   // Log data to file
+   public void logDriveTrainData(boolean enabled)
    {
-      logger.finer("Drivetrain_Left_Power: " + leftDriveMotors.get());
-      logger.finer("Drivetrain_Right_Power: " + rightDriveMotors.get());
+      if (enabled)
+      {
+         logger.finer("Drivetrain_Left_Power: " + leftDriveMotors.get());
+         logger.finer("Drivetrain_Right_Power: " + rightDriveMotors.get());
+      }
    }
-
 }

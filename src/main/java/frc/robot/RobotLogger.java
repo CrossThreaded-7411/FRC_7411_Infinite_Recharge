@@ -24,9 +24,10 @@ public class RobotLogger
       // Get the global logger to configure it
       Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
-      // The formatting can be customized by specifying the format string in the java.util.logging.SimpleFormatter.format property.
-      // The given LogRecord will be formatted as if by calling:
-      //    String.format(format, date, source, logger, level, message, thrown);
+      /**
+       * Customize formatting to our preference
+       * "%1$tT.%1$tL [%4$s]: %5$s%n" prints line as "Time [level] Text Data"
+       */
       System.setProperty("java.util.logging.SimpleFormatter.format", "%1$tT.%1$tL [%4$s]: %5$s%n");
 
 
@@ -43,13 +44,28 @@ public class RobotLogger
    }
 
 
-   // Place all calls to logging methods here. This will provide us a single point to enable
-   // and disable the feature. It also organizes logging method calls so they are not sprinkled
-   // throughout code and easier to manage.
-   public static void logData()
+   /**
+    * Manages logging data to the Java Logging Framework. All methods that manage
+    * logging of data should be consolidated here.
+    * @param enabled True enables logging, False disables
+    */
+   public static void logData(boolean enabled)
    {
-      Robot.m_robotContainer.driveTrainSubsystem.logDriveTrainData();
-      Robot.m_robotContainer.pdpSubsystem.logPDPData();
-      Robot.m_robotContainer.liftSubsystem.logLiftData();
+      if (enabled)
+      {
+         /**
+          * Place all calls to logging methods here. This consolidates logging requests
+          * so they are not sprinkledthroughout code and easier to manage.
+          */
+         Robot.m_robotContainer.driveTrainSubsystem.logDriveTrainData(true);
+         Robot.m_robotContainer.liftSubsystem.logLiftData(true);
+         Robot.m_robotContainer.ballShooterSubsystem.logBallShooterData(true);
+         Robot.m_robotContainer.ballFeederSubsystem.logBallFeederData(true);
+         Robot.m_robotContainer.ballCollectorSubsystem.logBallCollectorData(true);
+         Robot.m_robotContainer.turretSubsystem.logTurretData(true);
+         Robot.m_robotContainer.recordPlayerSubsystem.logRecordPlayerData(true);
+         Robot.m_robotContainer.pdpSubsystem.logPDPData(true);
+
+      }
    }
 }

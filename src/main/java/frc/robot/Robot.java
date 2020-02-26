@@ -61,7 +61,7 @@ public class Robot extends TimedRobot
       CommandScheduler.getInstance().run();
 
       // Call logging method
-      RobotLogger.logData();
+      RobotLogger.logData(true);
    }
 
    /**

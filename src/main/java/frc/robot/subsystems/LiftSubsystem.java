@@ -189,10 +189,17 @@ public class LiftSubsystem extends SubsystemBase
    }
 
 
-   // Sets motor power for the Record Player Spinner motor
-   public void logLiftData()
+   // Log data to file
+   public void logLiftData(boolean enabled)
    {
-      logger.finer("Raise_Sensor_Volts" + stringPotVertical.getVoltage());
-      logger.finer("Slide_Sensor_Volts" + stringPotHorizontal.getVoltage());
+      if (enabled)
+      {
+         logger.finer("Lift_Raise_Sensor_Volts: " + stringPotVertical.getVoltage());
+         logger.finer("Lift_Slide_Sensor_Volts: " + stringPotHorizontal.getVoltage());
+
+         // Divide by 100 to convert percent to ratio to be consistant with non-CTRE motor libraries
+         logger.finer("Lift_Raise_Power: " + liftRaiseMotor.getMotorOutputPercent() / 100.0);
+         logger.finer("Lift_Slide_Power: " + liftSlideMotor.getMotorOutputPercent() / 100.0);
+      }
    }
 }
