@@ -31,6 +31,7 @@ public class DriveByJoystick extends CommandBase
    @Override
    public void execute()
    {
+      System.out.println("output joystick value");
       forward = Robot.m_robotContainer.driver1Controller.getRawAxis(Constants.GamePadAxis.leftStickY.value);
       rotate = -Robot.m_robotContainer.driver1Controller.getRawAxis(Constants.GamePadAxis.leftStickX.value);
       
