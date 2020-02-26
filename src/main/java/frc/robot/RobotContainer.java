@@ -18,25 +18,20 @@ import frc.robot.commands.SpinRecordPlayer;
 
 // Import Subsystems
 import frc.robot.subsystems.BallShooterSubsystem;
-import frc.robot.subsystems.LiftSubsystem;
 import frc.robot.subsystems.BallFeederSubsystem;
-import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.BallTurretSubsystem;
-import frc.robot.subsystems.BallCollectorSubsystem;
 import frc.robot.subsystems.PDPSubsystem;
-//import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 // Import Commands
 import frc.robot.commands.DriveByJoystick;
-import frc.robot.commands.RunBallShooter;
 import frc.robot.commands.RunLift;
 import frc.robot.commands.RunTurret;
 import frc.robot.commands.RunBallCollector;
-import frc.robot.commands.RunBallFeeder;
 import frc.robot.Constants.*;
 import frc.robot.commands.StartShooterCommandGroup;
 import frc.robot.commands.StopShooterCommandGroup;
 import frc.robot.commands.ReadPDPValues;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -47,18 +42,18 @@ import frc.robot.commands.ReadPDPValues;
 public class RobotContainer
 {
    // The robot's subsystems and commands are defined here...
-   private final BallShooterSubsystem ballShooterSubsystem = new BallShooterSubsystem();
-   private final DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem();
-   private final LiftSubsystem liftSubsystem = new LiftSubsystem();
-   private final BallFeederSubsystem ballFeederSubsystem = new BallFeederSubsystem();
-   private final BallTurretSubsystem turretSubsystem = new BallTurretSubsystem();
-   private final BallCollectorSubsystem ballCollectorSubsystem = new BallCollectorSubsystem();
-   private final RecordPlayerSubsystem recordPlayerSubsystem = new RecordPlayerSubsystem();
-   private final PDPSubsystem pdpSubsystem = new PDPSubsystem();
+   protected final BallShooterSubsystem ballShooterSubsystem = new BallShooterSubsystem();
+   protected final DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem();
+   protected final LiftSubsystem liftSubsystem = new LiftSubsystem();
+   protected final BallFeederSubsystem ballFeederSubsystem = new BallFeederSubsystem();
+   protected final BallTurretSubsystem turretSubsystem = new BallTurretSubsystem();
+   protected final BallCollectorSubsystem ballCollectorSubsystem = new BallCollectorSubsystem();
+   protected final RecordPlayerSubsystem recordPlayerSubsystem = new RecordPlayerSubsystem();
+   protected final PDPSubsystem pdpSubsystem = new PDPSubsystem();
 
    // Create driver controller
-   public Joystick driver1Controller = new Joystick(OIConstants.driver1ControlPort);
-   public Joystick driver2Controller = new Joystick(OIConstants.driver2ControlPort);
+   public final Joystick driver1Controller = new Joystick(OIConstants.driver1ControlPort);
+   public final Joystick driver2Controller = new Joystick(OIConstants.driver2ControlPort);
 
 
    /**

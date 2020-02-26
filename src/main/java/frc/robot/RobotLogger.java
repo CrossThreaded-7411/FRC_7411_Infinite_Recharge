@@ -1,3 +1,8 @@
+/*---------------------------------------------------------------------------
+   FRC Team CrossThreaded #7411
+   Valley Lutheran School, Cedar Falls, IA
+   Open Source Software - may be modified and shared by all.
+  ---------------------------------------------------------------------------*/
 package frc.robot;
 
 import java.time.LocalDateTime;
@@ -8,10 +13,8 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 import java.lang.System;
 
-/**
- * This class creates a class for logging data to the console and/or file
- */
 
+// This class creates a class for logging data to the console and/or file
 public class RobotLogger
 {
    static private FileHandler logFile;
@@ -24,7 +27,6 @@ public class RobotLogger
       // The formatting can be customized by specifying the format string in the java.util.logging.SimpleFormatter.format property.
       // The given LogRecord will be formatted as if by calling:
       //    String.format(format, date, source, logger, level, message, thrown);
-      // System.setProperty("java.util.logging.SimpleFormatter.format", "%1$tT.%1$tL [%4$]: %5$s%6$s%n");
       System.setProperty("java.util.logging.SimpleFormatter.format", "%1$tT.%1$tL [%4$s]: %5$s%n");
 
 
@@ -38,12 +40,16 @@ public class RobotLogger
  
       logFile.setFormatter(new SimpleFormatter());
       logger.addHandler(logFile);
+   }
 
-      // Add some log file header info
-      // Using severe level so header is always included
-      logger.severe("-------------------------------------------------");
-      logger.severe("Filename: " + fileName);
-      // logger.severe("Date: " + String.format("%ta %tb %td %tT %tZ %tY", Date.Now()));
-      logger.severe("-------------------------------------------------");
+
+   // Place all calls to logging methods here. This will provide us a single point to enable
+   // and disable the feature. It also organizes logging method calls so they are not sprinkled
+   // throughout code and easier to manage.
+   public static void logData()
+   {
+      Robot.m_robotContainer.driveTrainSubsystem.logDriveTrainData();
+      Robot.m_robotContainer.pdpSubsystem.logPDPData();
+      Robot.m_robotContainer.liftSubsystem.logLiftData();
    }
 }

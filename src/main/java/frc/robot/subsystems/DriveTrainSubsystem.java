@@ -1,19 +1,20 @@
+/*---------------------------------------------------------------------------
+   FRC Team CrossThreaded #7411
+   Valley Lutheran School, Cedar Falls, IA
+   Open Source Software - may be modified and shared by all.
+  ---------------------------------------------------------------------------*/
 package frc.robot.subsystems;
 
-
+import java.util.logging.Logger;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
-//import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CANID;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import java.util.logging.Logger;
 
 public class DriveTrainSubsystem extends SubsystemBase
 {
-   private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-
    private CANSparkMax leftFrontDriveMotor = new CANSparkMax(CANID.driveTrainLF,MotorType.kBrushless);
    private CANSparkMax leftRearDriveMotor = new CANSparkMax(CANID.driveTrainLR,MotorType.kBrushless);
    SpeedControllerGroup leftDriveMotors = new SpeedControllerGroup(leftFrontDriveMotor, leftRearDriveMotor);
@@ -23,16 +24,17 @@ public class DriveTrainSubsystem extends SubsystemBase
    SpeedControllerGroup rightDriveMotors = new SpeedControllerGroup(rightFrontDriveMotor, rightRearDriveMotor);
 
    public final DifferentialDrive driveBase = new DifferentialDrive(leftDriveMotors, rightDriveMotors);
+   private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
+
+   // Constructor
    public DriveTrainSubsystem()
    {
-      // Constructor
-      logger.fine("entered Drivetrain constructor");
       stopDriveMotors();
-
       rightDriveMotors.setInverted(true);
       leftDriveMotors.setInverted(true);
    }
+
 
    public void stopDriveMotors()
    {
@@ -43,15 +45,17 @@ public class DriveTrainSubsystem extends SubsystemBase
 
    /**
    * Drives the robot using arcade controls.
-   *
-   * @param fwd the commanded forward movement
-   * @param rot the commanded rotation
    */
    public void driveByArcade(double fwd, double rot)
    {
       driveBase.arcadeDrive(fwd, rot);
-      logger.fine("leftdrive actual: " + leftDriveMotors.get());
-      logger.fine("rightdrive actual: " + rightDriveMotors.get());
+   }
+
+
+   public void logDriveTrainData()
+   {
+      logger.finer("Drivetrain_Left_Power: " + leftDriveMotors.get());
+      logger.finer("Drivetrain_Right_Power: " + rightDriveMotors.get());
    }
 
 }

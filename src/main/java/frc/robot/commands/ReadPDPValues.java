@@ -8,7 +8,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.PDPSubsystem;
 
-// A command to turn on the launch motor to a known desired power
+
 public class ReadPDPValues extends CommandBase
 {
    private final PDPSubsystem pdp;
@@ -21,11 +21,11 @@ public class ReadPDPValues extends CommandBase
    }
 
 
-   // Get values from pdp 
+   // Get values from pdp
    @Override
    public void execute()
    {
-      pdp.readCurrentValues();
+      pdp.logPDPData();
    }
 
 
