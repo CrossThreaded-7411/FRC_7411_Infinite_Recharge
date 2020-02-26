@@ -29,7 +29,7 @@ public final class Constants
       public static final int ballCollector = 24;
       public static final int ballFeeder = 31;
       public static final int liftSlide = 30;
-      public static final int liftRaise = 25;
+      public static final int liftRaise = 20;
       public static final int recordPlayer = 32;
       public static final int ballShooterTurret = 33;
    }
