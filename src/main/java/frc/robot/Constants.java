@@ -36,10 +36,10 @@ public final class Constants
 
    public static final class pdpPorts
    {
-      public static final int ballFeederPort = 0;
-      public static final int ballShooterTopPort = 1;
-      public static final int ballShooterBottomPort = 2;
-      public static final int ballShooterTurretPort = 3;
+      public static final int liftRaisePort = 0; //checked
+      public static final int ballShooterTopPort = 1; 
+      public static final int Port = 2;
+      public static final int ballShooterBottomPort = 3;
       public static final int recordPlayerPort = 4;
       public static final int liftSlideMotorPort = 5;
       public static final int liftRaiseMotorPort = 6;
