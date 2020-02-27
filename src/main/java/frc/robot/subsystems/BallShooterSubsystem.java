@@ -49,8 +49,8 @@ public class BallShooterSubsystem extends SubsystemBase
    {
       if (enabled)
       {
-         logger.finer("Ball_Shooter_Top_Power: " + launchMotorTop.get());
-         logger.finer("Ball_Shooter_Bottom_Power: " + launchMotorBottom.get());
+         logger.finer("Shoot_Top_Power: " + launchMotorTop.get());
+         logger.finer("Shoot_Bot_Power: " + launchMotorBottom.get());
       }
    }
 }

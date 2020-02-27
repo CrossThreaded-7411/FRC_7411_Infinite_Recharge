@@ -50,7 +50,7 @@ public class BallFeederSubsystem extends SubsystemBase
       if (enabled)
       {
          // Divide by 100 to convert percent to ratio to be consistant with non-CTRE motor libraries
-         logger.finer("Ball_Feeder_Power: " + feederMotor.getMotorOutputPercent() / 100.0);
+         logger.finer("Feeder_Power: " + feederMotor.getMotorOutputPercent() / 100.0);
       }
    }
 }

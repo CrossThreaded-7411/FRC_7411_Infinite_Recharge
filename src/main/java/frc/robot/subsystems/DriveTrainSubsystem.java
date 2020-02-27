@@ -57,8 +57,8 @@ public class DriveTrainSubsystem extends SubsystemBase
    {
       if (enabled)
       {
-         logger.finer("Drivetrain_Left_Power: " + leftDriveMotors.get());
-         logger.finer("Drivetrain_Right_Power: " + rightDriveMotors.get());
+         logger.finer("DT_Left_Power: " + leftDriveMotors.get());
+         logger.finer("DT_Right_Power: " + rightDriveMotors.get());
       }
    }
 }

@@ -28,19 +28,19 @@ public class PDPSubsystem extends SubsystemBase
    {
       if (enabled)
       {
-         logger.finer("Battery_Voltage: " + pdp.getVoltage());
-         logger.finer("Lift_Raise_Current: " + pdp.getCurrent(pdpPorts.liftRaisePort));
-         logger.finer("Lift_Slide_Current: " + pdp.getCurrent(pdpPorts.liftSlideMotorPort));
-         logger.finer("Shooter_Top_Current: " + pdp.getCurrent(pdpPorts.ballShooterTopPort));
-         logger.finer("Shooter_Bottom_Current: " + pdp.getCurrent(pdpPorts.ballShooterBottomPort));
-         logger.finer("Shooter_Turret_Current: " + pdp.getCurrent(pdpPorts.ballShooterTurretPort));
-         logger.finer("Record_Player_Current: " + pdp.getCurrent(pdpPorts.recordPlayerPort));
-         logger.finer("Ball_Collector_Current: " + pdp.getCurrent(pdpPorts.ballCollectorPort));
-         logger.finer("Ball_Feeder_Current: " + pdp.getCurrent(pdpPorts.ballFeederPort));
-         logger.finer("Drivetrain_RR_Current: " + pdp.getCurrent(pdpPorts.driveTrainRRPort));
-         logger.finer("Drivetrain_RF_Current: " + pdp.getCurrent(pdpPorts.driveTrainRFPort));
-         logger.finer("Drivettrain_LF_Current: " + pdp.getCurrent(pdpPorts.driveTrainLFPort));
-         logger.finer("Drivetrain_LR_Current: " + pdp.getCurrent(pdpPorts.driveTrainLRPort));
+         logger.finer("Battery_volts: " + pdp.getVoltage());
+         logger.finer("Raise_amps: " + pdp.getCurrent(pdpPorts.liftRaisePort));
+         logger.finer("Slide_amps: " + pdp.getCurrent(pdpPorts.liftSlideMotorPort));
+         logger.finer("Shoot_Top_amps: " + pdp.getCurrent(pdpPorts.ballShooterTopPort));
+         logger.finer("Shoot_Bot_amps: " + pdp.getCurrent(pdpPorts.ballShooterBottomPort));
+         logger.finer("Turret_amps: " + pdp.getCurrent(pdpPorts.ballTurretPort));
+         logger.finer("Record_Play_amps: " + pdp.getCurrent(pdpPorts.recordPlayerPort));
+         logger.finer("Collector_amps: " + pdp.getCurrent(pdpPorts.ballCollectorPort));
+         logger.finer("Feeder_amps: " + pdp.getCurrent(pdpPorts.ballFeederPort));
+         logger.finer("DT_RR_amps: " + pdp.getCurrent(pdpPorts.driveTrainRRPort));
+         logger.finer("DT_RF_amps: " + pdp.getCurrent(pdpPorts.driveTrainRFPort));
+         logger.finer("DT_LF_amps: " + pdp.getCurrent(pdpPorts.driveTrainLFPort));
+         logger.finer("DT_LR_amps: " + pdp.getCurrent(pdpPorts.driveTrainLRPort));
       }
    }
 }

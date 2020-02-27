@@ -31,15 +31,15 @@ public class LiftSubsystem extends SubsystemBase
    // Travells 0.0591V V/cm, meaning there are 0.148 Volts (2.5 cm) of decreased speed between the
    // hard and soft stops.
    private final double SPHHardStopRight = 0.09887;
+   private final double SPHHardStopLeft = 2.315;
    private final double SPHSoftStopRight = 0.24687;
    private final double SPHSoftStopLeft = 2.167;
-   private final double SPHHardStopLeft = 2.315;
 
    // Same as above, but for the lift
    private final double SPVHardStopDown = 0.295;
+   private final double SPVHardStopUp = 2.45;
    private final double SPVSoftStopDown = 0.443;
    private final double SPVSoftStopUp = 2.302;
-   private final double SPVHardStopUp = 2.45;
 
 
    public LiftSubsystem()
@@ -56,67 +56,68 @@ public class LiftSubsystem extends SubsystemBase
 
    public void runSlide(double slide)
    {
-      if ((stringPotHorizontal.getVoltage() >= SPHSoftStopRight) && (stringPotHorizontal.getVoltage() <= SPHSoftStopLeft))
-      {
-         liftSlideMotor.set(ControlMode.PercentOutput, slide);
-      }
+      liftSlideMotor.set(ControlMode.PercentOutput, slide);
+      // if ((stringPotHorizontal.getVoltage() >= SPHSoftStopRight) && (stringPotHorizontal.getVoltage() <= SPHSoftStopLeft))
+      // {
+      //    liftSlideMotor.set(ControlMode.PercentOutput, slide);
+      // }
 
-      else if ((stringPotHorizontal.getVoltage() >= SPHHardStopRight) && (stringPotHorizontal.getVoltage() < SPHSoftStopRight))
-      {
-         if (slide < 0)
-         {
-            liftSlideMotor.set(ControlMode.PercentOutput, slide / 3);
-         }
+      // else if ((stringPotHorizontal.getVoltage() >= SPHHardStopRight) && (stringPotHorizontal.getVoltage() < SPHSoftStopRight))
+      // {
+      //    if (slide < 0)
+      //    {
+      //       liftSlideMotor.set(ControlMode.PercentOutput, slide / 3);
+      //    }
 
-         else if (slide > 0)
-         {
-            liftSlideMotor.set(ControlMode.PercentOutput, slide);
-         }
-      }
+      //    else if (slide > 0)
+      //    {
+      //       liftSlideMotor.set(ControlMode.PercentOutput, slide);
+      //    }
+      // }
 
-      else if ((stringPotHorizontal.getVoltage() > SPHSoftStopLeft) && (stringPotHorizontal.getVoltage() <= SPHHardStopLeft))
-      {
-         if (slide > 0)
-         {
-            liftSlideMotor.set(ControlMode.PercentOutput, slide / 3);
-         }
+      // else if ((stringPotHorizontal.getVoltage() > SPHSoftStopLeft) && (stringPotHorizontal.getVoltage() <= SPHHardStopLeft))
+      // {
+      //    if (slide > 0)
+      //    {
+      //       liftSlideMotor.set(ControlMode.PercentOutput, slide / 3);
+      //    }
 
-         else if (slide < 0)
-         {
-            liftSlideMotor.set(ControlMode.PercentOutput, slide);
-         }
-      }
+      //    else if (slide < 0)
+      //    {
+      //       liftSlideMotor.set(ControlMode.PercentOutput, slide);
+      //    }
+      // }
 
-      else if (stringPotHorizontal.getVoltage() < SPHHardStopRight)
-      {
-         if (slide >= 0)
-         {
-            liftSlideMotor.set(ControlMode.PercentOutput, slide);
-         }
+      // else if (stringPotHorizontal.getVoltage() < SPHHardStopRight)
+      // {
+      //    if (slide >= 0)
+      //    {
+      //       liftSlideMotor.set(ControlMode.PercentOutput, slide);
+      //    }
 
-         else if (slide < 0)
-         {
-            liftSlideMotor.set(ControlMode.PercentOutput, 0);
-         }
-      }
+      //    else if (slide < 0)
+      //    {
+      //       liftSlideMotor.set(ControlMode.PercentOutput, 0);
+      //    }
+      // }
 
-      else if (stringPotHorizontal.getVoltage() > SPHHardStopLeft)
-      {
-         if (slide <= 0)
-         {
-            liftSlideMotor.set(ControlMode.PercentOutput, slide);
-         }
+      // else if (stringPotHorizontal.getVoltage() > SPHHardStopLeft)
+      // {
+      //    if (slide <= 0)
+      //    {
+      //       liftSlideMotor.set(ControlMode.PercentOutput, slide);
+      //    }
 
-         else if (slide > 0)
-         {
-            liftSlideMotor.set(ControlMode.PercentOutput, 0);
-         }
-      }
+      //    else if (slide > 0)
+      //    {
+      //       liftSlideMotor.set(ControlMode.PercentOutput, 0);
+      //    }
+      // }
 
-      else
-      {
-         liftSlideMotor.set(ControlMode.PercentOutput, 0);
-      }
+      // else
+      // {
+      //    liftSlideMotor.set(ControlMode.PercentOutput, 0);
+      // }
 
       SmartDashboard.putNumber("String Pot Horizontal:", stringPotHorizontal.getVoltage());
    }
@@ -194,12 +195,12 @@ public class LiftSubsystem extends SubsystemBase
    {
       if (enabled)
       {
-         logger.finer("Lift_Raise_Sensor_Volts: " + stringPotVertical.getVoltage());
-         logger.finer("Lift_Slide_Sensor_Volts: " + stringPotHorizontal.getVoltage());
+         logger.finer("Raise_Sensor_volts: " + stringPotVertical.getVoltage());
+         logger.finer("Slide_Sensor_volts: " + stringPotHorizontal.getVoltage());
 
          // Divide by 100 to convert percent to ratio to be consistant with non-CTRE motor libraries
-         logger.finer("Lift_Raise_Power: " + liftRaiseMotor.getMotorOutputPercent() / 100.0);
-         logger.finer("Lift_Slide_Power: " + liftSlideMotor.getMotorOutputPercent() / 100.0);
+         logger.finer("Raise_Power: " + liftRaiseMotor.getMotorOutputPercent() / 100.0);
+         logger.finer("Slide_Power: " + liftSlideMotor.getMotorOutputPercent() / 100.0);
       }
    }
 }

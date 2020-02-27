@@ -56,18 +56,13 @@ public class BallTurretSubsystem extends SubsystemBase
       return turretMotor.getSensorCollection().getPulseWidthPosition();
    }
 
-   public void displayTurretPosition()
-   {
-      System.out.println("Turret Counts: " + turretMotor.getSelectedSensorPosition() + ",  " + turretMotor.getSensorCollection().getPulseWidthPosition());
-   }
-
 
    // Log data to file
    public void logTurretData(boolean enabled)
    {
       if (enabled)
       {
-         logger.finer("Turrent_ABS_Encoder_Counts: " + turretMotor.getSensorCollection().getPulseWidthPosition());
+         logger.finer("Turrent_ABS_Enc: " + turretMotor.getSensorCollection().getPulseWidthPosition());
 
          // Divide by 100 to convert percent to ratio to be consistant with non-CTRE motor libraries
          logger.finer("Turret_Power: " + turretMotor.getMotorOutputPercent() / 100.0);

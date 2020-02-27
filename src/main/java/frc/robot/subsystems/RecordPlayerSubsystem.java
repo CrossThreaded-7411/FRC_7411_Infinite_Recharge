@@ -44,7 +44,7 @@ public class RecordPlayerSubsystem extends SubsystemBase
       if (enabled)
       {
          // Divide by 100 to convert percent to ratio to be consistant with non-CTRE motor libraries
-         logger.finer("Record_Player_Power: " + recordPlayerMotor.getMotorOutputPercent() / 100.0);
+         logger.finer("Record_Play_Power: " + recordPlayerMotor.getMotorOutputPercent() / 100.0);
       }
    }
 }

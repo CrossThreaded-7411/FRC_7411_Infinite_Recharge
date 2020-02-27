@@ -18,6 +18,22 @@ import java.lang.System;
 public class RobotLogger
 {
    static private FileHandler logFile;
+   private static boolean loggerEnabled = false;
+
+   public static void init()
+   {
+      try
+      {
+         RobotLogger.setup();
+         loggerEnabled = true;
+      }
+      catch (IOException e)
+      {
+         e.printStackTrace();
+         throw new RuntimeException("Problems with creating the log files");
+      }
+   }
+
 
    public static void setup() throws IOException
    {
@@ -30,9 +46,8 @@ public class RobotLogger
        */
       System.setProperty("java.util.logging.SimpleFormatter.format", "%1$tT.%1$tL [%4$s]: %5$s%n");
 
-
       // Set the level of messages to log
-      logger.setLevel(Level.INFO);
+      logger.setLevel(Level.FINER);
 
       // Specify the log file and the the file format
       String fileName = "RobotLog_" + LocalDateTime.now() + ".log";
@@ -49,9 +64,9 @@ public class RobotLogger
     * logging of data should be consolidated here.
     * @param enabled True enables logging, False disables
     */
-   public static void logData(boolean enabled)
+   public static void logData()
    {
-      if (enabled)
+      if (loggerEnabled)
       {
          /**
           * Place all calls to logging methods here. This consolidates logging requests
@@ -65,7 +80,6 @@ public class RobotLogger
          Robot.m_robotContainer.turretSubsystem.logTurretData(true);
          Robot.m_robotContainer.recordPlayerSubsystem.logRecordPlayerData(true);
          Robot.m_robotContainer.pdpSubsystem.logPDPData(true);
-
       }
    }
 }

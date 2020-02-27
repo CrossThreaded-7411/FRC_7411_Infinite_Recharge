@@ -30,7 +30,6 @@ import frc.robot.commands.RunBallCollector;
 import frc.robot.Constants.*;
 import frc.robot.commands.StartShooterCommandGroup;
 import frc.robot.commands.StopShooterCommandGroup;
-import frc.robot.commands.ReadPDPValues;
 
 
 /**
@@ -69,7 +68,6 @@ public class RobotContainer
       ballCollectorSubsystem.setDefaultCommand(new RunBallCollector(ballCollectorSubsystem));
       turretSubsystem.setDefaultCommand(new RunTurret(turretSubsystem));
       recordPlayerSubsystem.setDefaultCommand(new SpinRecordPlayer(recordPlayerSubsystem));
-      pdpSubsystem.setDefaultCommand(new ReadPDPValues(pdpSubsystem));
   }
 
    /**
