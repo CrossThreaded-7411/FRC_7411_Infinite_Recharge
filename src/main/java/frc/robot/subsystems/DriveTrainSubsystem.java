@@ -53,4 +53,8 @@ public class DriveTrainSubsystem extends SubsystemBase
       logger.fine("leftdrive actual: " + leftDriveMotors.get());
       logger.fine("rightdrive actual: " + rightDriveMotors.get());
    }
+
+public void setMotorPower(double motorPowerRight, double motorPowerLeft) 
+{
+}
 }

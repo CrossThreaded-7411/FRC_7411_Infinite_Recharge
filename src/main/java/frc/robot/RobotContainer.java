@@ -24,7 +24,7 @@ import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.BallTurretSubsystem;
 import frc.robot.subsystems.BallCollectorSubsystem;
 //import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-
+import frc.robot.commands.AutonomousDriveCommandGroup;
 // Import Commands
 import frc.robot.commands.DriveByJoystick;
 import frc.robot.commands.RunBallShooter;
@@ -35,6 +35,7 @@ import frc.robot.commands.RunBallFeeder;
 import frc.robot.Constants.*;
 import frc.robot.commands.StartShooterCommandGroup;
 import frc.robot.commands.StopShooterCommandGroup;
+import frc.robot.commands.AutonomousDriveCommandGroup;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -92,8 +93,11 @@ public class RobotContainer
     *
     * @return the command to run in autonomous
     */
-   public Command getAutonomousCommand()
+    
+   public static Command getAutonomousCommand() 
+   
    {
+      Command AutonomousDriveCommandGroup = RobotContainer.getAutonomousCommand();
       // An ExampleCommand will run in autonomous
       return null; // m_autoCommand;
    }
