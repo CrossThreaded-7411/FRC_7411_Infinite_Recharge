@@ -57,67 +57,67 @@ public class LiftSubsystem extends SubsystemBase
    public void runSlide(double slide)
    {
       liftSlideMotor.set(ControlMode.PercentOutput, slide);
-      // if ((stringPotHorizontal.getVoltage() >= SPHSoftStopRight) && (stringPotHorizontal.getVoltage() <= SPHSoftStopLeft))
-      // {
-      //    liftSlideMotor.set(ControlMode.PercentOutput, slide);
-      // }
+      if ((stringPotHorizontal.getVoltage() >= SPHSoftStopRight) && (stringPotHorizontal.getVoltage() <= SPHSoftStopLeft))
+      {
+         liftSlideMotor.set(ControlMode.PercentOutput, slide);
+      }
 
-      // else if ((stringPotHorizontal.getVoltage() >= SPHHardStopRight) && (stringPotHorizontal.getVoltage() < SPHSoftStopRight))
-      // {
-      //    if (slide < 0)
-      //    {
-      //       liftSlideMotor.set(ControlMode.PercentOutput, slide / 3);
-      //    }
+      else if ((stringPotHorizontal.getVoltage() >= SPHHardStopRight) && (stringPotHorizontal.getVoltage() < SPHSoftStopRight))
+      {
+         if (slide < 0)
+         {
+            liftSlideMotor.set(ControlMode.PercentOutput, slide / 3);
+         }
 
-      //    else if (slide > 0)
-      //    {
-      //       liftSlideMotor.set(ControlMode.PercentOutput, slide);
-      //    }
-      // }
+         else if (slide > 0)
+         {
+            liftSlideMotor.set(ControlMode.PercentOutput, slide);
+         }
+      }
 
-      // else if ((stringPotHorizontal.getVoltage() > SPHSoftStopLeft) && (stringPotHorizontal.getVoltage() <= SPHHardStopLeft))
-      // {
-      //    if (slide > 0)
-      //    {
-      //       liftSlideMotor.set(ControlMode.PercentOutput, slide / 3);
-      //    }
+      else if ((stringPotHorizontal.getVoltage() > SPHSoftStopLeft) && (stringPotHorizontal.getVoltage() <= SPHHardStopLeft))
+      {
+         if (slide > 0)
+         {
+            liftSlideMotor.set(ControlMode.PercentOutput, slide / 3);
+         }
 
-      //    else if (slide < 0)
-      //    {
-      //       liftSlideMotor.set(ControlMode.PercentOutput, slide);
-      //    }
-      // }
+         else if (slide < 0)
+         {
+            liftSlideMotor.set(ControlMode.PercentOutput, slide);
+         }
+      }
 
-      // else if (stringPotHorizontal.getVoltage() < SPHHardStopRight)
-      // {
-      //    if (slide >= 0)
-      //    {
-      //       liftSlideMotor.set(ControlMode.PercentOutput, slide);
-      //    }
+      else if (stringPotHorizontal.getVoltage() < SPHHardStopRight)
+      {
+         if (slide >= 0)
+         {
+            liftSlideMotor.set(ControlMode.PercentOutput, slide);
+         }
 
-      //    else if (slide < 0)
-      //    {
-      //       liftSlideMotor.set(ControlMode.PercentOutput, 0);
-      //    }
-      // }
+         else if (slide < 0)
+         {
+            liftSlideMotor.set(ControlMode.PercentOutput, 0);
+         }
+      }
 
-      // else if (stringPotHorizontal.getVoltage() > SPHHardStopLeft)
-      // {
-      //    if (slide <= 0)
-      //    {
-      //       liftSlideMotor.set(ControlMode.PercentOutput, slide);
-      //    }
+      else if (stringPotHorizontal.getVoltage() > SPHHardStopLeft)
+      {
+         if (slide <= 0)
+         {
+            liftSlideMotor.set(ControlMode.PercentOutput, slide);
+         }
 
-      //    else if (slide > 0)
-      //    {
-      //       liftSlideMotor.set(ControlMode.PercentOutput, 0);
-      //    }
-      // }
+         else if (slide > 0)
+         {
+            liftSlideMotor.set(ControlMode.PercentOutput, 0);
+         }
+      }
 
-      // else
-      // {
-      //    liftSlideMotor.set(ControlMode.PercentOutput, 0);
-      // }
+      else
+      {
+         liftSlideMotor.set(ControlMode.PercentOutput, 0);
+      }
 
       SmartDashboard.putNumber("String Pot Horizontal:", stringPotHorizontal.getVoltage());
    }
