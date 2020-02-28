@@ -1,13 +1,14 @@
 package frc.robot.commands;
 
-import java.util.logging.Logger;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrainSubsystem;
-import frc.robot.Robot;
+
 
 
 public class AutonomousDrive extends CommandBase 
 {
+  
  private final DriveTrainSubsystem driveTrain;
  private final double motorPowerRight;
  private final double motorPowerLeft;

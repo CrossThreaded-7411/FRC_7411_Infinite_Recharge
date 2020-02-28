@@ -53,7 +53,8 @@ public class RobotContainer
    private final BallTurretSubsystem turretSubsystem = new BallTurretSubsystem();
    private final BallCollectorSubsystem ballCollectorSubsystem = new BallCollectorSubsystem();
    private final RecordPlayerSubsystem recordPlayerSubsystem = new RecordPlayerSubsystem();
-
+   private final Command m_AutonomousCommand = new AutonomousDriveCommandGroup(driveTrainSubsystem);
+   
    // Create driver controller
    public Joystick driver1Controller = new Joystick(OIConstants.driver1ControlPort);
    public Joystick driver2Controller = new Joystick(OIConstants.driver2ControlPort);
@@ -73,6 +74,7 @@ public class RobotContainer
       turretSubsystem.setDefaultCommand(new RunTurret(turretSubsystem));
       recordPlayerSubsystem.setDefaultCommand(new SpinRecordPlayer(recordPlayerSubsystem));
   }
+
 
    /**
     * Use this method to define your button->command mappings. Buttons can be created by
@@ -94,11 +96,10 @@ public class RobotContainer
     * @return the command to run in autonomous
     */
     
-   public static Command getAutonomousCommand() 
-   
+   public Command getAutonomousCommand() 
    {
-      Command AutonomousDriveCommandGroup = RobotContainer.getAutonomousCommand();
+      //AutonomousDriveCommandGroup m_AutonomousDriveCommandGroup = new AutonomousDriveCommandGroup(driveTrainSubsystem);
       // An ExampleCommand will run in autonomous
-      return null; // m_autoCommand;
+      return m_AutonomousCommand;
    }
 }

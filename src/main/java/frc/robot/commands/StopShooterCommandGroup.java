@@ -2,7 +2,6 @@ package frc.robot.commands;
 
 import frc.robot.subsystems.BallShooterSubsystem;
 import frc.robot.subsystems.BallCollectorSubsystem;
-import frc.robot.commands.BallCollectorManual;
 import frc.robot.subsystems.BallFeederSubsystem;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
