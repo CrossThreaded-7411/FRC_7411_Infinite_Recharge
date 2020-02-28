@@ -4,6 +4,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.subsystems.BallTurretSubsystem;
 import frc.robot.Constants.GamePadButtons;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
+
+
 
 
 /**
@@ -11,6 +17,9 @@ import frc.robot.Constants.GamePadButtons;
  */
 public class RunTurret extends CommandBase
 {
+
+   
+
    private final BallTurretSubsystem turret;
    private final double maxMotorPower = 0.2;
    private final int countLimitCW = 10050;
@@ -36,6 +45,12 @@ public class RunTurret extends CommandBase
    @Override
    public void execute()
    {
+      NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+      NetworkTableEntry tx = table.getEntry("tx");
+      
+      //read values periodically
+      double x = tx.getDouble(0.0);
+      
       double motorPower = 0.0;
       boolean leftBumper = Robot.m_robotContainer.driver2Controller.getRawButton(GamePadButtons.bumperLeft.value);
       boolean rightBumper = Robot.m_robotContainer.driver2Controller.getRawButton(GamePadButtons.bumperRight.value);
@@ -57,7 +72,25 @@ public class RunTurret extends CommandBase
          // If not button held, do not rotate
          motorPower = 0.0;
       }
-      
+
+      if ((x > 0) && (operatingState() != State.at_CCW_limit))
+      {
+         // Rotate CW when turret is too far left
+         motorPower = maxMotorPower/8;
+      }
+
+      else if ((x < 0) && (operatingState() != State.at_CW_limit))
+      {
+         // Rotate CCW when turret is too far right
+         motorPower = -maxMotorPower/8;
+      }
+
+      else
+      {
+         // When target is not found, don't move motor
+         motorPower = 0.0;
+      }
+
       turret.setMotorPower(motorPower);
       turret.displayTurretPosition();
    }
