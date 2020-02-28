@@ -6,6 +6,8 @@ import frc.robot.subsystems.BallTurretSubsystem;
 import frc.robot.Constants.GamePadButtons;
 
 
+
+
 /**
  * A command to turn on the launch motor to a known desired power
  */
@@ -36,6 +38,8 @@ public class RunTurret extends CommandBase
    @Override
    public void execute()
    {
+
+      
       double motorPower = 0.0;
       boolean leftBumper = Robot.m_robotContainer.driver2Controller.getRawButton(GamePadButtons.bumperLeft.value);
       boolean rightBumper = Robot.m_robotContainer.driver2Controller.getRawButton(GamePadButtons.bumperRight.value);
