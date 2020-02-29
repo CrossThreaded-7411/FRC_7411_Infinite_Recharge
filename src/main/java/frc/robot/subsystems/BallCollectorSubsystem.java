@@ -23,12 +23,10 @@ public class BallCollectorSubsystem extends SubsystemBase {
 
     public void stopBallCollectorMotor() {
         ballCollectorMotor.set(ControlMode.PercentOutput, 0.0);
-        System.out.println("Motor set to off");
     }
 
     public void runBallCollectorMotor(double collectorSpeed) {
         ballCollectorMotor.set(ControlMode.PercentOutput, collectorSpeed);
         logger.fine("ball collector motor:" + ballCollectorMotor.getMotorOutputPercent());
-        System.out.println("Power set to " + ballCollectorMotor.getMotorOutputPercent());
     }
 }
