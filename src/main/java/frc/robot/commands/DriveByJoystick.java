@@ -1,3 +1,8 @@
+/*---------------------------------------------------------------------------
+   FRC Team CrossThreaded #7411
+   Valley Lutheran School, Cedar Falls, IA
+   Open Source Software - may be modified and shared by all.
+  ---------------------------------------------------------------------------*/
 package frc.robot.commands;
 
 import frc.robot.Robot;
@@ -7,9 +12,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.Constants;
 
-/**
- * A command to turn on the launch motor to a known desired power
- */
+
 public class DriveByJoystick extends CommandBase
 {
    private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
@@ -23,11 +26,9 @@ public class DriveByJoystick extends CommandBase
    
 
 
-   public DriveByJoystick(DriveTrainSubsystem subsystem)//, double forwardValue, double rotateValue)
+   public DriveByJoystick(DriveTrainSubsystem subsystem)
    {
       driveTrain = subsystem;
-      // forward = forwardValue;
-      // rotate = rotateValue;
       addRequirements(subsystem);
       
 
@@ -50,7 +51,6 @@ public class DriveByJoystick extends CommandBase
 
      return newvalue;
   }
-   
 
 
    @Override

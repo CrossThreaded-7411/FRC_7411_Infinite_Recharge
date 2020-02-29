@@ -5,6 +5,7 @@
   ---------------------------------------------------------------------------*/
 package frc.robot.subsystems;
 
+import java.util.logging.Logger;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -13,6 +14,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 public class RecordPlayerSubsystem extends SubsystemBase
 {
    private TalonSRX recordPlayerMotor = new TalonSRX(Constants.CANID.recordPlayer);
+   private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
    //constructor
    public RecordPlayerSubsystem()
@@ -33,5 +35,16 @@ public class RecordPlayerSubsystem extends SubsystemBase
    {
       double stopMotorPower = 0.0;
       recordPlayerMotor.set(ControlMode.PercentOutput, stopMotorPower);
+   }
+
+
+   // Log data to file
+   public void logRecordPlayerData(boolean enabled)
+   {
+      if (enabled)
+      {
+         // Divide by 100 to convert percent to ratio to be consistant with non-CTRE motor libraries
+         logger.finer("Record_Play_Power: " + recordPlayerMotor.getMotorOutputPercent() / 100.0);
+      }
    }
 }

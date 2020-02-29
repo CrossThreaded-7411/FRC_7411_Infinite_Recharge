@@ -10,6 +10,7 @@ import frc.robot.subsystems.RecordPlayerSubsystem;
 import frc.robot.Robot;
 import frc.robot.Constants;
 
+
 // A command to turn on the launch motor to a known desired power
 public class SpinRecordPlayer extends CommandBase
 {
@@ -31,7 +32,8 @@ public class SpinRecordPlayer extends CommandBase
    }
 
 
-   // Runtime operation of the record player by sing the right and left joystick triggers on driver 2 controller
+   // Runtime operation of the record player by sing the right and left joystick triggers on driver
+   // 2 controller
    @Override
    public void execute()
    {
@@ -52,7 +54,7 @@ public class SpinRecordPlayer extends CommandBase
       {
          power = 0.0;
       }
-      
+
       // Setting motor power proportional to joystick trigger position
       powerRecordPlayer.setRecordPlayerPower(power);
    }

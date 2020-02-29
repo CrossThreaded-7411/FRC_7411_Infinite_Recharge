@@ -1,20 +1,22 @@
+/*---------------------------------------------------------------------------
+   FRC Team CrossThreaded #7411
+   Valley Lutheran School, Cedar Falls, IA
+   Open Source Software - may be modified and shared by all.
+  ---------------------------------------------------------------------------*/
 package frc.robot.commands;
 
-import java.util.logging.Logger;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.BallCollectorSubsystem;
 import frc.robot.Robot;
 
-public class RunBallCollector extends CommandBase 
+
+public class RunBallCollector extends CommandBase
 {
-  private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
   private final BallCollectorSubsystem m_ballCollector;
 
   public RunBallCollector(BallCollectorSubsystem subsystem) {
     m_ballCollector = subsystem;
     addRequirements(subsystem);
-
-    logger.fine(" Collector command constructor complete");
   }
 
   @Override

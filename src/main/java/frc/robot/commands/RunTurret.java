@@ -1,9 +1,17 @@
+/*---------------------------------------------------------------------------
+   FRC Team CrossThreaded #7411
+   Valley Lutheran School, Cedar Falls, IA
+   Open Source Software - may be modified and shared by all.
+  ---------------------------------------------------------------------------*/
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.subsystems.BallTurretSubsystem;
 import frc.robot.Constants.GamePadButtons;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 
 
 /**
@@ -15,6 +23,12 @@ public class RunTurret extends CommandBase
    private final double maxMotorPower = 0.2;
    private final int countLimitCW = 10050;
    private final int countLimitCCW = -3520;
+   private double Kp = 0.05;
+   private double Kdamp = 0.005;
+   private double xLast = 0.0;
+   private static NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+   private static NetworkTableEntry tx = table.getEntry("tx");
+   private static NetworkTableEntry tv = table.getEntry("tv");
 
    // Rotational state of the turret
    private enum State
@@ -36,17 +50,23 @@ public class RunTurret extends CommandBase
    @Override
    public void execute()
    {
+      double x = tx.getDouble(0.0);
+      boolean targetFound = tv.getBoolean(false);
       double motorPower = 0.0;
+      double dx = 0.0;
       boolean leftBumper = Robot.m_robotContainer.driver2Controller.getRawButton(GamePadButtons.bumperLeft.value);
       boolean rightBumper = Robot.m_robotContainer.driver2Controller.getRawButton(GamePadButtons.bumperRight.value);
+      boolean driver1Trigger = Robot.m_robotContainer.driver1Controller.getRawButton(1);
 
-      // Rotate the turret based on the bumper buttons. If turret is at the rotational limit, do not allow rotation further that direction
+      System.out.println("Target Found:" + targetFound);
+
+      // Rotate the turret based on the bumper buttons. If turret is at the rotational limit, do not
+      // allow rotation further that direction
       if (leftBumper && (operatingState() != State.at_CCW_limit))
       {
          // Rotate CCW while held
          motorPower = -maxMotorPower;
       }
-
       else if (rightBumper && (operatingState() != State.at_CW_limit))
       {
          // Rotate CW while held
@@ -57,9 +77,29 @@ public class RunTurret extends CommandBase
          // If not button held, do not rotate
          motorPower = 0.0;
       }
-      
+
+      // Closed-loop control of turret using LimeLight cammera feedback
+      // Intent is to aquire and control to target only while holding a button
+      if (driver1Trigger == true)
+      {
+         // Calculates rate of change for the purpose of adding damping
+         dx = xLast - x;
+
+         // Only allow rotation while with allowable range of motino
+         if ((operatingState() != State.at_CCW_limit) && (operatingState() != State.at_CW_limit))
+         {
+            // PID control, currently not using I-control
+            motorPower = (Kp * x) + (Kdamp * dx);
+         }
+         else
+         {
+            motorPower = 0.0;
+         }
+
+         xLast = x;
+      }
+
       turret.setMotorPower(motorPower);
-      turret.displayTurretPosition();
    }
 
    

@@ -1,12 +1,11 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018-2019 FIRST. All Rights Reserved. */
-/* Open Source Software - may be modified and shared by FRC teams. The code */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project. */
-/*----------------------------------------------------------------------------*/
-
+/*---------------------------------------------------------------------------
+   FRC Team CrossThreaded #7411
+   Valley Lutheran School, Cedar Falls, IA
+   Open Source Software - may be modified and shared by all.
+  ---------------------------------------------------------------------------*/
 package frc.robot.subsystems;
 
+import java.util.logging.Logger;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -16,6 +15,8 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 public class BallTurretSubsystem extends SubsystemBase
 {
    private TalonSRX turretMotor = new TalonSRX(CANID.ballShooterTurret);
+   private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
 
    /**
     * Creates a new DriveSubsystem.
@@ -55,8 +56,16 @@ public class BallTurretSubsystem extends SubsystemBase
       return turretMotor.getSensorCollection().getPulseWidthPosition();
    }
 
-   public void displayTurretPosition()
+
+   // Log data to file
+   public void logTurretData(boolean enabled)
    {
-      System.out.println("Turret Counts: " + turretMotor.getSelectedSensorPosition() + ",  " + turretMotor.getSensorCollection().getPulseWidthPosition());
+      if (enabled)
+      {
+         logger.finer("Turrent_ABS_Enc: " + turretMotor.getSensorCollection().getPulseWidthPosition());
+
+         // Divide by 100 to convert percent to ratio to be consistant with non-CTRE motor libraries
+         logger.finer("Turret_Power: " + turretMotor.getMotorOutputPercent() / 100.0);
+      }
    }
 }
