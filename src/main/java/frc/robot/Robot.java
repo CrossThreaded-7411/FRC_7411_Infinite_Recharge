@@ -8,6 +8,9 @@
 package frc.robot;
 
 import java.util.logging.Logger;
+import edu.wpi.cscore.MjpegServer;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -23,7 +26,11 @@ public class Robot extends TimedRobot
    private Command m_autonomousCommand;
    public static RobotContainer m_robotContainer;
    Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-   
+   public static UsbCamera targetingCam;
+   public static UsbCamera driveCam;
+   public static CameraServer server;
+   private MjpegServer backendServer;
+   private static int cameraState = 0;
 
    /**
     * This function is run when the robot is first started up and should be used for any
@@ -32,9 +39,15 @@ public class Robot extends TimedRobot
    @Override
    public void robotInit()
    {
-      // Initialize the robot logger
-      //RobotLogger.init();
-      
+      // Initialize camera and start capuring the image
+      targetingCam = new UsbCamera("TargetingCam", 1);
+      targetingCam.setExposureManual(0);
+      targetingCam.setBrightness(0);
+      server = CameraServer.getInstance();
+      backendServer = server.startAutomaticCapture(targetingCam);
+      driveCam = new UsbCamera("DriveCam", 0);
+      // RobotLogger.init();
+
       // Instantiate our RobotContainer. This will perform all our button bindings,
       // and put our autonomous chooser on the dashboard.
       m_robotContainer = new RobotContainer();
@@ -42,13 +55,28 @@ public class Robot extends TimedRobot
 
    /**
     * This function is called every robot packet, no matter the mode. Use this for items like
-    * diagnostics that you want ran during disabled, autonomous, teleoperated and test.
-    * This runs after the mode specific periodic functions, but before LiveWindow and SmartDashboard
+    * diagnostics that you want ran during disabled, autonomous, teleoperated and test. This runs
+    * after the mode specific periodic functions, but before LiveWindow and SmartDashboard
     * integrated updating.
     */
    @Override
    public void robotPeriodic()
    {
+      if (m_robotContainer.driver2Controller.getRawButtonReleased(7))
+      {
+         if (cameraState == 0)
+         {
+            System.out.println("Switching to drive cam");
+            backendServer.setSource(driveCam);
+            cameraState = 1;
+         }
+         else if (cameraState == 1)
+         {
+            System.out.println("Switching to target cam");
+            backendServer.setSource(targetingCam);
+            cameraState = 0;
+         }
+      }
       // Runs the Scheduler. This is responsible for polling buttons, adding newly-scheduled
       // commands, running already-scheduled commands, removing finished or interrupted commands,
       // and running subsystem periodic() methods. This must be called from the robot's periodic
