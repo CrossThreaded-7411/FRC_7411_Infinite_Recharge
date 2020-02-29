@@ -55,40 +55,26 @@ public class RunTurret extends CommandBase
       double motorPower = 0.0;
       boolean leftBumper = Robot.m_robotContainer.driver2Controller.getRawButton(GamePadButtons.bumperLeft.value);
       boolean rightBumper = Robot.m_robotContainer.driver2Controller.getRawButton(GamePadButtons.bumperRight.value);
+      boolean driver1Trigger = Robot.m_robotContainer.driver1Controller.getRawButton(1);
+
 
       // Rotate the turret based on the bumper buttons. If turret is at the rotational limit, do not allow rotation further that direction
-      if (leftBumper && (operatingState() != State.at_CCW_limit))
+      if ((leftBumper && (operatingState() != State.at_CCW_limit))
+            || (((x < 0) && (operatingState() != State.at_CCW_limit)) && (driver1Trigger == true)))
       {
          // Rotate CCW while held
-         motorPower = -maxMotorPower;
+         motorPower = -maxMotorPower / 10;
       }
 
-      else if (rightBumper && (operatingState() != State.at_CW_limit))
+      else if ((rightBumper && (operatingState() != State.at_CW_limit))
+         || (((x > 0) && (operatingState() != State.at_CW_limit)) && (driver1Trigger == true)))
       {
          // Rotate CW while held
-         motorPower = maxMotorPower;
+         motorPower = maxMotorPower / 10;
       }
       else
       {
          // If not button held, do not rotate
-         motorPower = 0.0;
-      }
-
-      if ((x > 0) && (operatingState() != State.at_CCW_limit))
-      {
-         // Rotate CW when turret is too far left
-         motorPower = maxMotorPower/8;
-      }
-
-      else if ((x < 0) && (operatingState() != State.at_CW_limit))
-      {
-         // Rotate CCW when turret is too far right
-         motorPower = -maxMotorPower/8;
-      }
-
-      else
-      {
-         // When target is not found, don't move motor
          motorPower = 0.0;
       }
 
