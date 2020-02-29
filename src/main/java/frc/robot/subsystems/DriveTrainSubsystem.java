@@ -45,7 +45,7 @@ public class DriveTrainSubsystem extends SubsystemBase
    * Drives the robot using arcade controls.
    *
    * @param fwd the commanded forward movement
-   * @param rot the commanded rotation
+   * @param rot the commanded rotation 
    */
    public void driveByArcade(double fwd, double rot)
    {
@@ -54,7 +54,4 @@ public class DriveTrainSubsystem extends SubsystemBase
       logger.fine("rightdrive actual: " + rightDriveMotors.get());
    }
 
-public void setMotorPower(double motorPowerRight, double motorPowerLeft) 
-{
-}
 }

@@ -10,23 +10,25 @@ public class AutonomousDrive extends CommandBase
 {
   
  private final DriveTrainSubsystem driveTrain;
- private final double motorPowerRight;
- private final double motorPowerLeft;
+ private final double forwardPower;
+ private final double rotatePower;
 
 
 
- public AutonomousDrive(DriveTrainSubsystem subsystem, double rightDrivePower, double leftDrivePower) 
+ public AutonomousDrive(DriveTrainSubsystem subsystem, double fwdPower, double rotPower) 
  {
-   driveTrain = subsystem;
-    motorPowerRight = rightDrivePower;
-    motorPowerLeft = leftDrivePower;
+   System.out.println(" entered autonomous drive");
+    driveTrain = subsystem;
+    forwardPower = fwdPower;
+    rotatePower = rotPower;
     addRequirements(subsystem);
  }
 
  @Override
    public void initialize()
    {
-     driveTrain.setMotorPower(motorPowerRight, motorPowerLeft);
+     driveTrain.driveByArcade(forwardPower, rotatePower);
+     System.out.println("motor power");
    }
 
    @Override
@@ -34,14 +36,6 @@ public class AutonomousDrive extends CommandBase
    {
       return true;
    }
-
-  
-
-
-
-
-
-
 
 
 }

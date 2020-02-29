@@ -98,7 +98,9 @@ public class RobotContainer
     
    public Command getAutonomousCommand() 
    {
-      //AutonomousDriveCommandGroup m_AutonomousDriveCommandGroup = new AutonomousDriveCommandGroup(driveTrainSubsystem);
+
+     // System.out.println("entered autonomous mode");
+      AutonomousDriveCommandGroup m_AutonomousDriveCommandGroup = new AutonomousDriveCommandGroup(driveTrainSubsystem);
       // An ExampleCommand will run in autonomous
       return m_AutonomousCommand;
    }

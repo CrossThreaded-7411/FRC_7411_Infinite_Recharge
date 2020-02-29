@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Constants.*;
+import frc.robot.commands.AutonomousDriveCommandGroup;
 
 
 /**
@@ -30,6 +31,7 @@ public class Robot extends TimedRobot
 
    // use the classname for the logger, this way you can refactor
    private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+   private static final CommandScheduler Scheduler = null;
    
    /**
     * This function is run when the robot is first started up and should be used
@@ -100,7 +102,7 @@ public class Robot extends TimedRobot
    public void autonomousInit()
    {
       m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-
+   
       // schedule the autonomous command (example)
       if (m_autonomousCommand != null) 
       {
@@ -114,7 +116,8 @@ public class Robot extends TimedRobot
    @Override
    public void autonomousPeriodic()
    {  
-   
+      Scheduler.getInstance().run();
+      //AutonomousDriveCommandGroup;
    }
 
    @Override

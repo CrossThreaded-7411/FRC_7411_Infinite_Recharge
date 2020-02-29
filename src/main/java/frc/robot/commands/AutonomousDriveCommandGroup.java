@@ -8,11 +8,16 @@ public class AutonomousDriveCommandGroup extends SequentialCommandGroup
 {
     public AutonomousDriveCommandGroup(DriveTrainSubsystem driveTrain) 
     {
+
+        System.out.println("entered my autonomous mode");
         addCommands
         (
-            new AutonomousDrive(driveTrain, 0.2, 0.2),  
+            
+            new AutonomousDrive(driveTrain, 0.2, 0.0),  
             new WaitCommand(2),
             new AutonomousDrive(driveTrain, 0.0, 0.0)
+            
         );
-    }
+        System.out.println("exited autonomous mode");
+    }  
 }
