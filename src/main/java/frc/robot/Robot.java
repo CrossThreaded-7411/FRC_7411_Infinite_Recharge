@@ -10,6 +10,9 @@ package frc.robot;
 import java.util.logging.Logger;
 import edu.wpi.cscore.MjpegServer;
 import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoCamera;
+import edu.wpi.cscore.VideoSink;
+import edu.wpi.cscore.VideoSource;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -28,9 +31,9 @@ public class Robot extends TimedRobot
    Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
    public static UsbCamera targetingCam;
    public static UsbCamera driveCam;
-   public static CameraServer server;
-   private MjpegServer backendServer;
+   // public static CameraServer server;
    private static int cameraState = 0;
+   VideoSink server;
 
    /**
     * This function is run when the robot is first started up and should be used for any
@@ -40,12 +43,20 @@ public class Robot extends TimedRobot
    public void robotInit()
    {
       // Initialize camera and start capuring the image
-      targetingCam = new UsbCamera("TargetingCam", 1);
-      targetingCam.setExposureManual(0);
-      targetingCam.setBrightness(0);
-      server = CameraServer.getInstance();
-      backendServer = server.startAutomaticCapture(targetingCam);
-      driveCam = new UsbCamera("DriveCam", 0);
+      
+      // targetingCam = new UsbCamera("TargetingCam", 1);
+      // // targetingCam.setExposureManual(0);
+      // // targetingCam.setBrightness(0);
+      // server = CameraServer.getInstance();
+      // backendServer = server.startAutomaticCapture(targetingCam);
+      // driveCam = new UsbCamera("DriveCam", 0);
+
+      targetingCam = CameraServer.getInstance().startAutomaticCapture(0);
+      //driveCam = CameraServer.getInstance().startAutomaticCapture(1);
+      driveCam = new UsbCamera("DriveCam", 1);
+      server = CameraServer.getInstance().getServer();
+      server.setSource(driveCam);
+      
       // RobotLogger.init();
 
       // Instantiate our RobotContainer. This will perform all our button bindings,
@@ -67,13 +78,13 @@ public class Robot extends TimedRobot
          if (cameraState == 0)
          {
             System.out.println("Switching to drive cam");
-            backendServer.setSource(driveCam);
+            server.setSource(driveCam);
             cameraState = 1;
          }
          else if (cameraState == 1)
          {
             System.out.println("Switching to target cam");
-            backendServer.setSource(targetingCam);
+            server.setSource(targetingCam);
             cameraState = 0;
          }
       }
