@@ -1,3 +1,8 @@
+/*---------------------------------------------------------------------------
+   FRC Team CrossThreaded #7411
+   Valley Lutheran School, Cedar Falls, IA
+   Open Source Software - may be modified and shared by all.
+  ---------------------------------------------------------------------------*/
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -19,9 +24,7 @@ public class RunTurret extends CommandBase
    // Rotational state of the turret
    private enum State
    {
-      in_range,
-      at_CCW_limit,
-      at_CW_limit;
+      in_range, at_CCW_limit, at_CW_limit;
    }
 
 
@@ -32,7 +35,7 @@ public class RunTurret extends CommandBase
       addRequirements(subsystem);
    }
 
-   
+
    @Override
    public void execute()
    {
@@ -40,13 +43,13 @@ public class RunTurret extends CommandBase
       boolean leftBumper = Robot.m_robotContainer.driver2Controller.getRawButton(GamePadButtons.bumperLeft.value);
       boolean rightBumper = Robot.m_robotContainer.driver2Controller.getRawButton(GamePadButtons.bumperRight.value);
 
-      // Rotate the turret based on the bumper buttons. If turret is at the rotational limit, do not allow rotation further that direction
+      // Rotate the turret based on the bumper buttons. If turret is at the rotational limit, do not
+      // allow rotation further that direction
       if (leftBumper && (operatingState() != State.at_CCW_limit))
       {
          // Rotate CCW while held
          motorPower = -maxMotorPower;
       }
-
       else if (rightBumper && (operatingState() != State.at_CW_limit))
       {
          // Rotate CW while held
@@ -57,12 +60,11 @@ public class RunTurret extends CommandBase
          // If not button held, do not rotate
          motorPower = 0.0;
       }
-      
+
       turret.setMotorPower(motorPower);
-      turret.displayTurretPosition();
    }
 
-   
+
    // Limit rotation of the turret based on the absolute encoder position of the subsystem.
    // The desired operation is to allow 180 degrees of rotation.
    // Encoder values need to be determined empirically.
