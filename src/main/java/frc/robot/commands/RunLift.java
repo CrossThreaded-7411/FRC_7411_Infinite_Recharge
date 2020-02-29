@@ -16,7 +16,7 @@ public class RunLift extends CommandBase
    private final LiftSubsystem lift;
    private double slide;
    private double raise;
-   private double deadband;
+   private double deadband;   
    private double maxPower;
 
    public RunLift(LiftSubsystem subsystem)
