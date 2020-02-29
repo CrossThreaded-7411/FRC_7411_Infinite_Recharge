@@ -16,7 +16,9 @@ public class BallTurretSubsystem extends SubsystemBase
 {
    private TalonSRX turretMotor = new TalonSRX(CANID.ballShooterTurret);
    private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-
+   //10050 -3520
+   private final int countLimitCW = 6500;
+   private final int countLimitCCW = -6500;
 
    /**
     * Creates a new DriveSubsystem.
@@ -28,16 +30,21 @@ public class BallTurretSubsystem extends SubsystemBase
       stopMotor();
    }
 
-   
    /**
     * Sets motor power for the ball launcher motor
     * 
     * @param targetPower Accepts a power level between -1 to 1
     */
-   public void setMotorPower(double power)
-   {
-      turretMotor.set(ControlMode.PercentOutput, power);
-   }
+    public void setMotorPower(double power)
+    {
+       if(operatingState() == State.at_CCW_limit && power < 0){
+          stopMotor();
+       } else if(operatingState() == State.at_CW_limit && power > 0) {
+          stopMotor();
+       } else {
+          turretMotor.set(ControlMode.PercentOutput, power);
+       }
+    }
 
 
    /**
@@ -53,7 +60,39 @@ public class BallTurretSubsystem extends SubsystemBase
    // is not gauranteed to be at a known state on power up.
    public int getAbsPosition()
    {
-      return turretMotor.getSensorCollection().getPulseWidthPosition();
+      return turretMotor.getSelectedSensorPosition();//getSensorCollection().getPulseWidthPosition();
+   }
+
+   // Rotational state of the turret
+   private enum State
+   {
+      in_range,
+      at_CCW_limit,
+      at_CW_limit;
+   }
+
+   // Limit rotation of the turret based on the absolute encoder position of the subsystem.
+   // The desired operation is to allow 180 degrees of rotation.
+   // Encoder values need to be determined empirically.
+   private State operatingState()
+   {
+      State state = State.in_range;
+      int position = getAbsPosition();
+
+      if (position <= countLimitCCW)
+      {
+         state = State.at_CCW_limit;
+      }
+      else if (position >= countLimitCW)
+      {
+         state = State.at_CW_limit;
+      }
+      else
+      {
+         state = State.in_range;
+      }
+
+      return state;
    }
 
 

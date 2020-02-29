@@ -20,7 +20,8 @@ public class StartShooterCommandGroup extends SequentialCommandGroup
       addCommands
       (
          //10ft: 0.4, 0.7
-         new RunBallShooter(ballShooter, 0.75, 0.85),
+         // 31 ft 0.75 0.85
+         new RunBallShooter(ballShooter, 0.9, 1.0),
          new WaitCommand(0.5),
          new RunBallFeeder(ballFeeder, 0.35),
          new WaitCommand(0.5),
