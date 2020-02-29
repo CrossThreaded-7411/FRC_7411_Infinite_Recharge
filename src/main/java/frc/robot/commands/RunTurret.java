@@ -12,6 +12,7 @@ import frc.robot.Constants.GamePadButtons;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**
@@ -29,6 +30,8 @@ public class RunTurret extends CommandBase
    private static NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
    private static NetworkTableEntry tx = table.getEntry("tx");
    private static NetworkTableEntry tv = table.getEntry("tv");
+   private static NetworkTableEntry tshort = table.getEntry("tshort");
+   private static NetworkTableEntry tlong = table.getEntry("tlong");
 
    // Rotational state of the turret
    private enum State
@@ -51,6 +54,9 @@ public class RunTurret extends CommandBase
    public void execute()
    {
       double x = tx.getDouble(0.0);
+      double sideShort = tshort.getDouble(0.0);
+      double sideLong = tlong.getDouble(0.0);
+      double area = sideShort * sideLong;
       boolean targetFound = tv.getBoolean(false);
       double motorPower = 0.0;
       double dx = 0.0;
@@ -58,16 +64,18 @@ public class RunTurret extends CommandBase
       boolean rightBumper = Robot.m_robotContainer.driver2Controller.getRawButton(GamePadButtons.bumperRight.value);
       boolean driver1Trigger = Robot.m_robotContainer.driver1Controller.getRawButton(1);
 
-      System.out.println("Target Found:" + targetFound);
+      SmartDashboard.putNumber("LimelightArea", area);
+
+      //System.out.println("Target Found:" + targetFound);
 
       // Rotate the turret based on the bumper buttons. If turret is at the rotational limit, do not
       // allow rotation further that direction
-      if (leftBumper && (operatingState() != State.at_CCW_limit))
+      if (leftBumper)
       {
          // Rotate CCW while held
          motorPower = -maxMotorPower;
       }
-      else if (rightBumper && (operatingState() != State.at_CW_limit))
+      else if (rightBumper)
       {
          // Rotate CW while held
          motorPower = maxMotorPower;
@@ -84,21 +92,11 @@ public class RunTurret extends CommandBase
       {
          // Calculates rate of change for the purpose of adding damping
          dx = xLast - x;
-
-         // Only allow rotation while with allowable range of motino
-         if ((operatingState() != State.at_CCW_limit) && (operatingState() != State.at_CW_limit))
-         {
-            // PID control, currently not using I-control
-            motorPower = (Kp * x) + (Kdamp * dx);
-         }
-         else
-         {
-            motorPower = 0.0;
-         }
-
+         motorPower = (Kp * x) + (Kdamp * dx);
          xLast = x;
       }
 
+      SmartDashboard.putNumber("TurretCount:", turret.getAbsPosition());
       turret.setMotorPower(motorPower);
    }
 
