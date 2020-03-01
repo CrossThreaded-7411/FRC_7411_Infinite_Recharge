@@ -72,7 +72,6 @@ public class RobotLogger
           * Place all calls to logging methods here. This consolidates logging requests
           * so they are not sprinkledthroughout code and easier to manage.
           */
-         Robot.m_robotContainer.driveTrainSubsystem.logDriveTrainData(true);
          Robot.m_robotContainer.liftSubsystem.logLiftData(true);
          Robot.m_robotContainer.ballShooterSubsystem.logBallShooterData(true);
          Robot.m_robotContainer.ballFeederSubsystem.logBallFeederData(true);

@@ -52,6 +52,14 @@ public class DriveTrainSubsystem extends SubsystemBase
    }
 
 
+   public void driveByCommand(double rightPower, double leftPower)
+   {
+      driveBase.setSafetyEnabled(false);
+      leftDriveMotors.set(leftPower);
+      rightDriveMotors.set(rightPower);
+   }
+
+
    // Log data to file
    public void logDriveTrainData(boolean enabled)
    {
