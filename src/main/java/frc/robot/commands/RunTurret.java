@@ -32,6 +32,11 @@ public class RunTurret extends CommandBase
    private static NetworkTableEntry tv = table.getEntry("tv");
    private static NetworkTableEntry tshort = table.getEntry("tshort");
    private static NetworkTableEntry tlong = table.getEntry("tlong");
+   private static boolean targetingOn = false;
+
+   public static void setTargeting(boolean state) {
+      targetingOn = state;
+   }
 
    // Rotational state of the turret
    private enum State
@@ -88,7 +93,7 @@ public class RunTurret extends CommandBase
 
       // Closed-loop control of turret using LimeLight cammera feedback
       // Intent is to aquire and control to target only while holding a button
-      if (driver1Trigger == true)
+      if (driver1Trigger == true || targetingOn)
       {
          // Calculates rate of change for the purpose of adding damping
          dx = xLast - x;

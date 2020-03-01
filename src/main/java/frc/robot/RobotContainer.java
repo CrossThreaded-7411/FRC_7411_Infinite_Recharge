@@ -25,6 +25,7 @@ import frc.robot.subsystems.BallTurretSubsystem;
 // import frc.robot.subsystems.BallCollectorSubsystem;
 // import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.BallCollectorManual;
+import frc.robot.commands.DriveByJoystick;
 // Import Commands
 // import frc.robot.commands.RunBallShooter;
 import frc.robot.commands.RunLift;
@@ -75,7 +76,7 @@ public class RobotContainer
       // Configure the button bindings
       configureButtonBindings();
 
-      // driveTrainSubsystem.setDefaultCommand(new DriveByJoystick(driveTrainSubsystem));
+      driveTrainSubsystem.setDefaultCommand(new DriveByJoystick(driveTrainSubsystem));
       liftSubsystem.setDefaultCommand(new RunLift(liftSubsystem));
       ballCollectorSubsystem.setDefaultCommand(new RunBallCollector(ballCollectorSubsystem));
       turretSubsystem.setDefaultCommand(new RunTurret(turretSubsystem));
