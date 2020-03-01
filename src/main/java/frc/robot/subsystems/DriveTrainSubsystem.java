@@ -54,6 +54,7 @@ public class DriveTrainSubsystem extends SubsystemBase
 
    public void driveByCommand(double rightPower, double leftPower)
    {
+      // Differential drive safety disabled so it would continue to run in auto. without constant input
       driveBase.setSafetyEnabled(false);
       leftDriveMotors.set(leftPower);
       rightDriveMotors.set(rightPower);
