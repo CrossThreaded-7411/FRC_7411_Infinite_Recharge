@@ -41,6 +41,7 @@ import frc.robot.commands.RunTurret;
 import frc.robot.commands.RunBallCollector;
 import frc.robot.Constants.*;
 import frc.robot.commands.StartShooterCommandGroup;
+import frc.robot.commands.AutonomousCommandGroup;
 import frc.robot.commands.StopShooterCommandGroup;
 
 /**
@@ -60,7 +61,7 @@ public class RobotContainer
    protected final BallCollectorSubsystem ballCollectorSubsystem = new BallCollectorSubsystem();
    protected final RecordPlayerSubsystem recordPlayerSubsystem = new RecordPlayerSubsystem();
    protected final PDPSubsystem pdpSubsystem = new PDPSubsystem();
-   protected final StartShooterCommandGroup autoCommand = new StartShooterCommandGroup(ballShooterSubsystem, ballFeederSubsystem, ballCollectorSubsystem, driveTrainSubsystem);
+   protected final AutonomousCommandGroup autoCommand = new AutonomousCommandGroup(ballShooterSubsystem, ballFeederSubsystem, ballCollectorSubsystem, driveTrainSubsystem);
 
    // Create driver controller
    public final Joystick driver1Controller = new Joystick(OIConstants.driver1ControlPort);
@@ -91,7 +92,7 @@ public class RobotContainer
    private void configureButtonBindings()
    {
       // Bind controller buttons to commands
-      new JoystickButton(driver2Controller, GamePadButtons.buttonB.value).whenPressed(new StartShooterCommandGroup(ballShooterSubsystem, ballFeederSubsystem, ballCollectorSubsystem, driveTrainSubsystem));
+      new JoystickButton(driver2Controller, GamePadButtons.buttonB.value).whenPressed(new StartShooterCommandGroup(ballShooterSubsystem, ballFeederSubsystem, ballCollectorSubsystem));
       new JoystickButton(driver2Controller, GamePadButtons.buttonB.value).whenReleased(new StopShooterCommandGroup(ballShooterSubsystem, ballFeederSubsystem, ballCollectorSubsystem));
       new JoystickButton(driver2Controller, GamePadButtons.buttonA.value).whenPressed(new BallCollectorManual(ballCollectorSubsystem, 0.0));
 
