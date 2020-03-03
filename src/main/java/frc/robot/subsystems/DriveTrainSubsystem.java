@@ -30,6 +30,7 @@ public class DriveTrainSubsystem extends SubsystemBase
    // Constructor
    public DriveTrainSubsystem()
    {
+      driveBase.setSafetyEnabled(false);
       stopDriveMotors();
       rightDriveMotors.setInverted(true);
       leftDriveMotors.setInverted(true);
@@ -49,15 +50,6 @@ public class DriveTrainSubsystem extends SubsystemBase
    public void driveByArcade(double fwd, double rot)
    {
       driveBase.arcadeDrive(fwd, rot);
-   }
-
-
-   public void driveByCommand(double rightPower, double leftPower)
-   {
-      // Differential drive safety disabled so it would continue to run in auto. without constant input
-      driveBase.setSafetyEnabled(false);
-      leftDriveMotors.set(leftPower);
-      rightDriveMotors.set(rightPower);
    }
 
 

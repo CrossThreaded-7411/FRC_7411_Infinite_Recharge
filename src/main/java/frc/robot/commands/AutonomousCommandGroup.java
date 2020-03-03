@@ -23,14 +23,9 @@ public class AutonomousCommandGroup extends SequentialCommandGroup
       // new SequentialCommandGroup(new RunBallFeeder(ballFeeder, 0.5), new WaitCommand(1), new RunBallShooter(ballShooter, 0.5, 0.7));
       addCommands
       (
-         //10ft: 0.4, 0.7
-         // 31 ft 0.75 0.85
-         // new RunBallShooter(ballShooter, 0.80, 0.95),
-         // new WaitCommand(0.5),
-         // new RunBallFeeder(ballFeeder, 0.35),
-         // new WaitCommand(0.5),
-         // new BallCollectorManual(ballCollector, -0.35)
-         new RunDriveTrain(driveTrain, 0.3, 0.3)
+         new DriveByTime(driveTrain, 0.3, 0.0, 1000.0),
+         new WaitCommand(1.0),
+         new DriveByTime(driveTrain, 0.0, 0.3, 1000.0)
       );
    }
 }

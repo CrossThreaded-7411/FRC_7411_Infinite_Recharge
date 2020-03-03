@@ -122,8 +122,7 @@ public class Robot extends TimedRobot
    @Override
    public void autonomousPeriodic()
    {  
-      System.out.println("entered periodic");
-     //AutonomousDriveCommandGroup(driveTrainSubsystem);
+
    }
 
    @Override

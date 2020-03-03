@@ -18,32 +18,20 @@ import frc.robot.commands.SpinRecordPlayer;
 
 // Import Subsystems
 import frc.robot.subsystems.BallShooterSubsystem;
-// import frc.robot.subsystems.LiftSubsystem;
 import frc.robot.subsystems.BallFeederSubsystem;
-// import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.BallTurretSubsystem;
-// import frc.robot.subsystems.BallCollectorSubsystem;
-// import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.BallCollectorManual;
 import frc.robot.commands.DriveByJoystick;
-// Import Commands
-// import frc.robot.commands.RunBallShooter;
-import frc.robot.commands.RunLift;
-import frc.robot.commands.RunTurret;
-import frc.robot.commands.RunBallCollector;
-import frc.robot.commands.RunDriveTrain;
-import frc.robot.subsystems.BallFeederSubsystem;
-import frc.robot.subsystems.BallTurretSubsystem;
-import frc.robot.subsystems.PDPSubsystem;
 
 // Import Commands
 import frc.robot.commands.RunLift;
 import frc.robot.commands.RunTurret;
 import frc.robot.commands.RunBallCollector;
-import frc.robot.Constants.*;
+import frc.robot.subsystems.PDPSubsystem;
 import frc.robot.commands.StartShooterCommandGroup;
 import frc.robot.commands.AutonomousCommandGroup;
 import frc.robot.commands.StopShooterCommandGroup;
+import frc.robot.Constants.*;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -84,6 +72,7 @@ public class RobotContainer
       recordPlayerSubsystem.setDefaultCommand(new SpinRecordPlayer(recordPlayerSubsystem));
   }
 
+
    /**
     * Use this method to define your button->command mappings. Buttons can be created by
     * instantiating a {@link GenericHID} or one of its subclasses
@@ -96,7 +85,6 @@ public class RobotContainer
       new JoystickButton(driver2Controller, GamePadButtons.buttonB.value).whenPressed(new StartShooterCommandGroup(ballShooterSubsystem, ballFeederSubsystem, ballCollectorSubsystem));
       new JoystickButton(driver2Controller, GamePadButtons.buttonB.value).whenReleased(new StopShooterCommandGroup(ballShooterSubsystem, ballFeederSubsystem, ballCollectorSubsystem));
       new JoystickButton(driver2Controller, GamePadButtons.buttonA.value).whenPressed(new BallCollectorManual(ballCollectorSubsystem, 0.0));
-
    }
    
 
@@ -108,6 +96,6 @@ public class RobotContainer
    public Command getAutonomousCommand()
    {
       // An ExampleCommand will run in autonomous
-      return autoCommand;
+      return null; //autoCommand;
    }
 }

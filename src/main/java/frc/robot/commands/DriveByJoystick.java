@@ -36,7 +36,7 @@ public class DriveByJoystick extends CommandBase
       // logger.fine("xaxis: " + rotateValue);
    }
 
-   
+
   private double setDeadband(double rawvalue)
   {
      double newvalue = 0.0;
