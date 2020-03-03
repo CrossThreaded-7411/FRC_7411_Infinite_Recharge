@@ -9,14 +9,17 @@ package frc.robot;
 
 import java.io.IOException;
 import java.util.logging.Logger;
-
+import edu.wpi.cscore.MjpegServer;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoCamera;
+import edu.wpi.cscore.VideoSink;
+import edu.wpi.cscore.VideoSource;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Constants.*;
-//import frc.robot.commands.AutonomousDrive;
-//import frc.robot.commands.AutonomousDriveCommandGroup;
- import frc.robot.subsystems.DriveTrainSubsystem;
+
 
 
 /**
@@ -30,12 +33,15 @@ public class Robot extends TimedRobot
 {
    private Command m_autonomousCommand;
    public static RobotContainer m_robotContainer;
-   private final DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem();
-   //private final AutonomousDriveCommandGroup m_AutonomousDriveCommandGroup = new AutonomousDriveCommandGroup();
+   public static UsbCamera targetingCam;
+   public static UsbCamera driveCam;
+   // public static CameraServer server;
+   private static int cameraState = 0;
+   VideoSink server;
 
    // use the classname for the logger, this way you can refactor
    private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-  // private static final CommandScheduler Scheduler = null;
+   private static final CommandScheduler Scheduler = null;
    
    /**
     * This function is run when the robot is first started up and should be used
@@ -54,6 +60,22 @@ public class Robot extends TimedRobot
          e.printStackTrace();
          throw new RuntimeException("Problems with creating the log files");
       }
+      // Initialize camera and start capuring the image
+      
+      // targetingCam = new UsbCamera("TargetingCam", 1);
+      // // targetingCam.setExposureManual(0);
+      // // targetingCam.setBrightness(0);
+      // server = CameraServer.getInstance();
+      // backendServer = server.startAutomaticCapture(targetingCam);
+      // driveCam = new UsbCamera("DriveCam", 0);
+
+      targetingCam = CameraServer.getInstance().startAutomaticCapture(0);
+      //driveCam = CameraServer.getInstance().startAutomaticCapture(1);
+      driveCam = new UsbCamera("DriveCam", 1);
+      server = CameraServer.getInstance().getServer();
+      server.setSource(driveCam);
+      
+      // RobotLogger.init();
 
       // Instantiate our RobotContainer. This will perform all our button bindings,
       // and put our autonomous chooser on the dashboard.
@@ -69,6 +91,10 @@ public class Robot extends TimedRobot
     * <p>
     * This runs after the mode specific periodic functions, but before LiveWindow
     * and SmartDashboard integrated updating.
+    * This function is called every robot packet, no matter the mode. Use this for items like
+    * diagnostics that you want ran during disabled, autonomous, teleoperated and test. This runs
+    * after the mode specific periodic functions, but before LiveWindow and SmartDashboard
+    * integrated updating.
     */
    @Override
    public void robotPeriodic()
@@ -79,6 +105,24 @@ public class Robot extends TimedRobot
       // interrupted commands,
       // and running subsystem periodic() methods. This must be called from the
       // robot's periodic
+      if (m_robotContainer.driver2Controller.getRawButtonReleased(7))
+      {
+         if (cameraState == 0)
+         {
+            System.out.println("Switching to drive cam");
+            server.setSource(driveCam);
+            cameraState = 1;
+         }
+         else if (cameraState == 1)
+         {
+            System.out.println("Switching to target cam");
+            server.setSource(targetingCam);
+            cameraState = 0;
+         }
+      }
+      // Runs the Scheduler. This is responsible for polling buttons, adding newly-scheduled
+      // commands, running already-scheduled commands, removing finished or interrupted commands,
+      // and running subsystem periodic() methods. This must be called from the robot's periodic
       // block in order for anything in the Command-based framework to work.
       CommandScheduler.getInstance().run();
       logger.fine("yaxis:" + m_robotContainer.driver2Controller.getRawAxis(GamePadAxis.leftStickY.value));
@@ -105,7 +149,6 @@ public class Robot extends TimedRobot
    @Override
    public void autonomousInit()
    {
-     // System.out.println("entered ");
       m_autonomousCommand = m_robotContainer.getAutonomousCommand();
    
       // schedule the autonomous command (example)
@@ -113,7 +156,6 @@ public class Robot extends TimedRobot
       {
          m_autonomousCommand.schedule();
       }
-      //System.out.println("exited ");
    }
 
    /**
@@ -122,7 +164,8 @@ public class Robot extends TimedRobot
    @Override
    public void autonomousPeriodic()
    {  
-
+      CommandScheduler.getInstance().run();
+      //AutonomousDriveCommandGroup;
    }
 
    @Override
