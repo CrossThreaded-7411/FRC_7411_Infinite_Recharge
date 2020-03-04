@@ -33,18 +33,24 @@ public class RunTurret extends CommandBase
    private static NetworkTableEntry tshort = table.getEntry("tshort");
    private static NetworkTableEntry tlong = table.getEntry("tlong");
    private static boolean targetingOn = false;
+   private static boolean turretReturnZero = false;
 
    public static void setTargeting(boolean state) {
       targetingOn = state;
    }
 
-   // Rotational state of the turret
-   private enum State
-   {
-      in_range,
-      at_CCW_limit,
-      at_CW_limit;
+   public static void setReturnToZero(boolean state) {
+      turretReturnZero = state;
    }
+
+
+   // Rotational state of the turret
+   // private enum State
+   // {
+   //    in_range,
+   //    at_CCW_limit,
+   //    at_CW_limit;
+   // }
 
 
    // Constructor
@@ -101,7 +107,19 @@ public class RunTurret extends CommandBase
          xLast = x;
       }
 
-      SmartDashboard.putNumber("TurretCount:", turret.getAbsPosition());
+      // returns turret to zero position
+      if (turretReturnZero)
+      {
+         double x_home = turret.getRelativePosition();
+         // Calculates rate of change for the purpose of adding damping
+         dx = xLast - x_home;
+         motorPower = (-Kp * 0.01 * x_home) + (Kdamp * 0.01 * dx);
+         xLast = x_home;
+         System.out.println("motor output" + motorPower);
+      }
+
+
+      SmartDashboard.putNumber("TurretCount:", turret.getRelativePosition());
       turret.setMotorPower(motorPower);
    }
 
@@ -109,7 +127,7 @@ public class RunTurret extends CommandBase
    // Limit rotation of the turret based on the absolute encoder position of the subsystem.
    // The desired operation is to allow 180 degrees of rotation.
    // Encoder values need to be determined empirically.
-   private State operatingState()
+   /*private State operatingState()
    {
       State state = State.in_range;
       int position = turret.getAbsPosition();
@@ -128,5 +146,5 @@ public class RunTurret extends CommandBase
       }
 
       return state;
-   }
+   }*/
 }

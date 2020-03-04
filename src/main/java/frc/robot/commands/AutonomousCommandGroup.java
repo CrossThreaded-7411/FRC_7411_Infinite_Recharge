@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.BallCollectorSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
 
+
 public class AutonomousCommandGroup extends SequentialCommandGroup
 {
    public AutonomousCommandGroup(BallShooterSubsystem ballShooter,
@@ -23,9 +24,30 @@ public class AutonomousCommandGroup extends SequentialCommandGroup
       // new SequentialCommandGroup(new RunBallFeeder(ballFeeder, 0.5), new WaitCommand(1), new RunBallShooter(ballShooter, 0.5, 0.7));
       addCommands
       (
-         new DriveByTime(driveTrain, 0.3, 0.0, 1000.0),
-         new WaitCommand(1.0),
-         new DriveByTime(driveTrain, 0.0, 0.3, 1000.0)
+         new DriveByTime(driveTrain, -0.3, 0.0, 3000.0),
+         new WaitCommand(0.5),
+         new StartTargeting(),
+         new WaitCommand(0.5),
+         new RunBallShooter(ballShooter, 0.75, 0.90),
+         new WaitCommand(0.5),
+         new RunBallFeeder(ballFeeder, 0.35),
+         new WaitCommand(0.5),
+         new BallCollectorManual(ballCollector, -0.35),
+
+         // pause for shooting the balls
+         new WaitCommand(3.0),
+
+         // stop all motors
+         new StopTargeting(),
+         new RunBallShooter(ballShooter, 0.0, 0.0),
+         new RunBallFeeder(ballFeeder, 0.0),
+         new BallCollectorManual(ballCollector, 0.0),
+         new WaitCommand(0.5),
+
+         // return turret to zero
+         new TurretToZero(true),
+         new WaitCommand(2.0),
+         new TurretToZero(false)
       );
    }
 }

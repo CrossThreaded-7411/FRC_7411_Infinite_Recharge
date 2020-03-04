@@ -35,16 +35,21 @@ public class BallTurretSubsystem extends SubsystemBase
     * 
     * @param targetPower Accepts a power level between -1 to 1
     */
-    public void setMotorPower(double power)
-    {
-       if(operatingState() == State.at_CCW_limit && power < 0){
-          stopMotor();
-       } else if(operatingState() == State.at_CW_limit && power > 0) {
-          stopMotor();
-       } else {
-          turretMotor.set(ControlMode.PercentOutput, power);
-       }
-    }
+   public void setMotorPower(double power)
+   {
+      if (operatingState() == State.at_CCW_limit && power < 0)
+      {
+         stopMotor();
+      }
+      else if (operatingState() == State.at_CW_limit && power > 0)
+      {
+         stopMotor();
+      }
+      else
+      {
+         turretMotor.set(ControlMode.PercentOutput, power);
+      }
+   }
 
 
    /**
@@ -58,7 +63,7 @@ public class BallTurretSubsystem extends SubsystemBase
 
    // Returns the absolute encoder position for the turret. We need absolute position since the turret
    // is not gauranteed to be at a known state on power up.
-   public int getAbsPosition()
+   public int getRelativePosition()
    {
       return turretMotor.getSelectedSensorPosition();//getSensorCollection().getPulseWidthPosition();
    }
@@ -77,7 +82,7 @@ public class BallTurretSubsystem extends SubsystemBase
    private State operatingState()
    {
       State state = State.in_range;
-      int position = getAbsPosition();
+      int position = getRelativePosition();
 
       if (position <= countLimitCCW)
       {
