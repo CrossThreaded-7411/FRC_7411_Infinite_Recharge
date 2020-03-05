@@ -2,21 +2,23 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class StopTargeting extends CommandBase
+public class ToggleTurretLED extends CommandBase
 {
-   public StopTargeting()
+   boolean LEDActive = false;
+
+   public ToggleTurretLED(boolean ledOn)
    {
+      this.LEDActive = ledOn;
    }
 
 
    @Override
    public void initialize()
    {
-      RunTurret.setTargeting(false);
-      RunTurret.setTurretLedOn(false);
+      RunTurret.setTurretLedOn(this.LEDActive);
    }
 
-
+   
    @Override
    public boolean isFinished()
    {
