@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 //import frc.robot.commands.BallCollectorManual;
 import frc.robot.subsystems.BallCollectorSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
+import frc.robot.commands.ToggleTurretLED;
 
 
 public class AutonomousCommandGroup extends SequentialCommandGroup
@@ -34,7 +35,7 @@ public class AutonomousCommandGroup extends SequentialCommandGroup
          new WaitCommand(0.5),
          new BallCollectorManual(ballCollector, -0.35),
 
-         // pause for shooting the balls
+         //  pause for shooting the balls
          new WaitCommand(3.0),
 
          // stop all motors

@@ -36,9 +36,9 @@ public class LiftSubsystem extends SubsystemBase
    private final double SPHSoftStopLeft = 2.167;
 
    // Same as above, but for the lift
-   private final double SPVHardStopDown = 0.295;
+   private final double SPVHardStopDown = 0.235;
    private final double SPVHardStopUp = 2.45;
-   private final double SPVSoftStopDown = 0.443;
+   private final double SPVSoftStopDown = 0.325;
    private final double SPVSoftStopUp = 2.302;
 
 

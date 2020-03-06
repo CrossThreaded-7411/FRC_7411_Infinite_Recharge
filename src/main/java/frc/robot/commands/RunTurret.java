@@ -36,15 +36,18 @@ public class RunTurret extends CommandBase {
     private static boolean turretReturnZero = false;
     private static boolean turretLedOn = false;
 
-    public static void setTargeting(boolean state) {
+    public static void setTargeting(boolean state)
+    {
         targetingOn = state;
     }
 
-    public static void setReturnToZero(boolean state) {
+    public static void setReturnToZero(boolean state)
+    {
         turretReturnZero = state;
     }
 
-    public static void setTurretLedOn(boolean state) {
+    public static void setTurretLedOn(boolean state) 
+    {
         turretLedOn = state;
     }
 
@@ -95,11 +98,17 @@ public class RunTurret extends CommandBase {
 
         // Closed-loop control of turret using LimeLight cammera feedback
         // Intent is to aquire and control to target only while holding a button
-        if (driver1Trigger == true || targetingOn) {
+        if (driver1Trigger == true || targetingOn) 
+        {
+            setTurretLedOn(true);
             // Calculates rate of change for the purpose of adding damping
             dx = xLast - x;
             motorPower = (Kp * x) + (Kdamp * dx);
             xLast = x;
+        }
+        else
+        {
+            setTurretLedOn(false);
         }
 
         // returns turret to zero position
@@ -110,16 +119,17 @@ public class RunTurret extends CommandBase {
             dx = xLast - x_home;
             motorPower = (-Kp * 0.01 * x_home) + (Kdamp * 0.01 * dx);
             xLast = x_home;
-            System.out.println("motor output" + motorPower);
+            // System.out.println("motor output" + motorPower);
         }
 
         if (turretLedOn)
         {
             table.getEntry("ledMode").setNumber(3);
+            // System.out.println("LED on");
         }
         else 
         {
-            table.getEntry("ledMode").setNumber(0);
+            table.getEntry("ledMode").setNumber(1);
         }
 
         SmartDashboard.putNumber("TurretCount:", turret.getRelativePosition());
