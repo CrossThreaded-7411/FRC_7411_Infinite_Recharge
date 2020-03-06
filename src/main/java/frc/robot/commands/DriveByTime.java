@@ -58,11 +58,11 @@ public class DriveByTime extends CommandBase
    }
 
 
-   @Override
-   public void end(boolean interrupted)
-   {
+   // No longer using end to set safety back on. Enabling safety caused the robot to jitter while driving
+   // @Override
+   // public void end(boolean interrupted)
+   // {
       // Differential drive safety disabled so it would continue to run in auto. without constant input
-      DTAutoSubsystem.driveBase.setSafetyEnabled(true);
-      // DTAutoSubsystem.stopDriveMotors();
-   }
+      // DTAutoSubsystem.driveBase.setSafetyEnabled(true);
+   // }
 }
