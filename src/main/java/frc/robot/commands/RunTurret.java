@@ -15,6 +15,7 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+
 /**
  * A command to turn on the launch motor to a known desired power
  */
@@ -35,6 +36,7 @@ public class RunTurret extends CommandBase {
     private static boolean targetingOn = false;
     private static boolean turretReturnZero = false;
     private static boolean turretLedOn = false;
+   //  protected static TurretReturnGroup turretReturn = new TurretReturnGroup();
 
     public static void setTargeting(boolean state)
     {
@@ -109,6 +111,7 @@ public class RunTurret extends CommandBase {
         else
         {
             setTurretLedOn(false);
+            new TurretReturnGroup();
         }
 
         // returns turret to zero position
