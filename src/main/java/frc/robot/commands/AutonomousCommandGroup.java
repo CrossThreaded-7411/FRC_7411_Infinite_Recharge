@@ -27,6 +27,8 @@ public class AutonomousCommandGroup extends SequentialCommandGroup
       (
          new DriveByTime(driveTrain, -0.3, 0.0, 3000.0),
          new WaitCommand(0.5),
+         new DriveByTime(driveTrain, 0.0, 0.0, 500.0),
+         new WaitCommand(0.5),
          new StartTargeting(),
          new WaitCommand(0.5),
          new RunBallShooter(ballShooter, 0.75, 0.90),
