@@ -29,7 +29,7 @@ public class AutonomousCommandGroup extends SequentialCommandGroup
          new WaitCommand(0.5),
          new StartTargeting(),
          new WaitCommand(0.5),
-         new RunBallShooter(ballShooter, 0.75, 0.90),
+         new RunBallShooter(ballShooter, 0.775, 0.90),
          new WaitCommand(0.5),
          new RunBallFeeder(ballFeeder, 0.35),
          new WaitCommand(0.5),
